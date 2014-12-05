@@ -91,9 +91,11 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -101,7 +103,7 @@
     <name>SourceDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>SourceDB</database>
     <port>3306</port>
     <username/>
@@ -137,7 +139,7 @@
            <schema_name/>
            </partitioning>
     <connection>DestinationDB</connection>
-    <sql>SELECT c.id AS charge_id,&#x28;&#xd;&#xa;SELECT MAX&#x28;sp.id&#x29;&#xd;&#xa;FROM m_savings_product sp&#x29; savings_product_id&#xd;&#xa;FROM m_charge c&#xd;&#xa;WHERE c.charge_applies_to_enum&#x3d;2 -- 2 &#x3d;&#x3e; charges applies to savings</sql>
+    <sql>SELECT c.id AS charge_id,&#x28;&#xd;&#xa;SELECT MAX&#x28;sp.id&#x29;&#xd;&#xa;FROM m_savings_product sp&#x29; savings_product_id&#xd;&#xa;FROM m_charge c&#xd;&#xa;WHERE c.charge_applies_to_enum&#x3d;2  and c.is_active &#x3d;1 -- 2 &#x3d;&#x3e; charges applies to savings</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

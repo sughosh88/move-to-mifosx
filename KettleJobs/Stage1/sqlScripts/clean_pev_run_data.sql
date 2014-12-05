@@ -1,4 +1,7 @@
 SET foreign_key_checks = 0;
+TRUNCATE relatives;
+TRUNCATE address;
+TRUNCATE `customer details`;
 TRUNCATE m_appuser_role;
 TRUNCATE  m_role;
 TRUNCATE m_appuser;
@@ -52,5 +55,9 @@ TRUNCATE `m_savings_product_charge`;
 TRUNCATE `m_deposit_account_term_and_preclosure`;
 TRUNCATE `m_savings_account_interest_rate_chart`;
 TRUNCATE `m_savings_account_interest_rate_slab`;
+ALTER TABLE `acc_gl_account`
+	ALTER `name` DROP DEFAULT;
+ALTER TABLE `acc_gl_account`
+	CHANGE COLUMN `name` `name` VARCHAR(100) NOT NULL AFTER `id`;
 
 SET foreign_key_checks = 1;

@@ -76,7 +76,7 @@
     <name>DestinationDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>JNDI</access>
     <database>DestinationDB</database>
     <port>3306</port>
     <username/>
@@ -91,9 +91,11 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -101,7 +103,7 @@
     <name>SourceDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>SourceDB</database>
     <port>3306</port>
     <username/>
@@ -128,8 +130,8 @@
   <hop> <from>Table input</from><to>Database lookup</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Table input</name>
-    <type>TableInput</type>
+    <name>Adjustment_Written_off_amount</name>
+    <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -138,16 +140,37 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>DestinationDB</connection>
-    <sql>SELECT &#xd;&#xa;lo.id As loan_id, &#xd;&#xa;MIN&#x28;lrs.id&#x29; As ls_id,&#xd;&#xa;MIN&#x28;lrs.installment&#x29; As inst_id,&#xd;&#xa;&#x28; SUM&#x28;lrs.principal_writtenoff_derived&#x29; - lo.principal_writtenoff_derived &#x29; AS adj_amount&#xd;&#xa;FROM m_loan lo&#xd;&#xa;JOIN m_loan_repayment_schedule lrs ON lo.id&#x3d;lrs.loan_id AND lo.loan_status_id&#x3d;601 AND lrs.principal_writtenoff_derived &#x3c;&#x3e; 0.0&#xd;&#xa;GROUP BY lo.id</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+       <calculation><field_name>adj_principal_amount</field_name>
+<calc_type>ADD</calc_type>
+<field_a>principal_amount</field_a>
+<field_b>adj_amount</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>adj_writen_off_amount</field_name>
+<calc_type>SUBTRACT</calc_type>
+<field_a>principal_writtenoff_derived</field_a>
+<field_b>adj_amount</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>230</xloc>
+      <xloc>624</xloc>
       <yloc>232</yloc>
       <draw>Y</draw>
       </GUI>
@@ -214,8 +237,8 @@
     </step>
 
   <step>
-    <name>Adjustment_Written_off_amount</name>
-    <type>Calculator</type>
+    <name>Table input</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -224,37 +247,16 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>adj_principal_amount</field_name>
-<calc_type>ADD</calc_type>
-<field_a>principal_amount</field_a>
-<field_b>adj_amount</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>adj_writen_off_amount</field_name>
-<calc_type>SUBTRACT</calc_type>
-<field_a>principal_writtenoff_derived</field_a>
-<field_b>adj_amount</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
+    <connection>DestinationDB</connection>
+    <sql>SELECT &#xd;&#xa;lo.id As loan_id, &#xd;&#xa;MIN&#x28;lrs.id&#x29; As ls_id,&#xd;&#xa;MIN&#x28;lrs.installment&#x29; As inst_id,&#xd;&#xa;&#x28; SUM&#x28;lrs.principal_writtenoff_derived&#x29; - lo.principal_writtenoff_derived &#x29; AS adj_amount&#xd;&#xa;FROM m_loan lo&#xd;&#xa;JOIN m_loan_repayment_schedule lrs ON lo.id&#x3d;lrs.loan_id AND lo.loan_status_id&#x3d;601 AND lrs.principal_writtenoff_derived &#x3c;&#x3e; 0.0&#xd;&#xa;GROUP BY lo.id</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
+      <xloc>230</xloc>
       <yloc>232</yloc>
       <draw>Y</draw>
       </GUI>

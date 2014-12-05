@@ -95,7 +95,7 @@
     <name>DestinatioDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>DestinatioDB</database>
     <port>3306</port>
     <username/>
@@ -135,9 +135,11 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -145,7 +147,7 @@
     <name>DestinationDBPilot</name>
     <server/>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>DestinationDBPilot</database>
     <port>1521</port>
     <username/>
@@ -170,7 +172,7 @@
     <name>DestinationDBtest</name>
     <server/>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>DestinationDBtest</database>
     <port>1521</port>
     <username/>
@@ -310,9 +312,11 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -357,7 +361,7 @@
            <schema_name/>
            </partitioning>
     <connection>SourceDB</connection>
-    <sql>SELECT&#xa;  po.PRD_OFFERING_ID As id&#xa;, &#x24;&#x7b;CUR&#x7d; As currency_code&#xa;, 2 As currency_digits&#xa;, laa.DEFAULT_LOAN_AMOUNT As principal_amount&#xa;, laa.MIN_LOAN_AMOUNT As min_principal_amount&#xa;, laa.MAX_LOAN_AMNT As max_principal_amount&#xa;, 0 As arrearstolerance_amount&#xa;, po.PRD_OFFERING_NAME As name&#xa;, po.PRD_OFFERING_SHORT_NAME As short_name&#xa;, po.DESCRIPTION As description&#xa;, null  As fund_id&#xa;, lo.DEF_INTEREST_RATE As 	nominal_interest_rate_per_period&#xa;, lo.MIN_INTEREST_RATE As 	min_nominal_interest_rate_per_period&#xa;, lo.MAX_INTEREST_RATE As 	max_nominal_interest_rate_per_period&#xa;, 3 As 	interest_period_frequency_enum -- Per year&#xa;, lo.DEF_INTEREST_RATE As 	annual_nominal_interest_rate&#xa;, lo.INTEREST_TYPE_ID As 	interest_method_enum&#xa;, 1 As 	interest_calculated_in_period_enum  -- Same as repayment period&#xa;, rd.RECUR_AFTER As 	repay_every&#xa;, rd.RECURRENCE_ID As 	repayment_period_frequency_enum&#xa;, IF&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR &#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 3 AND lo.MAX_INTEREST_RATE &#x3d; 0 &#x29; , nl.DEFAULT_NO_INSTALL &#x2b; lo.GRACE_PERIOD_DURATION , nl.DEFAULT_NO_INSTALL &#x29; As 	number_of_repayments&#xa;, IF&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR &#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 3 AND lo.MAX_INTEREST_RATE &#x3d; 0 &#x29; , nl.MIN_NO_INSTALL &#x2b; lo.GRACE_PERIOD_DURATION , nl.MIN_NO_INSTALL &#x29; As 	min_number_of_repayments&#xa;, IF&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR &#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 3 AND lo.MAX_INTEREST_RATE &#x3d; 0 &#x29; , nl.MAX_NO_INSTALL &#x2b; lo.GRACE_PERIOD_DURATION , nl.MAX_NO_INSTALL &#x29; As 	max_number_of_repayments&#xa;, if&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR lo.GRACEPERIOD_TYPE_ID &#x3d; 3 , lo.GRACE_PERIOD_DURATION , NULL &#x29; As 	grace_on_principal_periods&#xa;, if&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 , lo.GRACE_PERIOD_DURATION , NULL &#x29; As 	grace_on_interest_periods&#xa;, NULL As 	grace_interest_free_periods&#xa;, 1 As 	amortization_method_enum&#xa;, &#x24;&#x7b;ACCT_TYPE&#x7d; As 	accounting_type&#xa;, 1 As 	loan_transaction_strategy_id -- Mifos Style&#xa;, po.GLOBAL_PRD_OFFERING_NUM As 	external_id&#xa;, loan_counter_flag As include_in_borrower_cycle&#xa;, prd.start_date As start_date&#xa;, if&#x28;prd.end_date &#x3c;&#x3e; NULL , prd.end_date , if&#x28;prd.offering_status_id &#x3d; 1 , NULL , prd.updated_date &#x29;&#x29;  As close_date&#xa;, 0 As currency_multiplesof&#xa;FROM prd_offering po &#xa;JOIN loan_offering lo ON lo.PRD_OFFERING_ID &#x3d; po.PRD_OFFERING_ID&#xa;JOIN prd_offering prd ON prd.prd_offering_id &#x3d; lo.prd_offering_id&#xa;LEFT JOIN loan_amount_same_for_all_loan laa ON laa.PRD_OFFERING_ID &#x3d; lo.PRD_OFFERING_ID&#xa;JOIN prd_offering_meeting pom ON pom.PRD_OFFERING_ID &#x3d; lo.PRD_OFFERING_ID&#xa;JOIN meeting me ON me.MEETING_ID &#x3d; pom.PRD_MEETING_ID&#xa;JOIN recurrence_detail rd ON rd.MEETING_ID &#x3d; me.MEETING_ID&#xa;JOIN no_of_install_same_for_all_loan nl ON  nl.PRD_OFFERING_ID &#x3d; lo.PRD_OFFERING_ID&#xa;</sql>
+    <sql>SELECT&#xd;&#xa;  po.PRD_OFFERING_ID As id&#xd;&#xa;, &#x24;&#x7b;CUR&#x7d; As currency_code&#xd;&#xa;, &#x24;&#x7b;CUR_DIGIT&#x7d; As currency_digits&#xd;&#xa;, ifnull&#x28;ifnull&#x28;laa.DEFAULT_LOAN_AMOUNT,lac.DEFAULT_LOAN_AMOUNT&#x29;,lla.def&#x29; As principal_amount&#xd;&#xa;, ifnull&#x28;ifnull&#x28;laa.MIN_LOAN_AMOUNT,lac.MIN_LOAN_AMOUNT&#x29;,lla.min&#x29; As min_principal_amount&#xd;&#xa;, ifnull&#x28;ifnull&#x28;laa.MAX_LOAN_AMNT,lac.MAX_LOAN_AMNT&#x29;,lla.max&#x29; As max_principal_amount&#xd;&#xa;, 0 As arrearstolerance_amount&#xd;&#xa;, po.PRD_OFFERING_NAME As name&#xd;&#xa;, po.PRD_OFFERING_SHORT_NAME As short_name&#xd;&#xa;, po.DESCRIPTION As description&#xd;&#xa;, null  As fund_id&#xd;&#xa;, lo.DEF_INTEREST_RATE As 	nominal_interest_rate_per_period&#xd;&#xa;, lo.MIN_INTEREST_RATE As 	min_nominal_interest_rate_per_period&#xd;&#xa;, lo.MAX_INTEREST_RATE As 	max_nominal_interest_rate_per_period&#xd;&#xa;, 3 As 	interest_period_frequency_enum -- Per year&#xd;&#xa;, lo.DEF_INTEREST_RATE As 	annual_nominal_interest_rate&#xd;&#xa;, lo.INTEREST_TYPE_ID As 	interest_method_enum&#xd;&#xa;, 1 As 	interest_calculated_in_period_enum  -- Same as repayment period&#xd;&#xa;, rd.RECUR_AFTER As 	repay_every&#xd;&#xa;, rd.RECURRENCE_ID As 	repayment_period_frequency_enum&#xd;&#xa;, IF&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR &#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 3 AND lo.MAX_INTEREST_RATE &#x3d; 0 &#x29; , ifnull&#x28;ifnull&#x28;nl.default_no_install,iac.default_no_install&#x29;,ilc.def&#x29; &#x2b; lo.GRACE_PERIOD_DURATION , ifnull&#x28;ifnull&#x28;nl.default_no_install,iac.default_no_install&#x29;,ilc.def&#x29; &#x29; As 	number_of_repayments&#xd;&#xa;, IF&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR &#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 3 AND lo.MAX_INTEREST_RATE &#x3d; 0 &#x29; , ifnull&#x28;ifnull&#x28;nl.min_no_install,iac.min_no_install&#x29;,ilc.min&#x29;  &#x2b; lo.GRACE_PERIOD_DURATION , ifnull&#x28;ifnull&#x28;nl.min_no_install,iac.min_no_install&#x29;,ilc.min&#x29;  &#x29; As 	min_number_of_repayments&#xd;&#xa;, IF&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR &#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 3 AND lo.MAX_INTEREST_RATE &#x3d; 0 &#x29; , ifnull&#x28;ifnull&#x28;nl.max_no_install,iac.max_no_install&#x29;,ilc.max&#x29; &#x2b; lo.GRACE_PERIOD_DURATION , ifnull&#x28;ifnull&#x28;nl.max_no_install,iac.max_no_install&#x29;,ilc.max&#x29;  &#x29; As 	max_number_of_repayments&#xd;&#xa;, ifnull&#x28;ifnull&#x28;nl.default_no_install,iac.default_no_install&#x29;,ilc.def&#x29; as def&#xd;&#xa;, ifnull&#x28;ifnull&#x28;nl.min_no_install,iac.min_no_install&#x29;,ilc.min&#x29; as min&#xd;&#xa;, ifnull&#x28;ifnull&#x28;nl.max_no_install,iac.max_no_install&#x29;,ilc.max&#x29; as max&#xd;&#xa;, if&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 OR lo.GRACEPERIOD_TYPE_ID &#x3d; 3 , lo.GRACE_PERIOD_DURATION , NULL &#x29; As 	grace_on_principal_periods&#xd;&#xa;, if&#x28;lo.GRACEPERIOD_TYPE_ID &#x3d; 2 , lo.GRACE_PERIOD_DURATION , NULL &#x29; As 	grace_on_interest_periods&#xd;&#xa;, NULL As 	grace_interest_free_periods&#xd;&#xa;, 1 As 	amortization_method_enum&#xd;&#xa;, &#x24;&#x7b;ACCT_TYPE&#x7d; As 	accounting_type&#xd;&#xa;, 1 As 	loan_transaction_strategy_id -- Mifos Style&#xd;&#xa;, po.GLOBAL_PRD_OFFERING_NUM As 	external_id&#xd;&#xa;, loan_counter_flag As include_in_borrower_cycle&#xd;&#xa;, prd.start_date As start_date&#xd;&#xa;, if&#x28;prd.end_date &#x3c;&#x3e; NULL , prd.end_date , if&#x28;prd.offering_status_id &#x3d; 1 , NULL , prd.updated_date &#x29;&#x29;  As close_date&#xd;&#xa;, 0 As currency_multiplesof&#xd;&#xa;FROM prd_offering po &#xd;&#xa;JOIN loan_offering lo ON lo.PRD_OFFERING_ID &#x3d; po.PRD_OFFERING_ID&#xd;&#xa;JOIN prd_offering prd ON prd.prd_offering_id &#x3d; lo.prd_offering_id&#xd;&#xa;LEFT JOIN loan_amount_same_for_all_loan laa ON laa.PRD_OFFERING_ID &#x3d; lo.PRD_OFFERING_ID&#xd;&#xa;JOIN prd_offering_meeting pom ON pom.PRD_OFFERING_ID &#x3d; lo.PRD_OFFERING_ID&#xd;&#xa;JOIN meeting me ON me.MEETING_ID &#x3d; pom.PRD_MEETING_ID&#xd;&#xa;JOIN recurrence_detail rd ON rd.MEETING_ID &#x3d; me.MEETING_ID&#xd;&#xa;left JOIN no_of_install_same_for_all_loan nl ON  nl.PRD_OFFERING_ID &#x3d; lo.PRD_OFFERING_ID&#xd;&#xa;left join loan_amount_from_loan_cycle lac on lac.PRD_OFFERING_ID&#x3d;lo.PRD_OFFERING_ID and lac.RANGE_INDEX&#x3d;0&#xd;&#xa;left join &#x28;select lal.prd_offering_id pid&#xd;&#xa;,min&#x28;lal.min_loan_amount&#x29; min&#xd;&#xa;,min&#x28;lal.max_loan_amnt&#x29; max&#xd;&#xa;,min&#x28;lal.default_loan_amount&#x29; def&#xd;&#xa;from loan_amount_from_last_loan lal&#xd;&#xa;group by lal.prd_offering_id&#x29; lla on lla.pid&#x3d;lo.prd_offering_id&#xd;&#xa;left join no_of_install_from_loan_cycle iac on iac.prd_offering_id&#x3d;lo.prd_offering_id and iac.range_index&#x3d;0&#xd;&#xa;left join &#x28;select lal.prd_offering_id pid&#xd;&#xa;,min&#x28;lal.min_no_install&#x29; min&#xd;&#xa;,min&#x28;lal.max_no_install&#x29; max&#xd;&#xa;,min&#x28;lal.default_no_install&#x29; def&#xd;&#xa;from no_of_install_from_last_loan lal&#xd;&#xa;group by lal.prd_offering_id&#x29; ilc on ilc.pid&#x3d;lo.prd_offering_id&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

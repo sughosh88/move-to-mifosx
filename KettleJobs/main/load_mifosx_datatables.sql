@@ -44,6 +44,7 @@ CREATE TABLE `relatives` (
   `Relationship_cd_Relationship` int(11) DEFAULT NULL,
   `First Name` varchar(2000) DEFAULT NULL,
   `Last Name` varchar(2000) DEFAULT NULL,
+  `Date Of Birth` DATE NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_client_id` (`client_id`),
   CONSTRAINT `fk_relatives_client_id` FOREIGN KEY (`client_id`) REFERENCES `m_client` (`id`)

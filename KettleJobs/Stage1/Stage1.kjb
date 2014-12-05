@@ -61,7 +61,7 @@
     <name>DestinationDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>DestinationDB</database>
     <port>3306</port>
     <username/>
@@ -236,7 +236,7 @@
     <name>SourceDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>SourceDB</database>
     <port>3306</port>
     <username/>
@@ -997,7 +997,7 @@
       <to>Set Openning balance</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>

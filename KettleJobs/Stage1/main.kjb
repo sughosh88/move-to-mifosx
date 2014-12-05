@@ -15,7 +15,7 @@
     <name>DestinationDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>DestinationDB</database>
     <port>3306</port>
     <username/>
@@ -40,7 +40,7 @@
     <name>SourceDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>, </access>
+    <access>Native</access>
     <database>SourceDB</database>
     <port>3306</port>
     <username/>
@@ -145,12 +145,12 @@
       <fields>
         <field>
           <variable_name>TOOLHOME</variable_name>
-          <variable_value>E&#x3a;&#x5c;Projects&#x5c;Clients&#x5c;secdep&#x5c;secdepx&#x5c;move-to-mifosx</variable_value>
+          <variable_value>C&#x3a;&#x2f;gitfiles&#x2f;move-to-mifosx</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>CUR</variable_name>
-          <variable_value>&#x22;PHP&#x22;</variable_value>
+          <variable_value>&#x22;INR&#x22;</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -161,6 +161,11 @@
         <field>
           <variable_name>FAMILY_DETAILS_REQUIRED</variable_name>
           <variable_value>1</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>CUR_DIGIT</variable_name>
+          <variable_value>2</variable_value>
           <variable_type>JVM</variable_type>
         </field>
       </fields>
