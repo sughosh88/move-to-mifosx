@@ -1,66 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>main</name>
+  <name>test</name>
     <description/>
     <extended_description/>
     <job_version/>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;04&#x2f;26 11&#x3a;07&#x3a;16.666</created_date>
+  <created_date>2015&#x2f;09&#x2f;18 20&#x3a;16&#x3a;40.586</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;04&#x2f;26 11&#x3a;07&#x3a;16.666</modified_date>
+  <modified_date>2015&#x2f;09&#x2f;18 20&#x3a;16&#x3a;40.586</modified_date>
     <parameters>
     </parameters>
-  <connection>
-    <name>DestinationDB</name>
-    <server>localhost</server>
-    <type>MYSQL</type>
-    <access>, </access>
-    <database>DestinationDB</database>
-    <port>3306</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>SourceDB</name>
-    <server>localhost</server>
-    <type>MYSQL</type>
-    <access>, </access>
-    <database>SourceDB</database>
-    <port>3306</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
     <slaveservers>
     </slaveservers>
 <job-log-table><connection/>
@@ -100,124 +50,55 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>292</xloc>
-      <yloc>120</yloc>
+      <xloc>191</xloc>
+      <yloc>242</yloc>
       </entry>
     <entry>
-      <name>stage1</name>
+      <name>Transformation</name>
       <description/>
-      <type>JOB</type>
+      <type>TRANS</type>
       <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Stage1.kjb</filename>
-      <jobname/>
+      <trans_object_id/>
+      <filename>C&#x3a;&#x5c;move-to-mifosx&#x5c;KettleJobs&#x5c;Stage1&#x5c;ClientFeesLatest&#x5c;test.ktr</filename>
+      <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
       <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
+      <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
+      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>618</xloc>
-      <yloc>119</yloc>
-      </entry>
-    <entry>
-      <name>Set variables</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename/>
-      <file_variable_type>JVM</file_variable_type>
-      <fields>
-        <field>
-          <variable_name>TOOLHOME</variable_name>
-          <variable_value>C&#x3a;&#x5c;Workstation&#x5c;move-to-mifosx</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>CUR</variable_name>
-          <variable_value>&#x22;INR&#x22;</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>CUR_DIGIT</variable_name>
-          <variable_value>0</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>ACCT_TYPE</variable_name>
-          <variable_value>1</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>FAMILY_DETAILS_REQUIRED</variable_name>
-          <variable_value>1</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>452</xloc>
-      <yloc>118</yloc>
+      <xloc>401</xloc>
+      <yloc>200</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Set variables</to>
+      <to>Transformation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>stage1</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
   </hops>
   <notepads>
-    <notepad>
-      <note>Stage1 migrates data witout re indexing the primary keys&#xa;</note>
-      <xloc>295</xloc>
-      <yloc>219</yloc>
-      <width>341</width>
-      <heigth>42</heigth>
-      <fontname/>
-      <fontsize>-1</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>165</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
 
 </job>

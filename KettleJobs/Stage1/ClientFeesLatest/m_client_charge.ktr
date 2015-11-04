@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>loanApprovedDate</name>
+    <name>m_client_charge</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -66,19 +66,19 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2013&#x2f;12&#x2f;26 16&#x3a;25&#x3a;02.219</created_date>
+  <created_date>2015&#x2f;09&#x2f;16 15&#x3a;35&#x3a;20.636</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2013&#x2f;12&#x2f;26 16&#x3a;25&#x3a;02.219</modified_date>
+  <modified_date>2015&#x2f;09&#x2f;16 15&#x3a;35&#x3a;20.636</modified_date>
   </info>
   <notepads>
   </notepads>
   <connection>
     <name>DestinationDB</name>
-    <server>localhost</server>
+    <server/>
     <type>MYSQL</type>
     <access>, </access>
     <database>DestinationDB</database>
-    <port>3306</port>
+    <port>1521</port>
     <username/>
     <password>Encrypted </password>
     <servername/>
@@ -90,20 +90,22 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <connection>
     <name>SourceDB</name>
-    <server>localhost</server>
+    <server/>
     <type>MYSQL</type>
     <access>, </access>
     <database>SourceDB</database>
-    <port>3306</port>
+    <port>1521</port>
     <username/>
     <password>Encrypted </password>
     <servername/>
@@ -115,18 +117,20 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get loan approve date</from><to>Update loan approved date</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table input</from><to>Table output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Get loan approve date</name>
+    <name>Table input</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -137,7 +141,7 @@
            <schema_name/>
            </partitioning>
     <connection>SourceDB</connection>
-    <sql>SELECT&#xa;asch.ACCOUNT_ID&#xa;, asch.CHANGED_BY&#xa;, asch.CHANGED_DATE&#xa;FROM loan_account la&#xa;LEFT JOIN account ac ON ac.account_id &#x3d;  la.account_id&#xa;LEFT JOIN account_status_change_history asch ON la.account_id &#x3d; asch.ACCOUNT_ID&#xa;WHERE asch.NEW_STATUS &#x3d;  3 AND asch.OLD_STATUS &#x3d;  2&#xa;</sql>
+    <sql>&#x2f;&#x2a;select distinct&#xd;&#xa;cfs.ACCOUNT_FEES_DETAIL_ID id&#xd;&#xa;,cu.CUSTOMER_ID client_id&#xd;&#xa;,f.FEE_ID charge_id&#xd;&#xa;,0 as is_penalty&#xd;&#xa;,2 as charge_time_enum&#xd;&#xa;,cs.ACTION_DATE as charge_due_date&#xd;&#xa;,1 as charge_calculation_enum&#xd;&#xa;,cfs.AMOUNT amount&#xd;&#xa;,cfs.AMOUNT_PAID amount_paid_derived&#xd;&#xa;,null as amount_waived_derived&#xd;&#xa;,null as amount_writtenoff_derived&#xd;&#xa;,ifnull&#x28;cfs.AMOUNT,0&#x29; - ifnull&#x28;cfs.AMOUNT_PAID,0&#x29; amount_outstanding_derived&#xd;&#xa;,case when ifnull&#x28;cfs.AMOUNT,0&#x29; - ifnull&#x28;cfs.AMOUNT_PAID,0&#x29; &#x3d; 0 then 1 else 0 end as is_paid_derived&#xd;&#xa;,0 as waived&#xd;&#xa;,1 as is_active&#xd;&#xa;,null as inactivated_on_date&#xd;&#xa;,cfs.ACCOUNT_FEES_DETAIL_ID&#xd;&#xa;,f.FEE_ID&#xd;&#xa;,f.FEE_NAME&#xd;&#xa;,rd.RECUR_AFTER&#xd;&#xa;,rt.RECURRENCE_NAME&#xd;&#xa;,atx.RELATED_TRXN_ID&#xd;&#xa;from customer cu&#xd;&#xa;inner join account ac on ac.CUSTOMER_ID&#x3d;cu.CUSTOMER_ID and ac.ACCOUNT_TYPE_ID&#x3d;3&#xd;&#xa;inner join customer_schedule cs on cs.CUSTOMER_ID&#x3d;cu.CUSTOMER_ID&#xd;&#xa;inner join customer_fee_schedule cfs on cfs.ID&#x3d;cs.ID&#xd;&#xa;inner join account_fees af on af.ACCOUNT_FEE_ID&#x3d; cfs.ACCOUNT_FEE_ID&#xd;&#xa;inner join fees f on f.FEE_ID&#x3d;af.FEE_ID&#xd;&#xa;inner join fee_frequency ff on ff.FEE_ID&#x3d;f.FEE_ID&#xd;&#xa;inner join fee_frequency_type fft on fft.FEE_FREQUENCY_ID&#x3d;ff.FEE_FREQUENCYTYPE_ID&#xd;&#xa;inner join lookup_value lv on lv.LOOKUP_ID&#x3d;fft.LOOKUP_ID&#xd;&#xa;inner join meeting m on m.MEETING_ID&#x3d;ff.FREQUENCY_MEETING_ID&#xd;&#xa;inner join recurrence_detail rd on rd.MEETING_ID&#x3d;m.MEETING_ID&#xd;&#xa;inner join recurrence_type rt on rt.RECURRENCE_ID&#x3d;rd.RECURRENCE_ID&#xd;&#xa;left join account_trxn atx on atx.ACCOUNT_ID&#x3d;ac.ACCOUNT_ID and atx.INSTALLMENT_ID&#x3d;cs.INSTALLMENT_ID&#xd;&#xa;left join fee_trxn_detail ftd on ftd.ACCOUNT_TRXN_ID&#x3d;atx.ACCOUNT_TRXN_ID and ftd.ACCOUNT_FEE_ID&#x3d;af.ACCOUNT_FEE_ID&#xd;&#xa;&#x23;where &#xd;&#xa;&#x23;atx.RELATED_TRXN_ID is not null&#xd;&#xa;&#x23;ac.ACCOUNT_ID&#x3d;85176&#xd;&#xa;&#x23;cfs.ACCOUNT_FEES_DETAIL_ID&#x3d;904221&#xd;&#xa;&#x23;and f.CATEGORY_ID&#x3d;2&#xd;&#xa;&#x23;and atx.ACCOUNT_ACTION_ID&#x3d;12&#x2a;&#x2f;&#xd;&#xa;&#xd;&#xa;select distinct&#xd;&#xa;&#xd;&#xa;cfs.ACCOUNT_FEES_DETAIL_ID id&#xd;&#xa;,cs.CUSTOMER_ID client_id&#xd;&#xa;,cfs.FEE_ID charge_id&#xd;&#xa;,0 as is_penalty&#xd;&#xa;,2 as charge_time_enum&#xd;&#xa;,cs.ACTION_DATE as charge_due_date&#xd;&#xa;,1 as charge_calculation_enum&#xd;&#xa;,cfs.AMOUNT amount&#xd;&#xa;,cfs.AMOUNT_PAID amount_paid_derived&#xd;&#xa;,null as amount_waived_derived&#xd;&#xa;,null as amount_writtenoff_derived&#xd;&#xa;,ifnull&#x28;cfs.AMOUNT,0&#x29; - ifnull&#x28;cfs.AMOUNT_PAID,0&#x29; amount_outstanding_derived&#xd;&#xa;,case when ifnull&#x28;cfs.AMOUNT,0&#x29; - ifnull&#x28;cfs.AMOUNT_PAID,0&#x29; &#x3d; 0 then 1 else 0 end as is_paid_derived&#xd;&#xa;,0 as waived&#xd;&#xa;,1 as is_active&#xd;&#xa;,null as inactivated_on_date&#xd;&#xa;&#x2f;&#x2a;,cfs.ACCOUNT_FEES_DETAIL_ID&#xd;&#xa;,f.FEE_ID&#xd;&#xa;,f.FEE_NAME&#xd;&#xa;,rd.RECUR_AFTER&#xd;&#xa;,rt.RECURRENCE_NAME&#xd;&#xa;,atx.RELATED_TRXN_ID&#x2a;&#x2f;&#xd;&#xa;from customer_fee_schedule cfs&#xd;&#xa;inner join customer_schedule cs on cs.ID&#x3d;cfs.ID&#xd;&#xa;inner join customer cu on cu.CUSTOMER_ID&#x3d;cs.CUSTOMER_ID and cu.CUSTOMER_LEVEL_ID&#xd;&#xa;inner join account ac on ac.CUSTOMER_ID&#x3d;cu.CUSTOMER_ID and ac.ACCOUNT_TYPE_ID&#x3d;3&#xd;&#xa;&#xd;&#xa;&#x23;where cs.CUSTOMER_ID&#x3d;17177&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -145,15 +149,15 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>364</xloc>
-      <yloc>226</yloc>
+      <xloc>191</xloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Update loan approved date</name>
-    <type>InsertUpdate</type>
+    <name>Table output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -163,32 +167,92 @@
            <schema_name/>
            </partitioning>
     <connection>DestinationDB</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>m_loan</table>
-      <key>
-        <name>ACCOUNT_ID</name>
-        <field>account_no</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>approvedon_userid</name>
-        <rename>CHANGED_BY</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>approvedon_date</name>
-        <rename>CHANGED_DATE</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <schema/>
+    <table>m_client_charge</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>id</column_name>
+          <stream_name>id</stream_name>
+        </field>
+        <field>
+          <column_name>client_id</column_name>
+          <stream_name>client_id</stream_name>
+        </field>
+        <field>
+          <column_name>charge_id</column_name>
+          <stream_name>charge_id</stream_name>
+        </field>
+        <field>
+          <column_name>is_penalty</column_name>
+          <stream_name>is_penalty</stream_name>
+        </field>
+        <field>
+          <column_name>charge_time_enum</column_name>
+          <stream_name>charge_time_enum</stream_name>
+        </field>
+        <field>
+          <column_name>charge_due_date</column_name>
+          <stream_name>charge_due_date</stream_name>
+        </field>
+        <field>
+          <column_name>charge_calculation_enum</column_name>
+          <stream_name>charge_calculation_enum</stream_name>
+        </field>
+        <field>
+          <column_name>amount</column_name>
+          <stream_name>amount</stream_name>
+        </field>
+        <field>
+          <column_name>amount_paid_derived</column_name>
+          <stream_name>amount_paid_derived</stream_name>
+        </field>
+        <field>
+          <column_name>amount_waived_derived</column_name>
+          <stream_name>amount_waived_derived</stream_name>
+        </field>
+        <field>
+          <column_name>amount_outstanding_derived</column_name>
+          <stream_name>amount_outstanding_derived</stream_name>
+        </field>
+        <field>
+          <column_name>is_paid_derived</column_name>
+          <stream_name>is_paid_derived</stream_name>
+        </field>
+        <field>
+          <column_name>waived</column_name>
+          <stream_name>waived</stream_name>
+        </field>
+        <field>
+          <column_name>is_active</column_name>
+          <stream_name>is_active</stream_name>
+        </field>
+        <field>
+          <column_name>inactivated_on_date</column_name>
+          <stream_name>inactivated_on_date</stream_name>
+        </field>
+        <field>
+          <column_name>amount_writtenoff_derived</column_name>
+          <stream_name>amount_writtenoff_derived</stream_name>
+        </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>583</xloc>
-      <yloc>225</yloc>
+      <xloc>431</xloc>
+      <yloc>215</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

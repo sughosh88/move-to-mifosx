@@ -609,8 +609,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>445</xloc>
-      <yloc>330</yloc>
+      <xloc>379</xloc>
+      <yloc>353</yloc>
       </entry>
     <entry>
       <name>Misc</name>
@@ -641,8 +641,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>607</xloc>
-      <yloc>506</yloc>
+      <xloc>549</xloc>
+      <yloc>510</yloc>
       </entry>
     <entry>
       <name>Initial tasks</name>
@@ -705,8 +705,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>760</xloc>
-      <yloc>506</yloc>
+      <xloc>517</xloc>
+      <yloc>329</yloc>
       </entry>
     <entry>
       <name>Details of client, groups</name>
@@ -769,8 +769,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>760</xloc>
-      <yloc>330</yloc>
+      <xloc>730</xloc>
+      <yloc>508</yloc>
       </entry>
     <entry>
       <name>Saving Product Details</name>
@@ -865,8 +865,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>916</xloc>
-      <yloc>502</yloc>
+      <xloc>681</xloc>
+      <yloc>332</yloc>
       </entry>
     <entry>
       <name>Product GL code mapping</name>
@@ -944,8 +944,8 @@
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>Loan Product details</from>
@@ -993,51 +993,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>MeetingAndAttendance</from>
-      <to>Set Openning balance</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Set Openning balance</from>
-      <to>QG</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>QG</from>
-      <to>Misc</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Notes</from>
-      <to>Client Fees</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Client Fees</from>
-      <to>MeetingAndAttendance</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
       <to>Initial tasks</to>
       <from_nr>0</from_nr>
@@ -1058,6 +1013,24 @@
     <hop>
       <from>Product GL code mapping</from>
       <to>Centers Groups and Clients</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>MeetingAndAttendance</from>
+      <to>Misc</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Notes</from>
+      <to>MeetingAndAttendance</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

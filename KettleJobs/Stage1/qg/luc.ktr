@@ -6,7 +6,7 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <directory>&#47;</directory>
+    <directory>&#x2f;</directory>
     <parameters>
     </parameters>
     <log>
@@ -16,7 +16,7 @@
 <size_limit_lines/>
 <interval/>
 <timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></trans-log-table>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
 <perf-log-table><connection/>
 <schema/>
 <table/>
@@ -33,6 +33,11 @@
 <table/>
 <timeout_days/>
 <field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
     </log>
     <maxdate>
       <connection/>
@@ -61,9 +66,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2013&#47;06&#47;26 14:28:03.780</created_date>
+  <created_date>2013&#x2f;06&#x2f;26 14&#x3a;28&#x3a;03.780</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2013&#47;06&#47;26 14:28:03.780</modified_date>
+  <modified_date>2013&#x2f;06&#x2f;26 14&#x3a;28&#x3a;03.780</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -90,7 +95,7 @@
     <name>DestinatioDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>JNDI</access>
+    <access>, </access>
     <database>DestinatioDB</database>
     <port>3306</port>
     <username/>
@@ -115,7 +120,7 @@
     <name>DestinationDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>JNDI</access>
+    <access>, </access>
     <database>DestinationDB</database>
     <port>3306</port>
     <username/>
@@ -240,7 +245,7 @@
     <name>SourceDB</name>
     <server>localhost</server>
     <type>MYSQL</type>
-    <access>JNDI</access>
+    <access>, </access>
     <database>SourceDB</database>
     <port>3306</port>
     <username/>
@@ -287,12 +292,15 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>LUC Questions input</from><to>Row denormaliser</to><enabled>Y</enabled> </hop>  <hop> <from>Row denormaliser</from><to>LUC  data table output</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>LUC Questions input</from><to>Row denormaliser</to><enabled>Y</enabled> </hop>
+  <hop> <from>Row denormaliser</from><to>LUC  data table output</to><enabled>Y</enabled> </hop>
+  </order>
   <step>
     <name>LUC  data table output</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
+    <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -346,25 +354,14 @@
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
+    <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
     <connection>SourceDB</connection>
-    <sql>SELECT 
-la.ACCOUNT_ID As accountId ,
-qgi.date_conducted As createdDate ,
-qgr.response As response ,
-qgr.question_group_instance_id As instanceId ,
-qgr.sections_questions_id As qid
-FROM 
-question_group_instance qgi 
-JOIN question_group qg ON qg.id = qgi.question_group_id AND qgi.event_source_id = 7
-JOIN question_group_response qgr ON qgr.question_group_instance_id = qgi.id
-JOIN loan_account la ON la.ACCOUNT_ID = qgi.entity_id
-JOIN account ac ON ac.ACCOUNT_ID = la.ACCOUNT_ID AND ac.OFFICE_ID = 12
-ORDER BY instanceId</sql>
+    <sql>SELECT &#xa;la.ACCOUNT_ID As accountId ,&#xa;qgi.date_conducted As createdDate ,&#xa;qgr.response As response ,&#xa;qgr.question_group_instance_id As instanceId ,&#xa;qgr.sections_questions_id As qid&#xa;FROM &#xa;question_group_instance qgi &#xa;JOIN question_group qg ON qg.id &#x3d; qgi.question_group_id AND qgi.event_source_id &#x3d; 7&#xa;JOIN question_group_response qgr ON qgr.question_group_instance_id &#x3d; qgi.id&#xa;JOIN loan_account la ON la.ACCOUNT_ID &#x3d; qgi.entity_id&#xa;JOIN account ac ON ac.ACCOUNT_ID &#x3d; la.ACCOUNT_ID &#x23;AND ac.OFFICE_ID &#x3d; 12&#xa;ORDER BY instanceId</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -383,6 +380,7 @@ ORDER BY instanceId</sql>
     <type>Denormaliser</type>
     <description/>
     <distribute>Y</distribute>
+    <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
@@ -437,4 +435,5 @@ ORDER BY instanceId</sql>
    <slave-step-copy-partition-distribution>
 </slave-step-copy-partition-distribution>
    <slave_transformation>N</slave_transformation>
+
 </transformation>

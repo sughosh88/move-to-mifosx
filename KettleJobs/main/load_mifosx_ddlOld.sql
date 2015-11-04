@@ -1,17 +1,4 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.5.23 - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             8.3.0.4851
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping structure for table samuelx.acc_accounting_rule
-DROP TABLE IF EXISTS `acc_accounting_rule`;
+-- acc_accounting_rule
 CREATE TABLE IF NOT EXISTS `acc_accounting_rule` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -32,14 +19,12 @@ CREATE TABLE IF NOT EXISTS `acc_accounting_rule` (
   CONSTRAINT `FK_acc_accounting_rule_m_office` FOREIGN KEY (`office_id`) REFERENCES `m_office` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.acc_accounting_rule: ~0 rows (approximately)
-DELETE FROM `acc_accounting_rule`;
+-- acc_accounting_rule: ~0 rows (approximately)
 /*!40000 ALTER TABLE `acc_accounting_rule` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acc_accounting_rule` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.acc_gl_account
-DROP TABLE IF EXISTS `acc_gl_account`;
+-- acc_gl_account
 CREATE TABLE IF NOT EXISTS `acc_gl_account` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -60,14 +45,12 @@ CREATE TABLE IF NOT EXISTS `acc_gl_account` (
   CONSTRAINT `FK_ACC_0000000001` FOREIGN KEY (`parent_id`) REFERENCES `acc_gl_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.acc_gl_account: ~0 rows (approximately)
-DELETE FROM `acc_gl_account`;
+-- acc_gl_account: ~0 rows (approximately)
 /*!40000 ALTER TABLE `acc_gl_account` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acc_gl_account` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.acc_gl_closure
-DROP TABLE IF EXISTS `acc_gl_closure`;
+-- acc_gl_closure
 CREATE TABLE IF NOT EXISTS `acc_gl_closure` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `office_id` bigint(20) NOT NULL,
@@ -88,32 +71,12 @@ CREATE TABLE IF NOT EXISTS `acc_gl_closure` (
   CONSTRAINT `FK_acc_gl_closure_m_office` FOREIGN KEY (`office_id`) REFERENCES `m_office` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.acc_gl_closure: ~0 rows (approximately)
-DELETE FROM `acc_gl_closure`;
+-- acc_gl_closure: ~0 rows (approximately)
 /*!40000 ALTER TABLE `acc_gl_closure` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acc_gl_closure` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.acc_gl_financial_activity_account
-DROP TABLE IF EXISTS `acc_gl_financial_activity_account`;
-CREATE TABLE IF NOT EXISTS `acc_gl_financial_activity_account` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `gl_account_id` bigint(20) NOT NULL DEFAULT '0',
-  `financial_activity_type` smallint(5) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `financial_activity_type` (`financial_activity_type`),
-  KEY `FK_office_mapping_acc_gl_account` (`gl_account_id`),
-  CONSTRAINT `FK_office_mapping_acc_gl_account` FOREIGN KEY (`gl_account_id`) REFERENCES `acc_gl_account` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.acc_gl_financial_activity_account: ~0 rows (approximately)
-DELETE FROM `acc_gl_financial_activity_account`;
-/*!40000 ALTER TABLE `acc_gl_financial_activity_account` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acc_gl_financial_activity_account` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.acc_gl_journal_entry
-DROP TABLE IF EXISTS `acc_gl_journal_entry`;
+-- acc_gl_journal_entry
 CREATE TABLE IF NOT EXISTS `acc_gl_journal_entry` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_id` bigint(20) NOT NULL,
@@ -159,14 +122,12 @@ CREATE TABLE IF NOT EXISTS `acc_gl_journal_entry` (
   CONSTRAINT `FK_acc_gl_journal_entry_m_savings_account_transaction` FOREIGN KEY (`savings_transaction_id`) REFERENCES `m_savings_account_transaction` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.acc_gl_journal_entry: ~0 rows (approximately)
-DELETE FROM `acc_gl_journal_entry`;
+-- acc_gl_journal_entry: ~0 rows (approximately)
 /*!40000 ALTER TABLE `acc_gl_journal_entry` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acc_gl_journal_entry` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.acc_product_mapping
-DROP TABLE IF EXISTS `acc_product_mapping`;
+-- acc_product_mapping
 CREATE TABLE IF NOT EXISTS `acc_product_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `gl_account_id` bigint(20) DEFAULT NULL,
@@ -182,14 +143,12 @@ CREATE TABLE IF NOT EXISTS `acc_product_mapping` (
   CONSTRAINT `FK_acc_product_mapping_m_code_value` FOREIGN KEY (`payment_type`) REFERENCES `m_code_value` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.acc_product_mapping: ~0 rows (approximately)
-DELETE FROM `acc_product_mapping`;
+-- acc_product_mapping: ~0 rows (approximately)
 /*!40000 ALTER TABLE `acc_product_mapping` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acc_product_mapping` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.acc_rule_tags
-DROP TABLE IF EXISTS `acc_rule_tags`;
+-- acc_rule_tags
 CREATE TABLE IF NOT EXISTS `acc_rule_tags` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `acc_rule_id` bigint(20) NOT NULL,
@@ -201,42 +160,37 @@ CREATE TABLE IF NOT EXISTS `acc_rule_tags` (
   KEY `FK_m_code_value_id` (`tag_id`),
   CONSTRAINT `FK_acc_accounting_rule_id` FOREIGN KEY (`acc_rule_id`) REFERENCES `acc_accounting_rule` (`id`),
   CONSTRAINT `FK_m_code_value_id` FOREIGN KEY (`tag_id`) REFERENCES `m_code_value` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.acc_rule_tags: ~0 rows (approximately)
-DELETE FROM `acc_rule_tags`;
+-- acc_rule_tags: ~0 rows (approximately)
 /*!40000 ALTER TABLE `acc_rule_tags` DISABLE KEYS */;
 /*!40000 ALTER TABLE `acc_rule_tags` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.c_cache
-DROP TABLE IF EXISTS `c_cache`;
+-- c_cache
 CREATE TABLE IF NOT EXISTS `c_cache` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cache_type_enum` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.c_cache: ~1 rows (approximately)
-DELETE FROM `c_cache`;
+-- c_cache: ~1 rows (approximately)
 /*!40000 ALTER TABLE `c_cache` DISABLE KEYS */;
 INSERT INTO `c_cache` (`id`, `cache_type_enum`) VALUES
 	(1, 1);
 /*!40000 ALTER TABLE `c_cache` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.c_configuration
-DROP TABLE IF EXISTS `c_configuration`;
+-- c_configuration
 CREATE TABLE IF NOT EXISTS `c_configuration` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `value` int(11) DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.c_configuration: ~10 rows (approximately)
-DELETE FROM `c_configuration`;
+-- c_configuration: ~10 rows (approximately)
 /*!40000 ALTER TABLE `c_configuration` DISABLE KEYS */;
 INSERT INTO `c_configuration` (`id`, `name`, `value`, `enabled`) VALUES
 	(1, 'maker-checker', NULL, 0),
@@ -252,16 +206,14 @@ INSERT INTO `c_configuration` (`id`, `name`, `value`, `enabled`) VALUES
 /*!40000 ALTER TABLE `c_configuration` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.c_external_service
-DROP TABLE IF EXISTS `c_external_service`;
+-- c_external_service
 CREATE TABLE IF NOT EXISTS `c_external_service` (
   `name` varchar(150) NOT NULL,
   `value` varchar(250) DEFAULT NULL,
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.c_external_service: ~3 rows (approximately)
-DELETE FROM `c_external_service`;
+-- c_external_service: ~3 rows (approximately)
 /*!40000 ALTER TABLE `c_external_service` DISABLE KEYS */;
 INSERT INTO `c_external_service` (`name`, `value`) VALUES
 	('s3_access_key', NULL),
@@ -270,8 +222,7 @@ INSERT INTO `c_external_service` (`name`, `value`) VALUES
 /*!40000 ALTER TABLE `c_external_service` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.job
-DROP TABLE IF EXISTS `job`;
+-- job
 CREATE TABLE IF NOT EXISTS `job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -290,32 +241,28 @@ CREATE TABLE IF NOT EXISTS `job` (
   `scheduler_group` smallint(2) NOT NULL DEFAULT '0',
   `is_misfired` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.job: ~15 rows (approximately)
-DELETE FROM `job`;
+-- job: ~13 rows (approximately)
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
 INSERT INTO `job` (`id`, `name`, `display_name`, `cron_expression`, `create_time`, `task_priority`, `group_name`, `previous_run_start_time`, `next_run_time`, `job_key`, `initializing_errorlog`, `is_active`, `currently_running`, `updates_allowed`, `scheduler_group`, `is_misfired`) VALUES
-	(1, 'Update loan Summary', 'Update loan Summary', '0 0 22 1/1 * ? *', '2014-12-05 12:20:12', 5, NULL, NULL, '2014-12-05 22:00:00', 'Update loan SummaryJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(2, 'Update Loan Arrears Ageing', 'Update Loan Arrears Ageing', '0 1 0 1/1 * ? *', '2014-12-05 12:20:12', 5, NULL, NULL, '2014-12-06 00:01:00', 'Update Loan Arrears AgeingJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(3, 'Update Loan Paid In Advance', 'Update Loan Paid In Advance', '0 5 0 1/1 * ? *', '2014-12-05 12:20:12', 5, NULL, NULL, '2014-12-06 00:05:00', 'Update Loan Paid In AdvanceJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(4, 'Apply Annual Fee For Savings', 'Apply Annual Fee For Savings', '0 20 22 1/1 * ? *', '2014-12-05 12:20:12', 5, NULL, NULL, '2014-12-05 22:20:00', 'Apply Annual Fee For SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(5, 'Apply Holidays To Loans', 'Apply Holidays To Loans', '0 0 12 * * ?', '2014-12-05 12:20:12', 5, NULL, NULL, '2014-12-06 12:00:00', 'Apply Holidays To LoansJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(6, 'Post Interest For Savings', 'Post Interest For Savings', '0 0 0 1/1 * ? *', '2014-12-05 12:20:13', 5, NULL, NULL, '2014-12-06 00:00:00', 'Post Interest For SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 1, 0),
-	(7, 'Transfer Fee For Loans From Savings', 'Transfer Fee For Loans From Savings', '0 1 0 1/1 * ? *', '2014-12-05 12:20:17', 5, NULL, NULL, '2014-12-06 00:01:00', 'Transfer Fee For Loans From SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(8, 'Pay Due Savings Charges', 'Pay Due Savings Charges', '0 0 12 * * ?', '2013-09-23 00:00:00', 5, NULL, NULL, '2014-12-06 12:00:00', 'Pay Due Savings ChargesJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(9, 'Update Accounting Running Balances', 'Update Accounting Running Balances', '0 1 0 1/1 * ? *', '2014-12-05 12:20:18', 5, NULL, NULL, '2014-12-06 00:01:00', 'Update Accounting Running BalancesJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(10, 'Execute Standing Instruction', 'Execute Standing Instruction', '0 0 0 1/1 * ? *', '2014-12-05 12:20:25', 5, NULL, NULL, '2014-12-06 00:00:00', 'Execute Standing InstructionJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(11, 'Add Accrual Transactions', 'Add Accrual Transactions', '0 1 0 1/1 * ? *', '2014-12-05 12:20:25', 5, NULL, NULL, '2014-12-06 00:01:00', 'Add Accrual TransactionsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(12, 'Apply penalty to overdue loans', 'Apply penalty to overdue loans', '0 0 0 1/1 * ? *', '2014-12-05 12:20:25', 5, NULL, NULL, '2014-12-06 00:00:00', 'Apply penalty to overdue loansJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(13, 'Update Non Performing Assets', 'Update Non Performing Assets', '0 0 0 1/1 * ? *', '2014-12-05 12:20:25', 5, NULL, NULL, '2014-12-06 00:00:00', 'Update Non Performing AssetsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
-	(14, 'Transfer Interest To Savings', 'Transfer Interest To Savings', '0 2 0 1/1 * ? *', '2014-12-05 12:20:26', 4, NULL, NULL, '2014-12-06 00:02:00', 'Transfer Interest To SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 1, 0),
-	(15, 'Update Deposit Accounts Maturity details', 'Update Deposit Accounts Maturity details', '0 0 0 1/1 * ? *', '2014-12-05 12:20:26', 5, NULL, NULL, '2014-12-06 00:00:00', 'Update Deposit Accounts Maturity detailsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0);
+	(1, 'Update loan Summary', 'Update loan Summary', '0 0 22 1/1 * ? *', '2014-05-06 16:11:19', 5, NULL, NULL, '2014-05-06 22:00:00', 'Update loan SummaryJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(2, 'Update Loan Arrears Ageing', 'Update Loan Arrears Ageing', '0 1 0 1/1 * ? *', '2014-05-06 16:11:19', 5, NULL, NULL, '2014-05-07 00:01:00', 'Update Loan Arrears AgeingJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(3, 'Update Loan Paid In Advance', 'Update Loan Paid In Advance', '0 5 0 1/1 * ? *', '2014-05-06 16:11:19', 5, NULL, NULL, '2014-05-07 00:05:00', 'Update Loan Paid In AdvanceJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(4, 'Apply Annual Fee For Savings', 'Apply Annual Fee For Savings', '0 20 22 1/1 * ? *', '2014-05-06 16:11:19', 5, NULL, NULL, '2014-05-06 22:20:00', 'Apply Annual Fee For SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(5, 'Apply Holidays To Loans', 'Apply Holidays To Loans', '0 0 12 * * ?', '2014-05-06 16:11:19', 5, NULL, NULL, '2014-05-07 12:00:00', 'Apply Holidays To LoansJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(6, 'Post Interest For Savings', 'Post Interest For Savings', '0 0 0 1/1 * ? *', '2014-05-06 16:11:30', 5, NULL, NULL, '2014-05-07 00:00:00', 'Post Interest For SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(7, 'Transfer Fee For Loans From Savings', 'Transfer Fee For Loans From Savings', '0 1 0 1/1 * ? *', '2014-05-06 16:11:43', 5, NULL, NULL, '2014-05-07 00:01:00', 'Transfer Fee For Loans From SavingsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(8, 'Pay Due Savings Charges', 'Pay Due Savings Charges', '0 0 12 * * ?', '2013-09-23 00:00:00', 5, NULL, NULL, '2014-05-07 12:00:00', 'Pay Due Savings ChargesJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(9, 'Update Accounting Running Balances', 'Update Accounting Running Balances', '0 1 0 1/1 * ? *', '2014-05-06 16:11:48', 5, NULL, NULL, '2014-05-07 00:01:00', 'Update Accounting Running BalancesJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(10, 'Execute Standing Instruction', 'Execute Standing Instruction', '0 0 0 1/1 * ? *', '2014-05-06 16:12:15', 5, NULL, NULL, '2014-05-07 00:00:00', 'Execute Standing InstructionJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(11, 'Add Accrual Transactions', 'Add Accrual Transactions', '0 1 0 1/1 * ? *', '2014-05-06 16:12:15', 5, NULL, NULL, '2014-05-07 00:01:00', 'Add Accrual TransactionsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(12, 'Apply penalty to overdue loans', 'Apply penalty to overdue loans', '0 0 0 1/1 * ? *', '2014-05-06 16:12:15', 5, NULL, NULL, '2014-05-07 00:00:00', 'Apply penalty to overdue loansJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0),
+	(13, 'Update Non Performing Assets', 'Update Non Performing Assets', '0 0 0 1/1 * ? *', '2014-05-06 16:12:16', 5, NULL, NULL, '2014-05-07 00:00:00', 'Update Non Performing AssetsJobDetail4 _ DEFAULT', NULL, 1, 0, 1, 0, 0);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.job_run_history
-DROP TABLE IF EXISTS `job_run_history`;
+-- job_run_history
 CREATE TABLE IF NOT EXISTS `job_run_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `job_id` bigint(20) NOT NULL,
@@ -323,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `job_run_history` (
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `status` varchar(10) CHARACTER SET latin1 NOT NULL,
-  `error_message` text,
+  `error_message` varchar(500) DEFAULT NULL,
   `trigger_type` varchar(25) NOT NULL,
   `error_log` text,
   PRIMARY KEY (`id`),
@@ -331,14 +278,12 @@ CREATE TABLE IF NOT EXISTS `job_run_history` (
   CONSTRAINT `scheduledjobsFK` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.job_run_history: ~0 rows (approximately)
-DELETE FROM `job_run_history`;
+-- job_run_history: ~0 rows (approximately)
 /*!40000 ALTER TABLE `job_run_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `job_run_history` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.mix_taxonomy
-DROP TABLE IF EXISTS `mix_taxonomy`;
+-- mix_taxonomy
 CREATE TABLE IF NOT EXISTS `mix_taxonomy` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -350,8 +295,7 @@ CREATE TABLE IF NOT EXISTS `mix_taxonomy` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.mix_taxonomy: ~48 rows (approximately)
-DELETE FROM `mix_taxonomy`;
+-- mix_taxonomy: ~48 rows (approximately)
 /*!40000 ALTER TABLE `mix_taxonomy` DISABLE KEYS */;
 INSERT INTO `mix_taxonomy` (`id`, `name`, `namespace_id`, `dimension`, `type`, `description`, `need_mapping`) VALUES
 	(1, 'AdministrativeExpense', 1, NULL, 3, NULL, 1),
@@ -405,8 +349,7 @@ INSERT INTO `mix_taxonomy` (`id`, `name`, `namespace_id`, `dimension`, `type`, `
 /*!40000 ALTER TABLE `mix_taxonomy` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.mix_taxonomy_mapping
-DROP TABLE IF EXISTS `mix_taxonomy_mapping`;
+-- mix_taxonomy_mapping
 CREATE TABLE IF NOT EXISTS `mix_taxonomy_mapping` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `identifier` varchar(50) NOT NULL DEFAULT '',
@@ -416,16 +359,14 @@ CREATE TABLE IF NOT EXISTS `mix_taxonomy_mapping` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.mix_taxonomy_mapping: ~1 rows (approximately)
-DELETE FROM `mix_taxonomy_mapping`;
+-- mix_taxonomy_mapping: ~1 rows (approximately)
 /*!40000 ALTER TABLE `mix_taxonomy_mapping` DISABLE KEYS */;
 INSERT INTO `mix_taxonomy_mapping` (`id`, `identifier`, `config`, `last_update_date`, `currency`) VALUES
 	(1, 'default', NULL, NULL, '');
 /*!40000 ALTER TABLE `mix_taxonomy_mapping` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.mix_xbrl_namespace
-DROP TABLE IF EXISTS `mix_xbrl_namespace`;
+-- mix_xbrl_namespace
 CREATE TABLE IF NOT EXISTS `mix_xbrl_namespace` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `prefix` varchar(20) NOT NULL DEFAULT '',
@@ -434,8 +375,7 @@ CREATE TABLE IF NOT EXISTS `mix_xbrl_namespace` (
   UNIQUE KEY `UNQUE` (`prefix`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.mix_xbrl_namespace: ~7 rows (approximately)
-DELETE FROM `mix_xbrl_namespace`;
+-- mix_xbrl_namespace: ~7 rows (approximately)
 /*!40000 ALTER TABLE `mix_xbrl_namespace` DISABLE KEYS */;
 INSERT INTO `mix_xbrl_namespace` (`id`, `prefix`, `url`) VALUES
 	(1, 'ifrs', 'http://xbrl.iasb.org/taxonomy/2009-04-01/ifrs'),
@@ -448,8 +388,7 @@ INSERT INTO `mix_xbrl_namespace` (`id`, `prefix`, `url`) VALUES
 /*!40000 ALTER TABLE `mix_xbrl_namespace` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_account_transfer_details
-DROP TABLE IF EXISTS `m_account_transfer_details`;
+-- m_account_transfer_details
 CREATE TABLE IF NOT EXISTS `m_account_transfer_details` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `from_office_id` bigint(20) NOT NULL,
@@ -480,14 +419,12 @@ CREATE TABLE IF NOT EXISTS `m_account_transfer_details` (
   CONSTRAINT `FK_m_account_transfer_details_to_savings_account` FOREIGN KEY (`to_savings_account_id`) REFERENCES `m_savings_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_account_transfer_details: ~0 rows (approximately)
-DELETE FROM `m_account_transfer_details`;
+-- m_account_transfer_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_account_transfer_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_account_transfer_details` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_account_transfer_standing_instructions
-DROP TABLE IF EXISTS `m_account_transfer_standing_instructions`;
+-- m_account_transfer_standing_instructions
 CREATE TABLE IF NOT EXISTS `m_account_transfer_standing_instructions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
@@ -510,34 +447,12 @@ CREATE TABLE IF NOT EXISTS `m_account_transfer_standing_instructions` (
   CONSTRAINT `FK_m_standing_instructions_account_transfer_details` FOREIGN KEY (`account_transfer_details_id`) REFERENCES `m_account_transfer_details` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_account_transfer_standing_instructions: ~0 rows (approximately)
-DELETE FROM `m_account_transfer_standing_instructions`;
+-- m_account_transfer_standing_instructions: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_account_transfer_standing_instructions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_account_transfer_standing_instructions` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_account_transfer_standing_instructions_history
-DROP TABLE IF EXISTS `m_account_transfer_standing_instructions_history`;
-CREATE TABLE IF NOT EXISTS `m_account_transfer_standing_instructions_history` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `standing_instruction_id` bigint(20) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `execution_time` datetime NOT NULL,
-  `amount` decimal(19,6) NOT NULL,
-  `error_log` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_m_account_transfer_standing_instructions_history` (`standing_instruction_id`),
-  CONSTRAINT `FK_m_account_transfer_standing_instructions_m_history` FOREIGN KEY (`standing_instruction_id`) REFERENCES `m_account_transfer_standing_instructions` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.m_account_transfer_standing_instructions_history: ~0 rows (approximately)
-DELETE FROM `m_account_transfer_standing_instructions_history`;
-/*!40000 ALTER TABLE `m_account_transfer_standing_instructions_history` DISABLE KEYS */;
-/*!40000 ALTER TABLE `m_account_transfer_standing_instructions_history` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.m_account_transfer_transaction
-DROP TABLE IF EXISTS `m_account_transfer_transaction`;
+-- m_account_transfer_transaction
 CREATE TABLE IF NOT EXISTS `m_account_transfer_transaction` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_transfer_details_id` bigint(20) NOT NULL,
@@ -565,14 +480,12 @@ CREATE TABLE IF NOT EXISTS `m_account_transfer_transaction` (
   CONSTRAINT `FK_m_account_transfer_transaction_to_m_savings_transaction` FOREIGN KEY (`to_savings_transaction_id`) REFERENCES `m_savings_account_transaction` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_account_transfer_transaction: ~0 rows (approximately)
-DELETE FROM `m_account_transfer_transaction`;
+-- m_account_transfer_transaction: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_account_transfer_transaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_account_transfer_transaction` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_appuser
-DROP TABLE IF EXISTS `m_appuser`;
+-- m_appuser
 CREATE TABLE IF NOT EXISTS `m_appuser` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
@@ -598,16 +511,14 @@ CREATE TABLE IF NOT EXISTS `m_appuser` (
   CONSTRAINT `fk_m_appuser_002` FOREIGN KEY (`staff_id`) REFERENCES `m_staff` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_appuser: ~1 rows (approximately)
-DELETE FROM `m_appuser`;
+-- m_appuser: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_appuser` DISABLE KEYS */;
 INSERT INTO `m_appuser` (`id`, `is_deleted`, `office_id`, `staff_id`, `username`, `firstname`, `lastname`, `password`, `email`, `firsttime_login_remaining`, `nonexpired`, `nonlocked`, `nonexpired_credentials`, `enabled`, `last_time_password_updated`) VALUES
-	(1, 0, 1, NULL, 'mifos', 'App', 'Administrator', '5787039480429368bf94732aacc771cd0a3ea02bcf504ffe1185ab94213bc63a', 'demomfi@mifos.org', b'0', b'1', b'1', b'1', b'1', '2014-12-05');
+	(1, 0, 1, NULL, 'mifos', 'App', 'Administrator', '5787039480429368bf94732aacc771cd0a3ea02bcf504ffe1185ab94213bc63a', 'demomfi@mifos.org', b'00000000', b'10000000', b'10000000', b'10000000', b'10000000', '2014-05-06');
 /*!40000 ALTER TABLE `m_appuser` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_appuser_previous_password
-DROP TABLE IF EXISTS `m_appuser_previous_password`;
+-- m_appuser_previous_password
 CREATE TABLE IF NOT EXISTS `m_appuser_previous_password` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
@@ -618,14 +529,12 @@ CREATE TABLE IF NOT EXISTS `m_appuser_previous_password` (
   CONSTRAINT `m_appuser_previous_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `m_appuser` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.m_appuser_previous_password: ~0 rows (approximately)
-DELETE FROM `m_appuser_previous_password`;
+-- m_appuser_previous_password: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_appuser_previous_password` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_appuser_previous_password` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_appuser_role
-DROP TABLE IF EXISTS `m_appuser_role`;
+-- m_appuser_role
 CREATE TABLE IF NOT EXISTS `m_appuser_role` (
   `appuser_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
@@ -636,16 +545,14 @@ CREATE TABLE IF NOT EXISTS `m_appuser_role` (
   CONSTRAINT `FK7662CE59B4100309` FOREIGN KEY (`appuser_id`) REFERENCES `m_appuser` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_appuser_role: ~1 rows (approximately)
-DELETE FROM `m_appuser_role`;
+-- m_appuser_role: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_appuser_role` DISABLE KEYS */;
 INSERT INTO `m_appuser_role` (`appuser_id`, `role_id`) VALUES
 	(1, 1);
 /*!40000 ALTER TABLE `m_appuser_role` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_calendar
-DROP TABLE IF EXISTS `m_calendar`;
+-- m_calendar
 CREATE TABLE IF NOT EXISTS `m_calendar` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
@@ -667,14 +574,12 @@ CREATE TABLE IF NOT EXISTS `m_calendar` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_calendar: ~0 rows (approximately)
-DELETE FROM `m_calendar`;
+-- m_calendar: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_calendar` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_calendar` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_calendar_history
-DROP TABLE IF EXISTS `m_calendar_history`;
+-- m_calendar_history
 CREATE TABLE IF NOT EXISTS `m_calendar_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `calendar_id` bigint(20) NOT NULL,
@@ -693,16 +598,14 @@ CREATE TABLE IF NOT EXISTS `m_calendar_history` (
   PRIMARY KEY (`id`),
   KEY `FK_m_calendar_m_calendar_history` (`calendar_id`),
   CONSTRAINT `FK_m_calendar_m_calendar_history` FOREIGN KEY (`calendar_id`) REFERENCES `m_calendar` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.m_calendar_history: ~0 rows (approximately)
-DELETE FROM `m_calendar_history`;
+-- m_calendar_history: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_calendar_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_calendar_history` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_calendar_instance
-DROP TABLE IF EXISTS `m_calendar_instance`;
+-- m_calendar_instance
 CREATE TABLE IF NOT EXISTS `m_calendar_instance` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `calendar_id` bigint(20) NOT NULL,
@@ -713,14 +616,12 @@ CREATE TABLE IF NOT EXISTS `m_calendar_instance` (
   CONSTRAINT `FK_m_calendar_m_calendar_instance` FOREIGN KEY (`calendar_id`) REFERENCES `m_calendar` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_calendar_instance: ~0 rows (approximately)
-DELETE FROM `m_calendar_instance`;
+-- m_calendar_instance: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_calendar_instance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_calendar_instance` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_charge
-DROP TABLE IF EXISTS `m_charge`;
+-- m_charge
 CREATE TABLE IF NOT EXISTS `m_charge` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -743,14 +644,12 @@ CREATE TABLE IF NOT EXISTS `m_charge` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_charge: ~0 rows (approximately)
-DELETE FROM `m_charge`;
+-- m_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_client
-DROP TABLE IF EXISTS `m_client`;
+-- m_client
 CREATE TABLE IF NOT EXISTS `m_client` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_no` varchar(20) NOT NULL,
@@ -778,8 +677,6 @@ CREATE TABLE IF NOT EXISTS `m_client` (
   `closedon_userid` bigint(20) DEFAULT NULL,
   `default_savings_product` bigint(20) DEFAULT NULL,
   `default_savings_account` bigint(20) DEFAULT NULL,
-  `client_type_cv_id` int(11) DEFAULT NULL,
-  `client_classification_cv_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `account_no_UNIQUE` (`account_no`),
   UNIQUE KEY `external_id` (`external_id`),
@@ -791,12 +688,6 @@ CREATE TABLE IF NOT EXISTS `m_client` (
   KEY `FK_m_client_m_office` (`transfer_to_office_id`),
   KEY `FK_m_client_m_savings_product` (`default_savings_product`),
   KEY `FK_m_client_m_savings_account` (`default_savings_account`),
-  KEY `FK_m_client_type_m_code_value` (`client_type_cv_id`),
-  KEY `FK_m_client_classification_m_code_value` (`client_classification_cv_id`),
-  KEY `FK1_m_client_gender_m_code_value` (`gender_cv_id`),
-  CONSTRAINT `FK_m_client_type_m_code_value` FOREIGN KEY (`client_type_cv_id`) REFERENCES `m_code_value` (`id`),
-  CONSTRAINT `FK_m_client_classification_m_code_value` FOREIGN KEY (`client_classification_cv_id`) REFERENCES `m_code_value` (`id`),
-  CONSTRAINT `FK1_m_client_gender_m_code_value` FOREIGN KEY (`gender_cv_id`) REFERENCES `m_code_value` (`id`),
   CONSTRAINT `FKCE00CAB3E0DD567A` FOREIGN KEY (`office_id`) REFERENCES `m_office` (`id`),
   CONSTRAINT `FK_m_client_m_code` FOREIGN KEY (`closure_reason_cv_id`) REFERENCES `m_code_value` (`id`),
   CONSTRAINT `FK_m_client_m_image` FOREIGN KEY (`image_id`) REFERENCES `m_image` (`id`),
@@ -806,14 +697,12 @@ CREATE TABLE IF NOT EXISTS `m_client` (
   CONSTRAINT `FK_m_client_m_staff` FOREIGN KEY (`staff_id`) REFERENCES `m_staff` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_client: ~0 rows (approximately)
-DELETE FROM `m_client`;
+-- m_client: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_client` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_client` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_client_attendance
-DROP TABLE IF EXISTS `m_client_attendance`;
+-- m_client_attendance
 CREATE TABLE IF NOT EXISTS `m_client_attendance` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `client_id` bigint(20) NOT NULL DEFAULT '0',
@@ -826,14 +715,12 @@ CREATE TABLE IF NOT EXISTS `m_client_attendance` (
   CONSTRAINT `FK_m_meeting_m_client_attendance` FOREIGN KEY (`meeting_id`) REFERENCES `m_meeting` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_client_attendance: ~0 rows (approximately)
-DELETE FROM `m_client_attendance`;
+-- m_client_attendance: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_client_attendance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_client_attendance` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_client_identifier
-DROP TABLE IF EXISTS `m_client_identifier`;
+-- m_client_identifier
 CREATE TABLE IF NOT EXISTS `m_client_identifier` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `client_id` bigint(20) NOT NULL,
@@ -853,24 +740,21 @@ CREATE TABLE IF NOT EXISTS `m_client_identifier` (
   CONSTRAINT `FK_m_client_document_m_code_value` FOREIGN KEY (`document_type_id`) REFERENCES `m_code_value` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_client_identifier: ~0 rows (approximately)
-DELETE FROM `m_client_identifier`;
+-- m_client_identifier: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_client_identifier` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_client_identifier` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_code
-DROP TABLE IF EXISTS `m_code`;
+-- m_code
 CREATE TABLE IF NOT EXISTS `m_code` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code_name` varchar(100) DEFAULT NULL,
   `is_system_defined` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_name` (`code_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_code: ~17 rows (approximately)
-DELETE FROM `m_code`;
+-- m_code: ~15 rows (approximately)
 /*!40000 ALTER TABLE `m_code` DISABLE KEYS */;
 INSERT INTO `m_code` (`id`, `code_name`, `is_system_defined`) VALUES
 	(1, 'Customer Identifier', 1),
@@ -887,44 +771,38 @@ INSERT INTO `m_code` (`id`, `code_name`, `is_system_defined`) VALUES
 	(12, 'PaymentType', 1),
 	(13, 'GROUPROLE', 1),
 	(14, 'ClientClosureReason', 1),
-	(15, 'GroupClosureReason', 1),
-	(16, 'ClientType', 1),
-	(17, 'ClientClassification', 1);
+	(15, 'GroupClosureReason', 1);
 /*!40000 ALTER TABLE `m_code` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_code_value
-DROP TABLE IF EXISTS `m_code_value`;
+-- m_code_value
 CREATE TABLE IF NOT EXISTS `m_code_value` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code_id` int(11) NOT NULL,
   `code_value` varchar(100) DEFAULT NULL,
   `order_position` int(11) NOT NULL DEFAULT '0',
-  `code_score` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_value` (`code_id`,`code_value`),
   KEY `FKCFCEA42640BE071Z` (`code_id`),
   CONSTRAINT `FKCFCEA42640BE071Z` FOREIGN KEY (`code_id`) REFERENCES `m_code` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_code_value: ~9 rows (approximately)
-DELETE FROM `m_code_value`;
+-- m_code_value: ~9 rows (approximately)
 /*!40000 ALTER TABLE `m_code_value` DISABLE KEYS */;
-INSERT INTO `m_code_value` (`id`, `code_id`, `code_value`, `order_position`, `code_score`) VALUES
-	(1, 1, 'Passport', 1, NULL),
-	(2, 1, 'Id', 2, NULL),
-	(3, 1, 'Drivers License', 3, NULL),
-	(4, 1, 'Any Other Id Type', 4, NULL),
-	(5, 6, 'Spouse', 0, NULL),
-	(6, 6, 'Parent', 0, NULL),
-	(7, 6, 'Sibling', 0, NULL),
-	(8, 6, 'Business Associate', 0, NULL),
-	(9, 6, 'Other', 0, NULL);
+INSERT INTO `m_code_value` (`id`, `code_id`, `code_value`, `order_position`) VALUES
+	(1, 1, 'Passport', 1),
+	(2, 1, 'Id', 2),
+	(3, 1, 'Drivers License', 3),
+	(4, 1, 'Any Other Id Type', 4),
+	(5, 6, 'Spouse', 0),
+	(6, 6, 'Parent', 0),
+	(7, 6, 'Sibling', 0),
+	(8, 6, 'Business Associate', 0),
+	(9, 6, 'Other', 0);
 /*!40000 ALTER TABLE `m_code_value` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_currency
-DROP TABLE IF EXISTS `m_currency`;
+-- m_currency
 CREATE TABLE IF NOT EXISTS `m_currency` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(3) NOT NULL,
@@ -937,8 +815,7 @@ CREATE TABLE IF NOT EXISTS `m_currency` (
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_currency: ~163 rows (approximately)
-DELETE FROM `m_currency`;
+-- m_currency: ~163 rows (approximately)
 /*!40000 ALTER TABLE `m_currency` DISABLE KEYS */;
 INSERT INTO `m_currency` (`id`, `code`, `decimal_places`, `currency_multiplesof`, `display_symbol`, `name`, `internationalized_name_code`) VALUES
 	(1, 'AED', 2, NULL, NULL, 'UAE Dirham', 'currency.AED'),
@@ -972,7 +849,7 @@ INSERT INTO `m_currency` (`id`, `code`, `decimal_places`, `currency_multiplesof`
 	(29, 'CLP', 0, NULL, '$', 'Chilean Peso', 'currency.CLP'),
 	(30, 'CNY', 2, NULL, NULL, 'Chinese Yuan Renminbi', 'currency.CNY'),
 	(31, 'COP', 2, NULL, '$', 'Colombian Peso', 'currency.COP'),
-	(32, 'CRC', 2, NULL, '₡', 'Costa Rican Colon', 'currency.CRC'),
+	(32, 'CRC', 2, NULL, '?', 'Costa Rican Colon', 'currency.CRC'),
 	(33, 'CSD', 2, NULL, NULL, 'Serbian Dinar', 'currency.CSD'),
 	(34, 'CUP', 2, NULL, '$MN', 'Cuban Peso', 'currency.CUP'),
 	(35, 'CVE', 2, NULL, NULL, 'Cape Verde Escudo', 'currency.CVE'),
@@ -1056,7 +933,7 @@ INSERT INTO `m_currency` (`id`, `code`, `decimal_places`, `currency_multiplesof`
 	(113, 'PHP', 2, NULL, NULL, 'Philippine Peso', 'currency.PHP'),
 	(114, 'PKR', 2, NULL, NULL, 'Pakistan Rupee', 'currency.PKR'),
 	(115, 'PLN', 2, NULL, NULL, 'Polish Zloty', 'currency.PLN'),
-	(116, 'PYG', 0, NULL, '₲', 'Paraguayan Guarani', 'currency.PYG'),
+	(116, 'PYG', 0, NULL, '?', 'Paraguayan Guarani', 'currency.PYG'),
 	(117, 'QAR', 2, NULL, NULL, 'Qatari Rial', 'currency.QAR'),
 	(118, 'RON', 2, NULL, NULL, 'Romanian Leu', 'currency.RON'),
 	(119, 'RUB', 2, NULL, NULL, 'Russian Ruble', 'currency.RUB'),
@@ -1107,31 +984,25 @@ INSERT INTO `m_currency` (`id`, `code`, `decimal_places`, `currency_multiplesof`
 /*!40000 ALTER TABLE `m_currency` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_deposit_account_recurring_detail
-DROP TABLE IF EXISTS `m_deposit_account_recurring_detail`;
+-- m_deposit_account_recurring_detail
 CREATE TABLE IF NOT EXISTS `m_deposit_account_recurring_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_id` bigint(20) NOT NULL DEFAULT '0',
-  `mandatory_recommended_deposit_amount` decimal(19,6) DEFAULT NULL,
-  `is_mandatory` tinyint(4) NOT NULL DEFAULT '0',
-  `allow_withdrawal` tinyint(4) NOT NULL DEFAULT '0',
-  `adjust_advance_towards_future_payments` tinyint(4) NOT NULL DEFAULT '1',
-  `is_calendar_inherited` tinyint(4) NOT NULL DEFAULT '0',
-  `total_overdue_amount` decimal(19,6) DEFAULT NULL,
-  `no_of_overdue_installments` int(11) DEFAULT NULL,
+  `recurring_deposit_amount` decimal(19,6) DEFAULT NULL,
+  `recurring_deposit_type_enum` smallint(5) DEFAULT NULL,
+  `recurring_deposit_frequency` int(11) DEFAULT NULL,
+  `recurring_deposit_frequency_type_enum` smallint(5) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKDARD00000000000001` (`savings_account_id`),
   CONSTRAINT `FKDARD00000000000001` FOREIGN KEY (`savings_account_id`) REFERENCES `m_savings_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_deposit_account_recurring_detail: ~0 rows (approximately)
-DELETE FROM `m_deposit_account_recurring_detail`;
+-- m_deposit_account_recurring_detail: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_deposit_account_recurring_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_deposit_account_recurring_detail` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_deposit_account_term_and_preclosure
-DROP TABLE IF EXISTS `m_deposit_account_term_and_preclosure`;
+-- m_deposit_account_term_and_preclosure
 CREATE TABLE IF NOT EXISTS `m_deposit_account_term_and_preclosure` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_id` bigint(20) NOT NULL DEFAULT '0',
@@ -1141,6 +1012,10 @@ CREATE TABLE IF NOT EXISTS `m_deposit_account_term_and_preclosure` (
   `max_deposit_term_type_enum` smallint(5) DEFAULT NULL,
   `in_multiples_of_deposit_term` int(11) DEFAULT NULL,
   `in_multiples_of_deposit_term_type_enum` smallint(5) DEFAULT NULL,
+  `interest_free_period_applicable` smallint(5) DEFAULT NULL,
+  `interest_free_from_period` int(11) DEFAULT NULL,
+  `interest_free_to_period` int(11) DEFAULT NULL,
+  `interest_free_period_frequency_enum` smallint(5) DEFAULT NULL,
   `pre_closure_penal_applicable` smallint(5) DEFAULT NULL,
   `pre_closure_penal_interest` decimal(19,6) DEFAULT NULL,
   `pre_closure_penal_interest_on_enum` smallint(5) DEFAULT NULL,
@@ -1151,20 +1026,17 @@ CREATE TABLE IF NOT EXISTS `m_deposit_account_term_and_preclosure` (
   `maturity_date` date DEFAULT NULL,
   `on_account_closure_enum` smallint(5) DEFAULT NULL,
   `expected_firstdepositon_date` date DEFAULT NULL,
-  `transfer_interest_to_linked_account` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FKDATP00000000000001` (`savings_account_id`),
   CONSTRAINT `FKDATP00000000000001` FOREIGN KEY (`savings_account_id`) REFERENCES `m_savings_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_deposit_account_term_and_preclosure: ~0 rows (approximately)
-DELETE FROM `m_deposit_account_term_and_preclosure`;
+-- m_deposit_account_term_and_preclosure: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_deposit_account_term_and_preclosure` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_deposit_account_term_and_preclosure` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_deposit_product_interest_rate_chart
-DROP TABLE IF EXISTS `m_deposit_product_interest_rate_chart`;
+-- m_deposit_product_interest_rate_chart
 CREATE TABLE IF NOT EXISTS `m_deposit_product_interest_rate_chart` (
   `deposit_product_id` bigint(20) NOT NULL,
   `interest_rate_chart_id` bigint(20) NOT NULL,
@@ -1174,33 +1046,29 @@ CREATE TABLE IF NOT EXISTS `m_deposit_product_interest_rate_chart` (
   CONSTRAINT `FKDPIRC00000000000002` FOREIGN KEY (`interest_rate_chart_id`) REFERENCES `m_interest_rate_chart` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_deposit_product_interest_rate_chart: ~0 rows (approximately)
-DELETE FROM `m_deposit_product_interest_rate_chart`;
+-- m_deposit_product_interest_rate_chart: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_deposit_product_interest_rate_chart` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_deposit_product_interest_rate_chart` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_deposit_product_recurring_detail
-DROP TABLE IF EXISTS `m_deposit_product_recurring_detail`;
+-- m_deposit_product_recurring_detail
 CREATE TABLE IF NOT EXISTS `m_deposit_product_recurring_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_product_id` bigint(20) NOT NULL DEFAULT '0',
-  `is_mandatory` tinyint(1) NOT NULL DEFAULT '1',
-  `allow_withdrawal` tinyint(1) NOT NULL DEFAULT '0',
-  `adjust_advance_towards_future_payments` tinyint(1) NOT NULL DEFAULT '1',
+  `recurring_deposit_type_enum` smallint(5) DEFAULT NULL,
+  `recurring_deposit_frequency` int(11) DEFAULT NULL,
+  `recurring_deposit_frequency_type_enum` smallint(5) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKDPRD00000000000001` (`savings_product_id`),
   CONSTRAINT `FKDPRD00000000000001` FOREIGN KEY (`savings_product_id`) REFERENCES `m_savings_product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_deposit_product_recurring_detail: ~0 rows (approximately)
-DELETE FROM `m_deposit_product_recurring_detail`;
+-- m_deposit_product_recurring_detail: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_deposit_product_recurring_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_deposit_product_recurring_detail` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_deposit_product_term_and_preclosure
-DROP TABLE IF EXISTS `m_deposit_product_term_and_preclosure`;
+-- m_deposit_product_term_and_preclosure
 CREATE TABLE IF NOT EXISTS `m_deposit_product_term_and_preclosure` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_product_id` bigint(20) NOT NULL DEFAULT '0',
@@ -1210,6 +1078,10 @@ CREATE TABLE IF NOT EXISTS `m_deposit_product_term_and_preclosure` (
   `max_deposit_term_type_enum` smallint(5) DEFAULT NULL,
   `in_multiples_of_deposit_term` int(11) DEFAULT NULL,
   `in_multiples_of_deposit_term_type_enum` smallint(5) DEFAULT NULL,
+  `interest_free_period_applicable` smallint(5) DEFAULT NULL,
+  `interest_free_from_period` int(11) DEFAULT NULL,
+  `interest_free_to_period` int(11) DEFAULT NULL,
+  `interest_free_period_frequency_enum` smallint(5) DEFAULT NULL,
   `pre_closure_penal_applicable` smallint(5) DEFAULT NULL,
   `pre_closure_penal_interest` decimal(19,6) DEFAULT NULL,
   `pre_closure_penal_interest_on_enum` smallint(5) DEFAULT NULL,
@@ -1221,14 +1093,12 @@ CREATE TABLE IF NOT EXISTS `m_deposit_product_term_and_preclosure` (
   CONSTRAINT `FKDPTP00000000000001` FOREIGN KEY (`savings_product_id`) REFERENCES `m_savings_product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_deposit_product_term_and_preclosure: ~0 rows (approximately)
-DELETE FROM `m_deposit_product_term_and_preclosure`;
+-- m_deposit_product_term_and_preclosure: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_deposit_product_term_and_preclosure` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_deposit_product_term_and_preclosure` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_document
-DROP TABLE IF EXISTS `m_document`;
+-- m_document
 CREATE TABLE IF NOT EXISTS `m_document` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `parent_entity_type` varchar(50) NOT NULL,
@@ -1243,14 +1113,12 @@ CREATE TABLE IF NOT EXISTS `m_document` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_document: ~0 rows (approximately)
-DELETE FROM `m_document`;
+-- m_document: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_document` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_document` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_fund
-DROP TABLE IF EXISTS `m_fund`;
+-- m_fund
 CREATE TABLE IF NOT EXISTS `m_fund` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -1260,14 +1128,12 @@ CREATE TABLE IF NOT EXISTS `m_fund` (
   UNIQUE KEY `fund_externalid_org` (`external_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_fund: ~0 rows (approximately)
-DELETE FROM `m_fund`;
+-- m_fund: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_fund` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_fund` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_group
-DROP TABLE IF EXISTS `m_group`;
+-- m_group
 CREATE TABLE IF NOT EXISTS `m_group` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `external_id` varchar(100) DEFAULT NULL,
@@ -1301,14 +1167,12 @@ CREATE TABLE IF NOT EXISTS `m_group` (
   CONSTRAINT `Parent_Id_reference` FOREIGN KEY (`parent_id`) REFERENCES `m_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_group: ~0 rows (approximately)
-DELETE FROM `m_group`;
+-- m_group: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_group` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_group_client
-DROP TABLE IF EXISTS `m_group_client`;
+-- m_group_client
 CREATE TABLE IF NOT EXISTS `m_group_client` (
   `group_id` bigint(20) NOT NULL,
   `client_id` bigint(20) NOT NULL,
@@ -1318,14 +1182,12 @@ CREATE TABLE IF NOT EXISTS `m_group_client` (
   CONSTRAINT `m_group_client_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `m_client` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_group_client: ~0 rows (approximately)
-DELETE FROM `m_group_client`;
+-- m_group_client: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_group_client` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_group_client` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_group_level
-DROP TABLE IF EXISTS `m_group_level`;
+-- m_group_level
 CREATE TABLE IF NOT EXISTS `m_group_level` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
@@ -1338,8 +1200,7 @@ CREATE TABLE IF NOT EXISTS `m_group_level` (
   CONSTRAINT `Parent_levelId_reference` FOREIGN KEY (`parent_id`) REFERENCES `m_group_level` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_group_level: ~2 rows (approximately)
-DELETE FROM `m_group_level`;
+-- m_group_level: ~2 rows (approximately)
 /*!40000 ALTER TABLE `m_group_level` DISABLE KEYS */;
 INSERT INTO `m_group_level` (`id`, `parent_id`, `super_parent`, `level_name`, `recursable`, `can_have_clients`) VALUES
 	(1, NULL, 1, 'Center', 1, 0),
@@ -1347,8 +1208,7 @@ INSERT INTO `m_group_level` (`id`, `parent_id`, `super_parent`, `level_name`, `r
 /*!40000 ALTER TABLE `m_group_level` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_group_roles
-DROP TABLE IF EXISTS `m_group_roles`;
+-- m_group_roles
 CREATE TABLE IF NOT EXISTS `m_group_roles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `client_id` bigint(20) DEFAULT NULL,
@@ -1364,14 +1224,12 @@ CREATE TABLE IF NOT EXISTS `m_group_roles` (
   CONSTRAINT `FK_grouprole_m_codevalue` FOREIGN KEY (`role_cv_id`) REFERENCES `m_code_value` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_group_roles: ~0 rows (approximately)
-DELETE FROM `m_group_roles`;
+-- m_group_roles: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_group_roles` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_group_roles` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_guarantor
-DROP TABLE IF EXISTS `m_guarantor`;
+-- m_guarantor
 CREATE TABLE IF NOT EXISTS `m_guarantor` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1397,14 +1255,12 @@ CREATE TABLE IF NOT EXISTS `m_guarantor` (
   CONSTRAINT `FK_m_guarantor_m_loan` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_guarantor: ~0 rows (approximately)
-DELETE FROM `m_guarantor`;
+-- m_guarantor: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_guarantor` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_guarantor` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_holiday
-DROP TABLE IF EXISTS `m_holiday`;
+-- m_holiday
 CREATE TABLE IF NOT EXISTS `m_holiday` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -1416,16 +1272,14 @@ CREATE TABLE IF NOT EXISTS `m_holiday` (
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `holiday_name` (`name`,`from_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.m_holiday: ~0 rows (approximately)
-DELETE FROM `m_holiday`;
+-- m_holiday: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_holiday` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_holiday` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_holiday_office
-DROP TABLE IF EXISTS `m_holiday_office`;
+-- m_holiday_office
 CREATE TABLE IF NOT EXISTS `m_holiday_office` (
   `holiday_id` bigint(20) NOT NULL,
   `office_id` bigint(20) NOT NULL,
@@ -1434,16 +1288,14 @@ CREATE TABLE IF NOT EXISTS `m_holiday_office` (
   KEY `m_office_id_ibfk_2` (`office_id`),
   CONSTRAINT `m_holiday_id_ibfk_1` FOREIGN KEY (`holiday_id`) REFERENCES `m_holiday` (`id`),
   CONSTRAINT `m_office_id_ibfk_2` FOREIGN KEY (`office_id`) REFERENCES `m_office` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.m_holiday_office: ~0 rows (approximately)
-DELETE FROM `m_holiday_office`;
+-- m_holiday_office: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_holiday_office` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_holiday_office` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_image
-DROP TABLE IF EXISTS `m_image`;
+-- m_image
 CREATE TABLE IF NOT EXISTS `m_image` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `location` varchar(500) DEFAULT NULL,
@@ -1451,36 +1303,12 @@ CREATE TABLE IF NOT EXISTS `m_image` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_image: ~0 rows (approximately)
-DELETE FROM `m_image`;
+-- m_image: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_image` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_image` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_interest_incentives
-DROP TABLE IF EXISTS `m_interest_incentives`;
-CREATE TABLE IF NOT EXISTS `m_interest_incentives` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `interest_rate_slab_id` bigint(20) NOT NULL,
-  `entiry_type` smallint(2) NOT NULL,
-  `attribute_name` smallint(2) NOT NULL,
-  `condition_type` smallint(2) NOT NULL,
-  `attribute_value` varchar(50) NOT NULL,
-  `incentive_type` smallint(2) NOT NULL,
-  `amount` decimal(19,6) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_m_interest_incentives_m_interest_rate_slab` (`interest_rate_slab_id`),
-  CONSTRAINT `FK_m_interest_incentives_m_interest_rate_slab` FOREIGN KEY (`interest_rate_slab_id`) REFERENCES `m_interest_rate_slab` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.m_interest_incentives: ~0 rows (approximately)
-DELETE FROM `m_interest_incentives`;
-/*!40000 ALTER TABLE `m_interest_incentives` DISABLE KEYS */;
-/*!40000 ALTER TABLE `m_interest_incentives` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.m_interest_rate_chart
-DROP TABLE IF EXISTS `m_interest_rate_chart`;
+-- m_interest_rate_chart
 CREATE TABLE IF NOT EXISTS `m_interest_rate_chart` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -1490,14 +1318,12 @@ CREATE TABLE IF NOT EXISTS `m_interest_rate_chart` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_interest_rate_chart: ~0 rows (approximately)
-DELETE FROM `m_interest_rate_chart`;
+-- m_interest_rate_chart: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_interest_rate_chart` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_interest_rate_chart` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_interest_rate_slab
-DROP TABLE IF EXISTS `m_interest_rate_slab`;
+-- m_interest_rate_slab
 CREATE TABLE IF NOT EXISTS `m_interest_rate_slab` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `interest_rate_chart_id` bigint(20) NOT NULL,
@@ -1514,14 +1340,12 @@ CREATE TABLE IF NOT EXISTS `m_interest_rate_slab` (
   CONSTRAINT `FKIRS00000000000001` FOREIGN KEY (`interest_rate_chart_id`) REFERENCES `m_interest_rate_chart` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_interest_rate_slab: ~0 rows (approximately)
-DELETE FROM `m_interest_rate_slab`;
+-- m_interest_rate_slab: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_interest_rate_slab` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_interest_rate_slab` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan
-DROP TABLE IF EXISTS `m_loan`;
+-- m_loan
 CREATE TABLE IF NOT EXISTS `m_loan` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_no` varchar(20) NOT NULL,
@@ -1609,7 +1433,6 @@ CREATE TABLE IF NOT EXISTS `m_loan` (
   `max_outstanding_loan_balance` decimal(19,6) DEFAULT NULL,
   `grace_on_arrears_ageing` smallint(5) DEFAULT NULL,
   `is_npa` tinyint(1) NOT NULL DEFAULT '0',
-  `total_recovered_derived` decimal(19,6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `loan_account_no_UNIQUE` (`account_no`),
   UNIQUE KEY `loan_externalid_UNIQUE` (`external_id`),
@@ -1643,14 +1466,12 @@ CREATE TABLE IF NOT EXISTS `m_loan` (
   CONSTRAINT `m_loan_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `m_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan: ~0 rows (approximately)
-DELETE FROM `m_loan`;
+-- m_loan: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_arrears_aging
-DROP TABLE IF EXISTS `m_loan_arrears_aging`;
+-- m_loan_arrears_aging
 CREATE TABLE IF NOT EXISTS `m_loan_arrears_aging` (
   `loan_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `principal_overdue_derived` decimal(19,6) NOT NULL DEFAULT '0.000000',
@@ -1663,14 +1484,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_arrears_aging` (
   CONSTRAINT `m_loan_arrears_aging_ibfk_1` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_arrears_aging: ~0 rows (approximately)
-DELETE FROM `m_loan_arrears_aging`;
+-- m_loan_arrears_aging: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_arrears_aging` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_arrears_aging` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_charge
-DROP TABLE IF EXISTS `m_loan_charge`;
+-- m_loan_charge
 CREATE TABLE IF NOT EXISTS `m_loan_charge` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1700,14 +1519,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_charge` (
   CONSTRAINT `m_loan_charge_ibfk_2` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_charge: ~0 rows (approximately)
-DELETE FROM `m_loan_charge`;
+-- m_loan_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_charge_paid_by
-DROP TABLE IF EXISTS `m_loan_charge_paid_by`;
+-- m_loan_charge_paid_by
 CREATE TABLE IF NOT EXISTS `m_loan_charge_paid_by` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_transaction_id` bigint(20) NOT NULL,
@@ -1720,14 +1537,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_charge_paid_by` (
   CONSTRAINT `FK__m_loan_transaction` FOREIGN KEY (`loan_transaction_id`) REFERENCES `m_loan_transaction` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_charge_paid_by: ~0 rows (approximately)
-DELETE FROM `m_loan_charge_paid_by`;
+-- m_loan_charge_paid_by: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_charge_paid_by` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_charge_paid_by` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_collateral
-DROP TABLE IF EXISTS `m_loan_collateral`;
+-- m_loan_collateral
 CREATE TABLE IF NOT EXISTS `m_loan_collateral` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1741,14 +1556,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_collateral` (
   CONSTRAINT `FK_collateral_code_value` FOREIGN KEY (`type_cv_id`) REFERENCES `m_code_value` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_collateral: ~0 rows (approximately)
-DELETE FROM `m_loan_collateral`;
+-- m_loan_collateral: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_collateral` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_collateral` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_disbursement_detail
-DROP TABLE IF EXISTS `m_loan_disbursement_detail`;
+-- m_loan_disbursement_detail
 CREATE TABLE IF NOT EXISTS `m_loan_disbursement_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1761,14 +1574,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_disbursement_detail` (
   CONSTRAINT `FK_loan_disbursement_detail_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_disbursement_detail: ~0 rows (approximately)
-DELETE FROM `m_loan_disbursement_detail`;
+-- m_loan_disbursement_detail: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_disbursement_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_disbursement_detail` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_installment_charge
-DROP TABLE IF EXISTS `m_loan_installment_charge`;
+-- m_loan_installment_charge
 CREATE TABLE IF NOT EXISTS `m_loan_installment_charge` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_charge_id` bigint(20) NOT NULL,
@@ -1789,14 +1600,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_installment_charge` (
   CONSTRAINT `FK_loan_schedule_id_charge_schedule` FOREIGN KEY (`loan_schedule_id`) REFERENCES `m_loan_repayment_schedule` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_installment_charge: ~0 rows (approximately)
-DELETE FROM `m_loan_installment_charge`;
+-- m_loan_installment_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_installment_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_installment_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_officer_assignment_history
-DROP TABLE IF EXISTS `m_loan_officer_assignment_history`;
+-- m_loan_officer_assignment_history
 CREATE TABLE IF NOT EXISTS `m_loan_officer_assignment_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1814,14 +1623,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_officer_assignment_history` (
   CONSTRAINT `fk_m_loan_officer_assignment_history_0002` FOREIGN KEY (`loan_officer_id`) REFERENCES `m_staff` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_officer_assignment_history: ~0 rows (approximately)
-DELETE FROM `m_loan_officer_assignment_history`;
+-- m_loan_officer_assignment_history: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_officer_assignment_history` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_officer_assignment_history` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_overdue_installment_charge
-DROP TABLE IF EXISTS `m_loan_overdue_installment_charge`;
+-- m_loan_overdue_installment_charge
 CREATE TABLE IF NOT EXISTS `m_loan_overdue_installment_charge` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_charge_id` bigint(20) NOT NULL,
@@ -1834,14 +1641,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_overdue_installment_charge` (
   CONSTRAINT `FK_m_loan_overdue_installment_charge_m_loan_repayment_schedule` FOREIGN KEY (`loan_schedule_id`) REFERENCES `m_loan_repayment_schedule` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_overdue_installment_charge: ~0 rows (approximately)
-DELETE FROM `m_loan_overdue_installment_charge`;
+-- m_loan_overdue_installment_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_overdue_installment_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_overdue_installment_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_paid_in_advance
-DROP TABLE IF EXISTS `m_loan_paid_in_advance`;
+-- m_loan_paid_in_advance
 CREATE TABLE IF NOT EXISTS `m_loan_paid_in_advance` (
   `loan_id` bigint(20) NOT NULL,
   `principal_in_advance_derived` decimal(19,6) NOT NULL DEFAULT '0.000000',
@@ -1853,14 +1658,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_paid_in_advance` (
   CONSTRAINT `m_loan_paid_in_advance_ibfk_1` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_paid_in_advance: ~0 rows (approximately)
-DELETE FROM `m_loan_paid_in_advance`;
+-- m_loan_paid_in_advance: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_paid_in_advance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_paid_in_advance` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_repayment_schedule
-DROP TABLE IF EXISTS `m_loan_repayment_schedule`;
+-- m_loan_repayment_schedule
 CREATE TABLE IF NOT EXISTS `m_loan_repayment_schedule` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1898,14 +1701,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_repayment_schedule` (
   CONSTRAINT `FK488B92AA40BE0710` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_repayment_schedule: ~0 rows (approximately)
-DELETE FROM `m_loan_repayment_schedule`;
+-- m_loan_repayment_schedule: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_repayment_schedule` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_repayment_schedule` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_term_variations
-DROP TABLE IF EXISTS `m_loan_term_variations`;
+-- m_loan_term_variations
 CREATE TABLE IF NOT EXISTS `m_loan_term_variations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1917,14 +1718,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_term_variations` (
   CONSTRAINT `FK_loan_id_m_loan_id` FOREIGN KEY (`loan_id`) REFERENCES `m_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_term_variations: ~0 rows (approximately)
-DELETE FROM `m_loan_term_variations`;
+-- m_loan_term_variations: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_term_variations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_term_variations` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_loan_transaction
-DROP TABLE IF EXISTS `m_loan_transaction`;
+-- m_loan_transaction
 CREATE TABLE IF NOT EXISTS `m_loan_transaction` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_id` bigint(20) NOT NULL,
@@ -1950,43 +1749,12 @@ CREATE TABLE IF NOT EXISTS `m_loan_transaction` (
   CONSTRAINT `FK_m_loan_transaction_m_payment_detail` FOREIGN KEY (`payment_detail_id`) REFERENCES `m_payment_detail` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_loan_transaction: ~0 rows (approximately)
-DELETE FROM `m_loan_transaction`;
+-- m_loan_transaction: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_loan_transaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_loan_transaction` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_mandatory_savings_schedule
-DROP TABLE IF EXISTS `m_mandatory_savings_schedule`;
-CREATE TABLE IF NOT EXISTS `m_mandatory_savings_schedule` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `savings_account_id` bigint(20) NOT NULL,
-  `fromdate` date DEFAULT NULL,
-  `duedate` date NOT NULL,
-  `installment` smallint(5) NOT NULL,
-  `deposit_amount` decimal(19,6) DEFAULT NULL,
-  `deposit_amount_completed_derived` decimal(19,6) DEFAULT NULL,
-  `total_paid_in_advance_derived` decimal(19,6) DEFAULT NULL,
-  `total_paid_late_derived` decimal(19,6) DEFAULT NULL,
-  `completed_derived` bit(1) NOT NULL,
-  `obligations_met_on_date` date DEFAULT NULL,
-  `createdby_id` bigint(20) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `lastmodified_date` datetime DEFAULT NULL,
-  `lastmodifiedby_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKMSS0000000001` (`savings_account_id`),
-  CONSTRAINT `FKMSS0000000001` FOREIGN KEY (`savings_account_id`) REFERENCES `m_savings_account` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.m_mandatory_savings_schedule: ~0 rows (approximately)
-DELETE FROM `m_mandatory_savings_schedule`;
-/*!40000 ALTER TABLE `m_mandatory_savings_schedule` DISABLE KEYS */;
-/*!40000 ALTER TABLE `m_mandatory_savings_schedule` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.m_meeting
-DROP TABLE IF EXISTS `m_meeting`;
+-- m_meeting
 CREATE TABLE IF NOT EXISTS `m_meeting` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `calendar_instance_id` bigint(20) NOT NULL,
@@ -1996,14 +1764,12 @@ CREATE TABLE IF NOT EXISTS `m_meeting` (
   CONSTRAINT `FK_m_calendar_instance_m_meeting` FOREIGN KEY (`calendar_instance_id`) REFERENCES `m_calendar_instance` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.m_meeting: ~0 rows (approximately)
-DELETE FROM `m_meeting`;
+-- m_meeting: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_meeting` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_meeting` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_note
-DROP TABLE IF EXISTS `m_note`;
+-- m_note
 CREATE TABLE IF NOT EXISTS `m_note` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `client_id` bigint(20) DEFAULT NULL,
@@ -2035,14 +1801,12 @@ CREATE TABLE IF NOT EXISTS `m_note` (
   CONSTRAINT `FK_m_note_m_group` FOREIGN KEY (`group_id`) REFERENCES `m_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_note: ~0 rows (approximately)
-DELETE FROM `m_note`;
+-- m_note: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_note` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_note` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_office
-DROP TABLE IF EXISTS `m_office`;
+-- m_office
 CREATE TABLE IF NOT EXISTS `m_office` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) DEFAULT NULL,
@@ -2057,16 +1821,14 @@ CREATE TABLE IF NOT EXISTS `m_office` (
   CONSTRAINT `FK2291C477E2551DCC` FOREIGN KEY (`parent_id`) REFERENCES `m_office` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_office: ~1 rows (approximately)
-DELETE FROM `m_office`;
+-- m_office: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_office` DISABLE KEYS */;
 INSERT INTO `m_office` (`id`, `parent_id`, `hierarchy`, `external_id`, `name`, `opening_date`) VALUES
 	(1, NULL, '.', '1', 'Head Office', '2009-01-01');
 /*!40000 ALTER TABLE `m_office` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_office_transaction
-DROP TABLE IF EXISTS `m_office_transaction`;
+-- m_office_transaction
 CREATE TABLE IF NOT EXISTS `m_office_transaction` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `from_office_id` bigint(20) DEFAULT NULL,
@@ -2083,14 +1845,12 @@ CREATE TABLE IF NOT EXISTS `m_office_transaction` (
   CONSTRAINT `FK1E37728B93C6C1B6` FOREIGN KEY (`to_office_id`) REFERENCES `m_office` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_office_transaction: ~0 rows (approximately)
-DELETE FROM `m_office_transaction`;
+-- m_office_transaction: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_office_transaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_office_transaction` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_organisation_currency
-DROP TABLE IF EXISTS `m_organisation_currency`;
+-- m_organisation_currency
 CREATE TABLE IF NOT EXISTS `m_organisation_currency` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(3) NOT NULL,
@@ -2102,16 +1862,14 @@ CREATE TABLE IF NOT EXISTS `m_organisation_currency` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_organisation_currency: ~1 rows (approximately)
-DELETE FROM `m_organisation_currency`;
+-- m_organisation_currency: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_organisation_currency` DISABLE KEYS */;
 INSERT INTO `m_organisation_currency` (`id`, `code`, `decimal_places`, `currency_multiplesof`, `name`, `display_symbol`, `internationalized_name_code`) VALUES
 	(21, 'USD', 2, NULL, 'US Dollar', '$', 'currency.USD');
 /*!40000 ALTER TABLE `m_organisation_currency` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_payment_detail
-DROP TABLE IF EXISTS `m_payment_detail`;
+-- m_payment_detail
 CREATE TABLE IF NOT EXISTS `m_payment_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `payment_type_cv_id` int(11) DEFAULT NULL,
@@ -2125,14 +1883,12 @@ CREATE TABLE IF NOT EXISTS `m_payment_detail` (
   CONSTRAINT `FK_m_payment_detail_m_code_value` FOREIGN KEY (`payment_type_cv_id`) REFERENCES `m_code_value` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_payment_detail: ~0 rows (approximately)
-DELETE FROM `m_payment_detail`;
+-- m_payment_detail: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_payment_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_payment_detail` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_permission
-DROP TABLE IF EXISTS `m_permission`;
+-- m_permission
 CREATE TABLE IF NOT EXISTS `m_permission` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `grouping` varchar(45) DEFAULT NULL,
@@ -2142,10 +1898,9 @@ CREATE TABLE IF NOT EXISTS `m_permission` (
   `can_maker_checker` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=550 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=541 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_permission: ~465 rows (approximately)
-DELETE FROM `m_permission`;
+-- m_permission: ~585 rows (approximately)
 /*!40000 ALTER TABLE `m_permission` DISABLE KEYS */;
 INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES
 	(1, 'special', 'ALL_FUNCTIONS', NULL, NULL, 0),
@@ -2155,206 +1910,206 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(5, 'authorisation', 'READ_PERMISSION', 'PERMISSION', 'READ', 0),
 	(6, 'authorisation', 'PERMISSIONS_ROLE', 'ROLE', 'PERMISSIONS', 0),
 	(7, 'authorisation', 'CREATE_ROLE', 'ROLE', 'CREATE', 0),
-	(8, 'authorisation', 'CREATE_ROLE_CHECKER', 'ROLE', 'CREATE_CHECKER', 0),
+	(8, 'authorisation', 'CREATE_ROLE_CHECKER', 'ROLE', 'CREATE', 0),
 	(9, 'authorisation', 'READ_ROLE', 'ROLE', 'READ', 0),
 	(10, 'authorisation', 'UPDATE_ROLE', 'ROLE', 'UPDATE', 0),
-	(11, 'authorisation', 'UPDATE_ROLE_CHECKER', 'ROLE', 'UPDATE_CHECKER', 0),
+	(11, 'authorisation', 'UPDATE_ROLE_CHECKER', 'ROLE', 'UPDATE', 0),
 	(12, 'authorisation', 'DELETE_ROLE', 'ROLE', 'DELETE', 0),
-	(13, 'authorisation', 'DELETE_ROLE_CHECKER', 'ROLE', 'DELETE_CHECKER', 0),
+	(13, 'authorisation', 'DELETE_ROLE_CHECKER', 'ROLE', 'DELETE', 0),
 	(14, 'authorisation', 'CREATE_USER', 'USER', 'CREATE', 0),
-	(15, 'authorisation', 'CREATE_USER_CHECKER', 'USER', 'CREATE_CHECKER', 0),
+	(15, 'authorisation', 'CREATE_USER_CHECKER', 'USER', 'CREATE', 0),
 	(16, 'authorisation', 'READ_USER', 'USER', 'READ', 0),
 	(17, 'authorisation', 'UPDATE_USER', 'USER', 'UPDATE', 0),
-	(18, 'authorisation', 'UPDATE_USER_CHECKER', 'USER', 'UPDATE_CHECKER', 0),
+	(18, 'authorisation', 'UPDATE_USER_CHECKER', 'USER', 'UPDATE', 0),
 	(19, 'authorisation', 'DELETE_USER', 'USER', 'DELETE', 0),
-	(20, 'authorisation', 'DELETE_USER_CHECKER', 'USER', 'DELETE_CHECKER', 0),
+	(20, 'authorisation', 'DELETE_USER_CHECKER', 'USER', 'DELETE', 0),
 	(21, 'configuration', 'READ_CONFIGURATION', 'CONFIGURATION', 'READ', 0),
 	(22, 'configuration', 'UPDATE_CONFIGURATION', 'CONFIGURATION', 'UPDATE', 0),
-	(23, 'configuration', 'UPDATE_CONFIGURATION_CHECKER', 'CONFIGURATION', 'UPDATE_CHECKER', 0),
+	(23, 'configuration', 'UPDATE_CONFIGURATION_CHECKER', 'CONFIGURATION', 'UPDATE', 0),
 	(24, 'configuration', 'READ_CODE', 'CODE', 'READ', 0),
 	(25, 'configuration', 'CREATE_CODE', 'CODE', 'CREATE', 0),
-	(26, 'configuration', 'CREATE_CODE_CHECKER', 'CODE', 'CREATE_CHECKER', 0),
+	(26, 'configuration', 'CREATE_CODE_CHECKER', 'CODE', 'CREATE', 0),
 	(27, 'configuration', 'UPDATE_CODE', 'CODE', 'UPDATE', 0),
-	(28, 'configuration', 'UPDATE_CODE_CHECKER', 'CODE', 'UPDATE_CHECKER', 0),
+	(28, 'configuration', 'UPDATE_CODE_CHECKER', 'CODE', 'UPDATE', 0),
 	(29, 'configuration', 'DELETE_CODE', 'CODE', 'DELETE', 0),
-	(30, 'configuration', 'DELETE_CODE_CHECKER', 'CODE', 'DELETE_CHECKER', 0),
+	(30, 'configuration', 'DELETE_CODE_CHECKER', 'CODE', 'DELETE', 0),
 	(31, 'configuration', 'READ_CODEVALUE', 'CODEVALUE', 'READ', 0),
 	(32, 'configuration', 'CREATE_CODEVALUE', 'CODEVALUE', 'CREATE', 0),
-	(33, 'configuration', 'CREATE_CODEVALUE_CHECKER', 'CODEVALUE', 'CREATE_CHECKER', 0),
+	(33, 'configuration', 'CREATE_CODEVALUE_CHECKER', 'CODEVALUE', 'CREATE', 0),
 	(34, 'configuration', 'UPDATE_CODEVALUE', 'CODEVALUE', 'UPDATE', 0),
-	(35, 'configuration', 'UPDATE_CODEVALUE_CHECKER', 'CODEVALUE', 'UPDATE_CHECKER', 0),
+	(35, 'configuration', 'UPDATE_CODEVALUE_CHECKER', 'CODEVALUE', 'UPDATE', 0),
 	(36, 'configuration', 'DELETE_CODEVALUE', 'CODEVALUE', 'DELETE', 0),
-	(37, 'configuration', 'DELETE_CODEVALUE_CHECKER', 'CODEVALUE', 'DELETE_CHECKER', 0),
+	(37, 'configuration', 'DELETE_CODEVALUE_CHECKER', 'CODEVALUE', 'DELETE', 0),
 	(38, 'configuration', 'READ_CURRENCY', 'CURRENCY', 'READ', 0),
 	(39, 'configuration', 'UPDATE_CURRENCY', 'CURRENCY', 'UPDATE', 0),
-	(40, 'configuration', 'UPDATE_CURRENCY_CHECKER', 'CURRENCY', 'UPDATE_CHECKER', 0),
+	(40, 'configuration', 'UPDATE_CURRENCY_CHECKER', 'CURRENCY', 'UPDATE', 0),
 	(41, 'configuration', 'UPDATE_PERMISSION', 'PERMISSION', 'UPDATE', 0),
-	(42, 'configuration', 'UPDATE_PERMISSION_CHECKER', 'PERMISSION', 'UPDATE_CHECKER', 0),
+	(42, 'configuration', 'UPDATE_PERMISSION_CHECKER', 'PERMISSION', 'UPDATE', 0),
 	(43, 'configuration', 'READ_DATATABLE', 'DATATABLE', 'READ', 0),
 	(44, 'configuration', 'REGISTER_DATATABLE', 'DATATABLE', 'REGISTER', 0),
-	(45, 'configuration', 'REGISTER_DATATABLE_CHECKER', 'DATATABLE', 'REGISTER_CHECKER', 0),
+	(45, 'configuration', 'REGISTER_DATATABLE_CHECKER', 'DATATABLE', 'REGISTER', 0),
 	(46, 'configuration', 'DEREGISTER_DATATABLE', 'DATATABLE', 'DEREGISTER', 0),
-	(47, 'configuration', 'DEREGISTER_DATATABLE_CHECKER', 'DATATABLE', 'DEREGISTER_CHECKER', 0),
+	(47, 'configuration', 'DEREGISTER_DATATABLE_CHECKER', 'DATATABLE', 'DEREGISTER', 0),
 	(48, 'configuration', 'READ_AUDIT', 'AUDIT', 'READ', 0),
 	(49, 'configuration', 'CREATE_CALENDAR', 'CALENDAR', 'CREATE', 0),
 	(50, 'configuration', 'READ_CALENDAR', 'CALENDAR', 'READ', 0),
 	(51, 'configuration', 'UPDATE_CALENDAR', 'CALENDAR', 'UPDATE', 0),
 	(52, 'configuration', 'DELETE_CALENDAR', 'CALENDAR', 'DELETE', 0),
-	(53, 'configuration', 'CREATE_CALENDAR_CHECKER', 'CALENDAR', 'CREATE_CHECKER', 0),
-	(54, 'configuration', 'UPDATE_CALENDAR_CHECKER', 'CALENDAR', 'UPDATE_CHECKER', 0),
-	(55, 'configuration', 'DELETE_CALENDAR_CHECKER', 'CALENDAR', 'DELETE_CHECKER', 0),
+	(53, 'configuration', 'CREATE_CALENDAR_CHECKER', 'CALENDAR', 'CREATE', 0),
+	(54, 'configuration', 'UPDATE_CALENDAR_CHECKER', 'CALENDAR', 'UPDATE', 0),
+	(55, 'configuration', 'DELETE_CALENDAR_CHECKER', 'CALENDAR', 'DELETE', 0),
 	(57, 'organisation', 'READ_CHARGE', 'CHARGE', 'READ', 0),
 	(58, 'organisation', 'CREATE_CHARGE', 'CHARGE', 'CREATE', 0),
-	(59, 'organisation', 'CREATE_CHARGE_CHECKER', 'CHARGE', 'CREATE_CHECKER', 0),
+	(59, 'organisation', 'CREATE_CHARGE_CHECKER', 'CHARGE', 'CREATE', 0),
 	(60, 'organisation', 'UPDATE_CHARGE', 'CHARGE', 'UPDATE', 0),
-	(61, 'organisation', 'UPDATE_CHARGE_CHECKER', 'CHARGE', 'UPDATE_CHECKER', 0),
+	(61, 'organisation', 'UPDATE_CHARGE_CHECKER', 'CHARGE', 'UPDATE', 0),
 	(62, 'organisation', 'DELETE_CHARGE', 'CHARGE', 'DELETE', 0),
-	(63, 'organisation', 'DELETE_CHARGE_CHECKER', 'CHARGE', 'DELETE_CHECKER', 0),
+	(63, 'organisation', 'DELETE_CHARGE_CHECKER', 'CHARGE', 'DELETE', 0),
 	(64, 'organisation', 'READ_FUND', 'FUND', 'READ', 0),
 	(65, 'organisation', 'CREATE_FUND', 'FUND', 'CREATE', 0),
-	(66, 'organisation', 'CREATE_FUND_CHECKER', 'FUND', 'CREATE_CHECKER', 0),
+	(66, 'organisation', 'CREATE_FUND_CHECKER', 'FUND', 'CREATE', 0),
 	(67, 'organisation', 'UPDATE_FUND', 'FUND', 'UPDATE', 0),
-	(68, 'organisation', 'UPDATE_FUND_CHECKER', 'FUND', 'UPDATE_CHECKER', 0),
+	(68, 'organisation', 'UPDATE_FUND_CHECKER', 'FUND', 'UPDATE', 0),
 	(69, 'organisation', 'DELETE_FUND', 'FUND', 'DELETE', 0),
-	(70, 'organisation', 'DELETE_FUND_CHECKER', 'FUND', 'DELETE_CHECKER', 0),
+	(70, 'organisation', 'DELETE_FUND_CHECKER', 'FUND', 'DELETE', 0),
 	(71, 'organisation', 'READ_LOANPRODUCT', 'LOANPRODUCT', 'READ', 0),
 	(72, 'organisation', 'CREATE_LOANPRODUCT', 'LOANPRODUCT', 'CREATE', 0),
-	(73, 'organisation', 'CREATE_LOANPRODUCT_CHECKER', 'LOANPRODUCT', 'CREATE_CHECKER', 0),
+	(73, 'organisation', 'CREATE_LOANPRODUCT_CHECKER', 'LOANPRODUCT', 'CREATE', 0),
 	(74, 'organisation', 'UPDATE_LOANPRODUCT', 'LOANPRODUCT', 'UPDATE', 0),
-	(75, 'organisation', 'UPDATE_LOANPRODUCT_CHECKER', 'LOANPRODUCT', 'UPDATE_CHECKER', 0),
+	(75, 'organisation', 'UPDATE_LOANPRODUCT_CHECKER', 'LOANPRODUCT', 'UPDATE', 0),
 	(76, 'organisation', 'DELETE_LOANPRODUCT', 'LOANPRODUCT', 'DELETE', 0),
-	(77, 'organisation', 'DELETE_LOANPRODUCT_CHECKER', 'LOANPRODUCT', 'DELETE_CHECKER', 0),
+	(77, 'organisation', 'DELETE_LOANPRODUCT_CHECKER', 'LOANPRODUCT', 'DELETE', 0),
 	(78, 'organisation', 'READ_OFFICE', 'OFFICE', 'READ', 0),
 	(79, 'organisation', 'CREATE_OFFICE', 'OFFICE', 'CREATE', 0),
-	(80, 'organisation', 'CREATE_OFFICE_CHECKER', 'OFFICE', 'CREATE_CHECKER', 0),
+	(80, 'organisation', 'CREATE_OFFICE_CHECKER', 'OFFICE', 'CREATE', 0),
 	(81, 'organisation', 'UPDATE_OFFICE', 'OFFICE', 'UPDATE', 0),
-	(82, 'organisation', 'UPDATE_OFFICE_CHECKER', 'OFFICE', 'UPDATE_CHECKER', 0),
+	(82, 'organisation', 'UPDATE_OFFICE_CHECKER', 'OFFICE', 'UPDATE', 0),
 	(83, 'organisation', 'READ_OFFICETRANSACTION', 'OFFICETRANSACTION', 'READ', 0),
-	(84, 'organisation', 'DELETE_OFFICE_CHECKER', 'OFFICE', 'DELETE_CHECKER', 0),
+	(84, 'organisation', 'DELETE_OFFICE_CHECKER', 'OFFICE', 'DELETE', 0),
 	(85, 'organisation', 'CREATE_OFFICETRANSACTION', 'OFFICETRANSACTION', 'CREATE', 0),
-	(86, 'organisation', 'CREATE_OFFICETRANSACTION_CHECKER', 'OFFICETRANSACTION', 'CREATE_CHECKER', 0),
+	(86, 'organisation', 'CREATE_OFFICETRANSACTION_CHECKER', 'OFFICETRANSACTION', 'CREATE', 0),
 	(87, 'organisation', 'DELETE_OFFICETRANSACTION', 'OFFICETRANSACTION', 'DELETE', 0),
-	(88, 'organisation', 'DELETE_OFFICETRANSACTION_CHECKER', 'OFFICETRANSACTION', 'DELETE_CHECKER', 0),
+	(88, 'organisation', 'DELETE_OFFICETRANSACTION_CHECKER', 'OFFICETRANSACTION', 'DELETE', 0),
 	(89, 'organisation', 'READ_STAFF', 'STAFF', 'READ', 0),
 	(90, 'organisation', 'CREATE_STAFF', 'STAFF', 'CREATE', 0),
-	(91, 'organisation', 'CREATE_STAFF_CHECKER', 'STAFF', 'CREATE_CHECKER', 0),
+	(91, 'organisation', 'CREATE_STAFF_CHECKER', 'STAFF', 'CREATE', 0),
 	(92, 'organisation', 'UPDATE_STAFF', 'STAFF', 'UPDATE', 0),
-	(93, 'organisation', 'UPDATE_STAFF_CHECKER', 'STAFF', 'UPDATE_CHECKER', 0),
+	(93, 'organisation', 'UPDATE_STAFF_CHECKER', 'STAFF', 'UPDATE', 0),
 	(94, 'organisation', 'DELETE_STAFF', 'STAFF', 'DELETE', 0),
-	(95, 'organisation', 'DELETE_STAFF_CHECKER', 'STAFF', 'DELETE_CHECKER', 0),
+	(95, 'organisation', 'DELETE_STAFF_CHECKER', 'STAFF', 'DELETE', 0),
 	(96, 'organisation', 'READ_SAVINGSPRODUCT', 'SAVINGSPRODUCT', 'READ', 0),
 	(97, 'organisation', 'CREATE_SAVINGSPRODUCT', 'SAVINGSPRODUCT', 'CREATE', 0),
-	(98, 'organisation', 'CREATE_SAVINGSPRODUCT_CHECKER', 'SAVINGSPRODUCT', 'CREATE_CHECKER', 0),
+	(98, 'organisation', 'CREATE_SAVINGSPRODUCT_CHECKER', 'SAVINGSPRODUCT', 'CREATE', 0),
 	(99, 'organisation', 'UPDATE_SAVINGSPRODUCT', 'SAVINGSPRODUCT', 'UPDATE', 0),
-	(100, 'organisation', 'UPDATE_SAVINGSPRODUCT_CHECKER', 'SAVINGSPRODUCT', 'UPDATE_CHECKER', 0),
+	(100, 'organisation', 'UPDATE_SAVINGSPRODUCT_CHECKER', 'SAVINGSPRODUCT', 'UPDATE', 0),
 	(101, 'organisation', 'DELETE_SAVINGSPRODUCT', 'SAVINGSPRODUCT', 'DELETE', 0),
-	(102, 'organisation', 'DELETE_SAVINGSPRODUCT_CHECKER', 'SAVINGSPRODUCT', 'DELETE_CHECKER', 0),
+	(102, 'organisation', 'DELETE_SAVINGSPRODUCT_CHECKER', 'SAVINGSPRODUCT', 'DELETE', 0),
 	(103, 'portfolio', 'READ_LOAN', 'LOAN', 'READ', 0),
 	(104, 'portfolio', 'CREATE_LOAN', 'LOAN', 'CREATE', 0),
-	(105, 'portfolio', 'CREATE_LOAN_CHECKER', 'LOAN', 'CREATE_CHECKER', 0),
+	(105, 'portfolio', 'CREATE_LOAN_CHECKER', 'LOAN', 'CREATE', 0),
 	(106, 'portfolio', 'UPDATE_LOAN', 'LOAN', 'UPDATE', 0),
-	(107, 'portfolio', 'UPDATE_LOAN_CHECKER', 'LOAN', 'UPDATE_CHECKER', 0),
+	(107, 'portfolio', 'UPDATE_LOAN_CHECKER', 'LOAN', 'UPDATE', 0),
 	(108, 'portfolio', 'DELETE_LOAN', 'LOAN', 'DELETE', 0),
-	(109, 'portfolio', 'DELETE_LOAN_CHECKER', 'LOAN', 'DELETE_CHECKER', 0),
+	(109, 'portfolio', 'DELETE_LOAN_CHECKER', 'LOAN', 'DELETE', 0),
 	(110, 'portfolio', 'READ_CLIENT', 'CLIENT', 'READ', 0),
 	(111, 'portfolio', 'CREATE_CLIENT', 'CLIENT', 'CREATE', 0),
-	(112, 'portfolio', 'CREATE_CLIENT_CHECKER', 'CLIENT', 'CREATE_CHECKER', 0),
+	(112, 'portfolio', 'CREATE_CLIENT_CHECKER', 'CLIENT', 'CREATE', 0),
 	(113, 'portfolio', 'UPDATE_CLIENT', 'CLIENT', 'UPDATE', 0),
-	(114, 'portfolio', 'UPDATE_CLIENT_CHECKER', 'CLIENT', 'UPDATE_CHECKER', 0),
+	(114, 'portfolio', 'UPDATE_CLIENT_CHECKER', 'CLIENT', 'UPDATE', 0),
 	(115, 'portfolio', 'DELETE_CLIENT', 'CLIENT', 'DELETE', 0),
-	(116, 'portfolio', 'DELETE_CLIENT_CHECKER', 'CLIENT', 'DELETE_CHECKER', 0),
+	(116, 'portfolio', 'DELETE_CLIENT_CHECKER', 'CLIENT', 'DELETE', 0),
 	(117, 'portfolio', 'READ_CLIENTIMAGE', 'CLIENTIMAGE', 'READ', 0),
 	(118, 'portfolio', 'CREATE_CLIENTIMAGE', 'CLIENTIMAGE', 'CREATE', 0),
-	(119, 'portfolio', 'CREATE_CLIENTIMAGE_CHECKER', 'CLIENTIMAGE', 'CREATE_CHECKER', 0),
+	(119, 'portfolio', 'CREATE_CLIENTIMAGE_CHECKER', 'CLIENTIMAGE', 'CREATE', 0),
 	(120, 'portfolio', 'DELETE_CLIENTIMAGE', 'CLIENTIMAGE', 'DELETE', 0),
-	(121, 'portfolio', 'DELETE_CLIENTIMAGE_CHECKER', 'CLIENTIMAGE', 'DELETE_CHECKER', 0),
+	(121, 'portfolio', 'DELETE_CLIENTIMAGE_CHECKER', 'CLIENTIMAGE', 'DELETE', 0),
 	(122, 'portfolio', 'READ_CLIENTNOTE', 'CLIENTNOTE', 'READ', 0),
 	(123, 'portfolio', 'CREATE_CLIENTNOTE', 'CLIENTNOTE', 'CREATE', 0),
-	(124, 'portfolio', 'CREATE_CLIENTNOTE_CHECKER', 'CLIENTNOTE', 'CREATE_CHECKER', 0),
+	(124, 'portfolio', 'CREATE_CLIENTNOTE_CHECKER', 'CLIENTNOTE', 'CREATE', 0),
 	(125, 'portfolio', 'UPDATE_CLIENTNOTE', 'CLIENTNOTE', 'UPDATE', 0),
-	(126, 'portfolio', 'UPDATE_CLIENTNOTE_CHECKER', 'CLIENTNOTE', 'UPDATE_CHECKER', 0),
+	(126, 'portfolio', 'UPDATE_CLIENTNOTE_CHECKER', 'CLIENTNOTE', 'UPDATE', 0),
 	(127, 'portfolio', 'DELETE_CLIENTNOTE', 'CLIENTNOTE', 'DELETE', 0),
-	(128, 'portfolio', 'DELETE_CLIENTNOTE_CHECKER', 'CLIENTNOTE', 'DELETE_CHECKER', 0),
+	(128, 'portfolio', 'DELETE_CLIENTNOTE_CHECKER', 'CLIENTNOTE', 'DELETE', 0),
 	(129, 'portfolio_group', 'READ_GROUPNOTE', 'GROUPNOTE', 'READ', 0),
 	(130, 'portfolio_group', 'CREATE_GROUPNOTE', 'GROUPNOTE', 'CREATE', 0),
 	(131, 'portfolio_group', 'UPDATE_GROUPNOTE', 'GROUPNOTE', 'UPDATE', 0),
 	(132, 'portfolio_group', 'DELETE_GROUPNOTE', 'GROUPNOTE', 'DELETE', 0),
-	(133, 'portfolio_group', 'CREATE_GROUPNOTE_CHECKER', 'GROUPNOTE', 'CREATE_CHECKER', 0),
-	(134, 'portfolio_group', 'UPDATE_GROUPNOTE_CHECKER', 'GROUPNOTE', 'UPDATE_CHECKER', 0),
-	(135, 'portfolio_group', 'DELETE_GROUPNOTE_CHECKER', 'GROUPNOTE', 'DELETE_CHECKER', 0),
+	(133, 'portfolio_group', 'CREATE_GROUPNOTE_CHECKER', 'GROUPNOTE', 'CREATE', 0),
+	(134, 'portfolio_group', 'UPDATE_GROUPNOTE_CHECKER', 'GROUPNOTE', 'UPDATE', 0),
+	(135, 'portfolio_group', 'DELETE_GROUPNOTE_CHECKER', 'GROUPNOTE', 'DELETE', 0),
 	(136, 'portfolio', 'READ_LOANNOTE', 'LOANNOTE', 'READ', 0),
 	(137, 'portfolio', 'CREATE_LOANNOTE', 'LOANNOTE', 'CREATE', 0),
 	(138, 'portfolio', 'UPDATE_LOANNOTE', 'LOANNOTE', 'UPDATE', 0),
 	(139, 'portfolio', 'DELETE_LOANNOTE', 'LOANNOTE', 'DELETE', 0),
-	(140, 'portfolio', 'CREATE_LOANNOTE_CHECKER', 'LOANNOTE', 'CREATE_CHECKER', 0),
-	(141, 'portfolio', 'UPDATE_LOANNOTE_CHECKER', 'LOANNOTE', 'UPDATE_CHECKER', 0),
-	(142, 'portfolio', 'DELETE_LOANNOTE_CHECKER', 'LOANNOTE', 'DELETE_CHECKER', 0),
+	(140, 'portfolio', 'CREATE_LOANNOTE_CHECKER', 'LOANNOTE', 'CREATE', 0),
+	(141, 'portfolio', 'UPDATE_LOANNOTE_CHECKER', 'LOANNOTE', 'UPDATE', 0),
+	(142, 'portfolio', 'DELETE_LOANNOTE_CHECKER', 'LOANNOTE', 'DELETE', 0),
 	(143, 'portfolio', 'READ_LOANTRANSACTIONNOTE', 'LOANTRANSACTIONNOTE', 'READ', 0),
 	(144, 'portfolio', 'CREATE_LOANTRANSACTIONNOTE', 'LOANTRANSACTIONNOTE', 'CREATE', 0),
 	(145, 'portfolio', 'UPDATE_LOANTRANSACTIONNOTE', 'LOANTRANSACTIONNOTE', 'UPDATE', 0),
 	(146, 'portfolio', 'DELETE_LOANTRANSACTIONNOTE', 'LOANTRANSACTIONNOTE', 'DELETE', 0),
-	(147, 'portfolio', 'CREATE_LOANTRANSACTIONNOTE_CHECKER', 'LOANTRANSACTIONNOTE', 'CREATE_CHECKER', 0),
-	(148, 'portfolio', 'UPDATE_LOANTRANSACTIONNOTE_CHECKER', 'LOANTRANSACTIONNOTE', 'UPDATE_CHECKER', 0),
-	(149, 'portfolio', 'DELETE_LOANTRANSACTIONNOTE_CHECKER', 'LOANTRANSACTIONNOTE', 'DELETE_CHECKER', 0),
+	(147, 'portfolio', 'CREATE_LOANTRANSACTIONNOTE_CHECKER', 'LOANTRANSACTIONNOTE', 'CREATE', 0),
+	(148, 'portfolio', 'UPDATE_LOANTRANSACTIONNOTE_CHECKER', 'LOANTRANSACTIONNOTE', 'UPDATE', 0),
+	(149, 'portfolio', 'DELETE_LOANTRANSACTIONNOTE_CHECKER', 'LOANTRANSACTIONNOTE', 'DELETE', 0),
 	(150, 'portfolio', 'READ_SAVINGNOTE', 'SAVINGNOTE', 'READ', 0),
 	(151, 'portfolio', 'CREATE_SAVINGNOTE', 'SAVINGNOTE', 'CREATE', 0),
 	(152, 'portfolio', 'UPDATE_SAVINGNOTE', 'SAVINGNOTE', 'UPDATE', 0),
 	(153, 'portfolio', 'DELETE_SAVINGNOTE', 'SAVINGNOTE', 'DELETE', 0),
-	(154, 'portfolio', 'CREATE_SAVINGNOTE_CHECKER', 'SAVINGNOTE', 'CREATE_CHECKER', 0),
-	(155, 'portfolio', 'UPDATE_SAVINGNOTE_CHECKER', 'SAVINGNOTE', 'UPDATE_CHECKER', 0),
-	(156, 'portfolio', 'DELETE_SAVINGNOTE_CHECKER', 'SAVINGNOTE', 'DELETE_CHECKER', 0),
+	(154, 'portfolio', 'CREATE_SAVINGNOTE_CHECKER', 'SAVINGNOTE', 'CREATE', 0),
+	(155, 'portfolio', 'UPDATE_SAVINGNOTE_CHECKER', 'SAVINGNOTE', 'UPDATE', 0),
+	(156, 'portfolio', 'DELETE_SAVINGNOTE_CHECKER', 'SAVINGNOTE', 'DELETE', 0),
 	(157, 'portfolio', 'READ_CLIENTIDENTIFIER', 'CLIENTIDENTIFIER', 'READ', 0),
 	(158, 'portfolio', 'CREATE_CLIENTIDENTIFIER', 'CLIENTIDENTIFIER', 'CREATE', 0),
-	(159, 'portfolio', 'CREATE_CLIENTIDENTIFIER_CHECKER', 'CLIENTIDENTIFIER', 'CREATE_CHECKER', 0),
+	(159, 'portfolio', 'CREATE_CLIENTIDENTIFIER_CHECKER', 'CLIENTIDENTIFIER', 'CREATE', 0),
 	(160, 'portfolio', 'UPDATE_CLIENTIDENTIFIER', 'CLIENTIDENTIFIER', 'UPDATE', 0),
-	(161, 'portfolio', 'UPDATE_CLIENTIDENTIFIER_CHECKER', 'CLIENTIDENTIFIER', 'UPDATE_CHECKER', 0),
+	(161, 'portfolio', 'UPDATE_CLIENTIDENTIFIER_CHECKER', 'CLIENTIDENTIFIER', 'UPDATE', 0),
 	(162, 'portfolio', 'DELETE_CLIENTIDENTIFIER', 'CLIENTIDENTIFIER', 'DELETE', 0),
-	(163, 'portfolio', 'DELETE_CLIENTIDENTIFIER_CHECKER', 'CLIENTIDENTIFIER', 'DELETE_CHECKER', 0),
+	(163, 'portfolio', 'DELETE_CLIENTIDENTIFIER_CHECKER', 'CLIENTIDENTIFIER', 'DELETE', 0),
 	(164, 'portfolio', 'READ_DOCUMENT', 'DOCUMENT', 'READ', 0),
 	(165, 'portfolio', 'CREATE_DOCUMENT', 'DOCUMENT', 'CREATE', 0),
-	(166, 'portfolio', 'CREATE_DOCUMENT_CHECKER', 'DOCUMENT', 'CREATE_CHECKER', 0),
+	(166, 'portfolio', 'CREATE_DOCUMENT_CHECKER', 'DOCUMENT', 'CREATE', 0),
 	(167, 'portfolio', 'UPDATE_DOCUMENT', 'DOCUMENT', 'UPDATE', 0),
-	(168, 'portfolio', 'UPDATE_DOCUMENT_CHECKER', 'DOCUMENT', 'UPDATE_CHECKER', 0),
+	(168, 'portfolio', 'UPDATE_DOCUMENT_CHECKER', 'DOCUMENT', 'UPDATE', 0),
 	(169, 'portfolio', 'DELETE_DOCUMENT', 'DOCUMENT', 'DELETE', 0),
-	(170, 'portfolio', 'DELETE_DOCUMENT_CHECKER', 'DOCUMENT', 'DELETE_CHECKER', 0),
+	(170, 'portfolio', 'DELETE_DOCUMENT_CHECKER', 'DOCUMENT', 'DELETE', 0),
 	(171, 'portfolio_group', 'READ_GROUP', 'GROUP', 'READ', 0),
 	(172, 'portfolio_group', 'CREATE_GROUP', 'GROUP', 'CREATE', 0),
-	(173, 'portfolio_group', 'CREATE_GROUP_CHECKER', 'GROUP', 'CREATE_CHECKER', 0),
+	(173, 'portfolio_group', 'CREATE_GROUP_CHECKER', 'GROUP', 'CREATE', 0),
 	(174, 'portfolio_group', 'UPDATE_GROUP', 'GROUP', 'UPDATE', 0),
-	(175, 'portfolio_group', 'UPDATE_GROUP_CHECKER', 'GROUP', 'UPDATE_CHECKER', 0),
+	(175, 'portfolio_group', 'UPDATE_GROUP_CHECKER', 'GROUP', 'UPDATE', 0),
 	(176, 'portfolio_group', 'DELETE_GROUP', 'GROUP', 'DELETE', 0),
-	(177, 'portfolio_group', 'DELETE_GROUP_CHECKER', 'GROUP', 'DELETE_CHECKER', 0),
+	(177, 'portfolio_group', 'DELETE_GROUP_CHECKER', 'GROUP', 'DELETE', 0),
 	(178, 'portfolio_group', 'UNASSIGNSTAFF_GROUP', 'GROUP', 'UNASSIGNSTAFF', 0),
-	(179, 'portfolio_group', 'UNASSIGNSTAFF_GROUP_CHECKER', 'GROUP', 'UNASSIGNSTAFF_CHECKER', 0),
+	(179, 'portfolio_group', 'UNASSIGNSTAFF_GROUP_CHECKER', 'GROUP', 'UNASSIGNSTAFF', 0),
 	(180, 'portfolio', 'CREATE_LOANCHARGE', 'LOANCHARGE', 'CREATE', 0),
-	(181, 'portfolio', 'CREATE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'CREATE_CHECKER', 0),
+	(181, 'portfolio', 'CREATE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'CREATE', 0),
 	(182, 'portfolio', 'UPDATE_LOANCHARGE', 'LOANCHARGE', 'UPDATE', 0),
-	(183, 'portfolio', 'UPDATE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'UPDATE_CHECKER', 0),
+	(183, 'portfolio', 'UPDATE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'UPDATE', 0),
 	(184, 'portfolio', 'DELETE_LOANCHARGE', 'LOANCHARGE', 'DELETE', 0),
-	(185, 'portfolio', 'DELETE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'DELETE_CHECKER', 0),
+	(185, 'portfolio', 'DELETE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'DELETE', 0),
 	(186, 'portfolio', 'WAIVE_LOANCHARGE', 'LOANCHARGE', 'WAIVE', 0),
-	(187, 'portfolio', 'WAIVE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'WAIVE_CHECKER', 0),
+	(187, 'portfolio', 'WAIVE_LOANCHARGE_CHECKER', 'LOANCHARGE', 'WAIVE', 0),
 	(188, 'portfolio', 'READ_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'READ', 0),
 	(189, 'portfolio', 'CREATE_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'CREATE', 0),
-	(190, 'portfolio', 'CREATE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'CREATE_CHECKER', 0),
+	(190, 'portfolio', 'CREATE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'CREATE', 0),
 	(191, 'portfolio', 'UPDATE_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'UPDATE', 0),
-	(192, 'portfolio', 'UPDATE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'UPDATE_CHECKER', 0),
+	(192, 'portfolio', 'UPDATE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'UPDATE', 0),
 	(193, 'portfolio', 'DELETE_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'DELETE', 0),
-	(194, 'portfolio', 'DELETE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'DELETE_CHECKER', 0),
+	(194, 'portfolio', 'DELETE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'DELETE', 0),
 	(195, 'portfolio', 'READ_GUARANTOR', 'GUARANTOR', 'READ', 0),
 	(196, 'portfolio', 'CREATE_GUARANTOR', 'GUARANTOR', 'CREATE', 0),
-	(197, 'portfolio', 'CREATE_GUARANTOR_CHECKER', 'GUARANTOR', 'CREATE_CHECKER', 0),
+	(197, 'portfolio', 'CREATE_GUARANTOR_CHECKER', 'GUARANTOR', 'CREATE', 0),
 	(198, 'portfolio', 'UPDATE_GUARANTOR', 'GUARANTOR', 'UPDATE', 0),
-	(199, 'portfolio', 'UPDATE_GUARANTOR_CHECKER', 'GUARANTOR', 'UPDATE_CHECKER', 0),
+	(199, 'portfolio', 'UPDATE_GUARANTOR_CHECKER', 'GUARANTOR', 'UPDATE', 0),
 	(200, 'portfolio', 'DELETE_GUARANTOR', 'GUARANTOR', 'DELETE', 0),
-	(201, 'portfolio', 'DELETE_GUARANTOR_CHECKER', 'GUARANTOR', 'DELETE_CHECKER', 0),
+	(201, 'portfolio', 'DELETE_GUARANTOR_CHECKER', 'GUARANTOR', 'DELETE', 0),
 	(202, 'portfolio', 'READ_COLLATERAL', 'COLLATERAL', 'READ', 0),
 	(203, 'portfolio', 'CREATE_COLLATERAL', 'COLLATERAL', 'CREATE', 0),
 	(204, 'portfolio', 'UPDATE_COLLATERAL', 'COLLATERAL', 'UPDATE', 0),
 	(205, 'portfolio', 'DELETE_COLLATERAL', 'COLLATERAL', 'DELETE', 0),
-	(206, 'portfolio', 'CREATE_COLLATERAL_CHECKER', 'COLLATERAL', 'CREATE_CHECKER', 0),
-	(207, 'portfolio', 'UPDATE_COLLATERAL_CHECKER', 'COLLATERAL', 'UPDATE_CHECKER', 0),
-	(208, 'portfolio', 'DELETE_COLLATERAL_CHECKER', 'COLLATERAL', 'DELETE_CHECKER', 0),
+	(206, 'portfolio', 'CREATE_COLLATERAL_CHECKER', 'COLLATERAL', 'CREATE', 0),
+	(207, 'portfolio', 'UPDATE_COLLATERAL_CHECKER', 'COLLATERAL', 'UPDATE', 0),
+	(208, 'portfolio', 'DELETE_COLLATERAL_CHECKER', 'COLLATERAL', 'DELETE', 0),
 	(209, 'transaction_loan', 'APPROVE_LOAN', 'LOAN', 'APPROVE', 0),
 	(211, 'transaction_loan', 'REJECT_LOAN', 'LOAN', 'REJECT', 0),
 	(213, 'transaction_loan', 'WITHDRAW_LOAN', 'LOAN', 'WITHDRAW', 0),
@@ -2368,31 +2123,31 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(224, 'transaction_loan', 'CLOSE_LOAN', 'LOAN', 'CLOSE', 0),
 	(225, 'transaction_loan', 'CLOSEASRESCHEDULED_LOAN', 'LOAN', 'CLOSEASRESCHEDULED', 0),
 	(226, 'transaction_loan', 'UPDATELOANOFFICER_LOAN', 'LOAN', 'UPDATELOANOFFICER', 0),
-	(227, 'transaction_loan', 'UPDATELOANOFFICER_LOAN_CHECKER', 'LOAN', 'UPDATELOANOFFICER_CHECKER', 0),
+	(227, 'transaction_loan', 'UPDATELOANOFFICER_LOAN_CHECKER', 'LOAN', 'UPDATELOANOFFICER', 0),
 	(228, 'transaction_loan', 'REMOVELOANOFFICER_LOAN', 'LOAN', 'REMOVELOANOFFICER', 0),
-	(229, 'transaction_loan', 'REMOVELOANOFFICER_LOAN_CHECKER', 'LOAN', 'REMOVELOANOFFICER_CHECKER', 0),
+	(229, 'transaction_loan', 'REMOVELOANOFFICER_LOAN_CHECKER', 'LOAN', 'REMOVELOANOFFICER', 0),
 	(230, 'transaction_loan', 'BULKREASSIGN_LOAN', 'LOAN', 'BULKREASSIGN', 0),
-	(231, 'transaction_loan', 'BULKREASSIGN_LOAN_CHECKER', 'LOAN', 'BULKREASSIGN_CHECKER', 0),
-	(232, 'transaction_loan', 'APPROVE_LOAN_CHECKER', 'LOAN', 'APPROVE_CHECKER', 0),
-	(234, 'transaction_loan', 'REJECT_LOAN_CHECKER', 'LOAN', 'REJECT_CHECKER', 0),
-	(236, 'transaction_loan', 'WITHDRAW_LOAN_CHECKER', 'LOAN', 'WITHDRAW_CHECKER', 0),
-	(238, 'transaction_loan', 'APPROVALUNDO_LOAN_CHECKER', 'LOAN', 'APPROVALUNDO_CHECKER', 0),
-	(239, 'transaction_loan', 'DISBURSE_LOAN_CHECKER', 'LOAN', 'DISBURSE_CHECKER', 0),
-	(241, 'transaction_loan', 'DISBURSALUNDO_LOAN_CHECKER', 'LOAN', 'DISBURSALUNDO_CHECKER', 0),
-	(242, 'transaction_loan', 'REPAYMENT_LOAN_CHECKER', 'LOAN', 'REPAYMENT_CHECKER', 0),
-	(244, 'transaction_loan', 'ADJUST_LOAN_CHECKER', 'LOAN', 'ADJUST_CHECKER', 0),
-	(245, 'transaction_loan', 'WAIVEINTERESTPORTION_LOAN_CHECKER', 'LOAN', 'WAIVEINTERESTPORTION_CHECKER', 0),
-	(246, 'transaction_loan', 'WRITEOFF_LOAN_CHECKER', 'LOAN', 'WRITEOFF_CHECKER', 0),
-	(247, 'transaction_loan', 'CLOSE_LOAN_CHECKER', 'LOAN', 'CLOSE_CHECKER', 0),
-	(248, 'transaction_loan', 'CLOSEASRESCHEDULED_LOAN_CHECKER', 'LOAN', 'CLOSEASRESCHEDULED_CHECKER', 0),
+	(231, 'transaction_loan', 'BULKREASSIGN_LOAN_CHECKER', 'LOAN', 'BULKREASSIGN', 0),
+	(232, 'transaction_loan', 'APPROVE_LOAN_CHECKER', 'LOAN', 'APPROVE', 0),
+	(234, 'transaction_loan', 'REJECT_LOAN_CHECKER', 'LOAN', 'REJECT', 0),
+	(236, 'transaction_loan', 'WITHDRAW_LOAN_CHECKER', 'LOAN', 'WITHDRAW', 0),
+	(238, 'transaction_loan', 'APPROVALUNDO_LOAN_CHECKER', 'LOAN', 'APPROVALUNDO', 0),
+	(239, 'transaction_loan', 'DISBURSE_LOAN_CHECKER', 'LOAN', 'DISBURSE', 0),
+	(241, 'transaction_loan', 'DISBURSALUNDO_LOAN_CHECKER', 'LOAN', 'DISBURSALUNDO', 0),
+	(242, 'transaction_loan', 'REPAYMENT_LOAN_CHECKER', 'LOAN', 'REPAYMENT', 0),
+	(244, 'transaction_loan', 'ADJUST_LOAN_CHECKER', 'LOAN', 'ADJUST', 0),
+	(245, 'transaction_loan', 'WAIVEINTERESTPORTION_LOAN_CHECKER', 'LOAN', 'WAIVEINTERESTPORTION', 0),
+	(246, 'transaction_loan', 'WRITEOFF_LOAN_CHECKER', 'LOAN', 'WRITEOFF', 0),
+	(247, 'transaction_loan', 'CLOSE_LOAN_CHECKER', 'LOAN', 'CLOSE', 0),
+	(248, 'transaction_loan', 'CLOSEASRESCHEDULED_LOAN_CHECKER', 'LOAN', 'CLOSEASRESCHEDULED', 0),
 	(249, 'transaction_savings', 'DEPOSIT_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'DEPOSIT', 0),
-	(250, 'transaction_savings', 'DEPOSIT_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'DEPOSIT_CHECKER', 0),
+	(250, 'transaction_savings', 'DEPOSIT_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'DEPOSIT', 0),
 	(251, 'transaction_savings', 'WITHDRAWAL_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'WITHDRAWAL', 0),
-	(252, 'transaction_savings', 'WITHDRAWAL_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'WITHDRAWAL_CHECKER', 0),
+	(252, 'transaction_savings', 'WITHDRAWAL_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'WITHDRAWAL', 0),
 	(253, 'transaction_savings', 'ACTIVATE_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'ACTIVATE', 0),
-	(254, 'transaction_savings', 'ACTIVATE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'ACTIVATE_CHECKER', 0),
+	(254, 'transaction_savings', 'ACTIVATE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'ACTIVATE', 0),
 	(255, 'transaction_savings', 'CALCULATEINTEREST_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'CALCULATEINTEREST', 0),
-	(256, 'transaction_savings', 'CALCULATEINTEREST_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'CALCULATEINTEREST_CHECKER', 0),
+	(256, 'transaction_savings', 'CALCULATEINTEREST_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'CALCULATEINTEREST', 0),
 	(257, 'accounting', 'CREATE_GLACCOUNT', 'GLACCOUNT', 'CREATE', 0),
 	(258, 'accounting', 'UPDATE_GLACCOUNT', 'GLACCOUNT', 'UPDATE', 0),
 	(259, 'accounting', 'DELETE_GLACCOUNT', 'GLACCOUNT', 'DELETE', 0),
@@ -2433,27 +2188,27 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(294, 'report', 'READ_Trial Balance', 'Trial Balance', 'READ', 0),
 	(295, 'report', 'READ_Written-Off Loans', 'Written-Off Loans', 'READ', 0),
 	(296, 'transaction_savings', 'POSTINTEREST_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'POSTINTEREST', 1),
-	(297, 'transaction_savings', 'POSTINTEREST_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'POSTINTEREST_CHECKER', 0),
+	(297, 'transaction_savings', 'POSTINTEREST_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'POSTINTEREST', 0),
 	(298, 'portfolio_center', 'READ_CENTER', 'CENTER', 'READ', 0),
 	(299, 'portfolio_center', 'CREATE_CENTER', 'CENTER', 'CREATE', 0),
-	(300, 'portfolio_center', 'CREATE_CENTER_CHECKER', 'CENTER', 'CREATE_CHECKER', 0),
+	(300, 'portfolio_center', 'CREATE_CENTER_CHECKER', 'CENTER', 'CREATE', 0),
 	(301, 'portfolio_center', 'UPDATE_CENTER', 'CENTER', 'UPDATE', 0),
-	(302, 'portfolio_center', 'UPDATE_CENTER_CHECKER', 'CENTER', 'UPDATE_CHECKER', 0),
+	(302, 'portfolio_center', 'UPDATE_CENTER_CHECKER', 'CENTER', 'UPDATE', 0),
 	(303, 'portfolio_center', 'DELETE_CENTER', 'CENTER', 'DELETE', 0),
-	(304, 'portfolio_center', 'DELETE_CENTER_CHECKER', 'CENTER', 'DELETE_CHECKER', 0),
+	(304, 'portfolio_center', 'DELETE_CENTER_CHECKER', 'CENTER', 'DELETE', 0),
 	(305, 'configuration', 'READ_REPORT', 'REPORT', 'READ', 0),
 	(306, 'configuration', 'CREATE_REPORT', 'REPORT', 'CREATE', 0),
-	(307, 'configuration', 'CREATE_REPORT_CHECKER', 'REPORT', 'CREATE_CHECKER', 0),
+	(307, 'configuration', 'CREATE_REPORT_CHECKER', 'REPORT', 'CREATE', 0),
 	(308, 'configuration', 'UPDATE_REPORT', 'REPORT', 'UPDATE', 0),
-	(309, 'configuration', 'UPDATE_REPORT_CHECKER', 'REPORT', 'UPDATE_CHECKER', 0),
+	(309, 'configuration', 'UPDATE_REPORT_CHECKER', 'REPORT', 'UPDATE', 0),
 	(310, 'configuration', 'DELETE_REPORT', 'REPORT', 'DELETE', 0),
-	(311, 'configuration', 'DELETE_REPORT_CHECKER', 'REPORT', 'DELETE_CHECKER', 0),
+	(311, 'configuration', 'DELETE_REPORT_CHECKER', 'REPORT', 'DELETE', 0),
 	(312, 'portfolio', 'ACTIVATE_CLIENT', 'CLIENT', 'ACTIVATE', 1),
-	(313, 'portfolio', 'ACTIVATE_CLIENT_CHECKER', 'CLIENT', 'ACTIVATE_CHECKER', 0),
+	(313, 'portfolio', 'ACTIVATE_CLIENT_CHECKER', 'CLIENT', 'ACTIVATE', 0),
 	(314, 'portfolio_center', 'ACTIVATE_CENTER', 'CENTER', 'ACTIVATE', 1),
-	(315, 'portfolio_center', 'ACTIVATE_CENTER_CHECKER', 'CENTER', 'ACTIVATE_CHECKER', 0),
+	(315, 'portfolio_center', 'ACTIVATE_CENTER_CHECKER', 'CENTER', 'ACTIVATE', 0),
 	(316, 'portfolio_group', 'ACTIVATE_GROUP', 'GROUP', 'ACTIVATE', 1),
-	(317, 'portfolio_group', 'ACTIVATE_GROUP_CHECKER', 'GROUP', 'ACTIVATE_CHECKER', 0),
+	(317, 'portfolio_group', 'ACTIVATE_GROUP_CHECKER', 'GROUP', 'ACTIVATE', 0),
 	(318, 'portfolio_group', 'ASSOCIATECLIENTS_GROUP', 'GROUP', 'ASSOCIATECLIENTS', 0),
 	(319, 'portfolio_group', 'DISASSOCIATECLIENTS_GROUP', 'GROUP', 'DISASSOCIATECLIENTS', 0),
 	(320, 'portfolio_group', 'SAVECOLLECTIONSHEET_GROUP', 'GROUP', 'SAVECOLLECTIONSHEET', 0),
@@ -2464,11 +2219,11 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(326, 'report', 'READ_GroupSummaryCounts', 'GroupSummaryCounts', 'READ', 0),
 	(327, 'report', 'READ_GroupSummaryAmounts', 'GroupSummaryAmounts', 'READ', 0),
 	(328, 'configuration', 'CREATE_DATATABLE', 'DATATABLE', 'CREATE', 0),
-	(329, 'configuration', 'CREATE_DATATABLE_CHECKER', 'DATATABLE', 'CREATE_CHECKER', 0),
+	(329, 'configuration', 'CREATE_DATATABLE_CHECKER', 'DATATABLE', 'CREATE', 0),
 	(330, 'configuration', 'UPDATE_DATATABLE', 'DATATABLE', 'UPDATE', 0),
-	(331, 'configuration', 'UPDATE_DATATABLE_CHECKER', 'DATATABLE', 'UPDATE_CHECKER', 0),
+	(331, 'configuration', 'UPDATE_DATATABLE_CHECKER', 'DATATABLE', 'UPDATE', 0),
 	(332, 'configuration', 'DELETE_DATATABLE', 'DATATABLE', 'DELETE', 0),
-	(333, 'configuration', 'DELETE_DATATABLE_CHECKER', 'DATATABLE', 'DELETE_CHECKER', 0),
+	(333, 'configuration', 'DELETE_DATATABLE_CHECKER', 'DATATABLE', 'DELETE', 0),
 	(334, 'organisation', 'CREATE_HOLIDAY', 'HOLIDAY', 'CREATE', 0),
 	(335, 'portfolio_group', 'ASSIGNROLE_GROUP', 'GROUP', 'ASSIGNROLE', 0),
 	(336, 'portfolio_group', 'UNASSIGNROLE_GROUP', 'GROUP', 'UNASSIGNROLE', 0),
@@ -2490,38 +2245,38 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(360, 'transaction_savings', 'WITHDRAW_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'WITHDRAW', 1),
 	(361, 'transaction_savings', 'APPROVALUNDO_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'APPROVALUNDO', 1),
 	(362, 'transaction_savings', 'CLOSE_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'CLOSE', 1),
-	(363, 'transaction_savings', 'APPROVE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'APPROVE_CHECKER', 0),
-	(364, 'transaction_savings', 'REJECT_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'REJECT_CHECKER', 0),
-	(365, 'transaction_savings', 'WITHDRAW_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'WITHDRAW_CHECKER', 0),
-	(366, 'transaction_savings', 'APPROVALUNDO_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'APPROVALUNDO_CHECKER', 0),
-	(367, 'transaction_savings', 'CLOSE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'CLOSE_CHECKER', 0),
+	(363, 'transaction_savings', 'APPROVE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'APPROVE', 0),
+	(364, 'transaction_savings', 'REJECT_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'REJECT', 0),
+	(365, 'transaction_savings', 'WITHDRAW_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'WITHDRAW', 0),
+	(366, 'transaction_savings', 'APPROVALUNDO_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'APPROVALUNDO', 0),
+	(367, 'transaction_savings', 'CLOSE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'CLOSE', 0),
 	(368, 'transaction_savings', 'UNDOTRANSACTION_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'UNDOTRANSACTION', 1),
-	(369, 'transaction_savings', 'UNDOTRANSACTION_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'UNDOTRANSACTION_CHECKER', 0),
+	(369, 'transaction_savings', 'UNDOTRANSACTION_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'UNDOTRANSACTION', 0),
 	(370, 'portfolio', 'CREATE_PRODUCTMIX', 'PRODUCTMIX', 'CREATE', 0),
 	(371, 'portfolio', 'UPDATE_PRODUCTMIX', 'PRODUCTMIX', 'UPDATE', 0),
 	(372, 'portfolio', 'DELETE_PRODUCTMIX', 'PRODUCTMIX', 'DELETE', 0),
 	(373, 'jobs', 'UPDATE_SCHEDULER', 'SCHEDULER', 'UPDATE', 0),
 	(374, 'transaction_savings', 'APPLYANNUALFEE_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'APPLYANNUALFEE', 1),
-	(375, 'transaction_savings', 'APPLYANNUALFEE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'APPLYANNUALFEE_CHECKER', 0),
+	(375, 'transaction_savings', 'APPLYANNUALFEE_SAVINGSACCOUNT_CHECKER', 'SAVINGSACCOUNT', 'APPLYANNUALFEE', 0),
 	(376, 'portfolio_group', 'ASSIGNSTAFF_GROUP', 'GROUP', 'ASSIGNSTAFF', 0),
 	(377, 'transaction_savings', 'READ_ACCOUNTTRANSFER', 'ACCOUNTTRANSFER', 'READ', 0),
 	(378, 'transaction_savings', 'CREATE_ACCOUNTTRANSFER', 'ACCOUNTTRANSFER', 'CREATE', 1),
-	(379, 'transaction_savings', 'CREATE_ACCOUNTTRANSFER_CHECKER', 'ACCOUNTTRANSFER', 'CREATE_CHECKER', 0),
+	(379, 'transaction_savings', 'CREATE_ACCOUNTTRANSFER_CHECKER', 'ACCOUNTTRANSFER', 'CREATE', 0),
 	(380, 'transaction_savings', 'ADJUSTTRANSACTION_SAVINGSACCOUNT', 'SAVINGSACCOUNT', 'ADJUSTTRANSACTION', 0),
 	(381, 'portfolio', 'CREATE_MEETING', 'MEETING', 'CREATE', 0),
 	(382, 'portfolio', 'UPDATE_MEETING', 'MEETING', 'UPDATE', 0),
 	(383, 'portfolio', 'DELETE_MEETING', 'MEETING', 'DELETE', 0),
 	(384, 'portfolio', 'SAVEORUPDATEATTENDANCE_MEETING', 'MEETING', 'SAVEORUPDATEATTENDANCE', 0),
 	(385, 'portfolio_group', 'TRANSFERCLIENTS_GROUP', 'GROUP', 'TRANSFERCLIENTS', 0),
-	(386, 'portfolio_group', 'TRANSFERCLIENTS_GROUP_CHECKER', 'GROUP', 'TRANSFERCLIENTS_CHECKER', 0),
+	(386, 'portfolio_group', 'TRANSFERCLIENTS_GROUP_CHECKER', 'GROUP', 'TRANSFERCLIENTS', 0),
 	(389, 'portfolio', 'PROPOSETRANSFER_CLIENT', 'CLIENT', 'PROPOSETRANSFER', 0),
-	(390, 'portfolio', 'PROPOSETRANSFER_CLIENT_CHECKER', 'CLIENT', 'PROPOSETRANSFER_CHECKER', 0),
+	(390, 'portfolio', 'PROPOSETRANSFER_CLIENT_CHECKER', 'CLIENT', 'PROPOSETRANSFER', 0),
 	(391, 'portfolio', 'ACCEPTTRANSFER_CLIENT', 'CLIENT', 'ACCEPTTRANSFER', 0),
-	(392, 'portfolio', 'ACCEPTTRANSFER_CLIENT_CHECKER', 'CLIENT', 'ACCEPTTRANSFER_CHECKER', 0),
+	(392, 'portfolio', 'ACCEPTTRANSFER_CLIENT_CHECKER', 'CLIENT', 'ACCEPTTRANSFER', 0),
 	(393, 'portfolio', 'REJECTTRANSFER_CLIENT', 'CLIENT', 'REJECTTRANSFER', 0),
-	(394, 'portfolio', 'REJECTTRANSFER_CLIENT_CHECKER', 'CLIENT', 'REJECTTRANSFER_CHECKER', 0),
+	(394, 'portfolio', 'REJECTTRANSFER_CLIENT_CHECKER', 'CLIENT', 'REJECTTRANSFER', 0),
 	(395, 'portfolio', 'WITHDRAWTRANSFER_CLIENT', 'CLIENT', 'WITHDRAWTRANSFER', 0),
-	(396, 'portfolio', 'WITHDRAWTRANSFER_CLIENT_CHECKER', 'CLIENT', 'WITHDRAWTRANSFER_CHECKER', 0),
+	(396, 'portfolio', 'WITHDRAWTRANSFER_CLIENT_CHECKER', 'CLIENT', 'WITHDRAWTRANSFER', 0),
 	(397, 'portfolio', 'CLOSE_GROUP', 'GROUP', 'CLOSE', 1),
 	(398, 'portfolio', 'CLOSE_CENTER', 'CENTER', 'CLOSE', 1),
 	(399, 'xbrlmapping', 'UPDATE_XBRLMAPPING', 'XBRLMAPPING', 'UPDATE', 0),
@@ -2529,17 +2284,17 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(401, 'configuration', 'UPDATE_CACHE', 'CACHE', 'UPDATE', 0),
 	(402, 'transaction_loan', 'PAY_LOANCHARGE', 'LOANCHARGE', 'PAY', 0),
 	(403, 'portfolio', 'CREATE_SAVINGSACCOUNTCHARGE', 'SAVINGSACCOUNTCHARGE', 'CREATE', 0),
-	(404, 'portfolio', 'CREATE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'CREATE_CHECKER', 0),
+	(404, 'portfolio', 'CREATE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'CREATE', 0),
 	(405, 'portfolio', 'UPDATE_SAVINGSACCOUNTCHARGE', 'SAVINGSACCOUNTCHARGE', 'UPDATE', 0),
-	(406, 'portfolio', 'UPDATE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'UPDATE_CHECKER', 0),
+	(406, 'portfolio', 'UPDATE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'UPDATE', 0),
 	(407, 'portfolio', 'DELETE_SAVINGSACCOUNTCHARGE', 'SAVINGSACCOUNTCHARGE', 'DELETE', 0),
-	(408, 'portfolio', 'DELETE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'DELETE_CHECKER', 0),
+	(408, 'portfolio', 'DELETE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'DELETE', 0),
 	(409, 'portfolio', 'WAIVE_SAVINGSACCOUNTCHARGE', 'SAVINGSACCOUNTCHARGE', 'WAIVE', 0),
-	(410, 'portfolio', 'WAIVE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'WAIVE_CHECKER', 0),
+	(410, 'portfolio', 'WAIVE_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'WAIVE', 0),
 	(411, 'portfolio', 'PAY_SAVINGSACCOUNTCHARGE', 'SAVINGSACCOUNTCHARGE', 'PAY', 0),
-	(412, 'portfolio', 'PAY_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'PAY_CHECKER', 0),
+	(412, 'portfolio', 'PAY_SAVINGSACCOUNTCHARGE_CHECKER', 'SAVINGSACCOUNTCHARGE', 'PAY', 0),
 	(413, 'portfolio', 'PROPOSEANDACCEPTTRANSFER_CLIENT', 'CLIENT', 'PROPOSEANDACCEPTTRANSFER', 0),
-	(414, 'portfolio', 'PROPOSEANDACCEPTTRANSFER_CLIENT_CHECKER', 'CLIENT', 'PROPOSEANDACCEPTTRANSFER_CHECKER', 0),
+	(414, 'portfolio', 'PROPOSEANDACCEPTTRANSFER_CLIENT_CHECKER', 'CLIENT', 'PROPOSEANDACCEPTTRANSFER', 0),
 	(415, 'organisation', 'DELETE_TEMPLATE', 'TEMPLATE', 'DELETE', 0),
 	(416, 'organisation', 'CREATE_TEMPLATE', 'TEMPLATE', 'CREATE', 0),
 	(417, 'organisation', 'UPDATE_TEMPLATE', 'TEMPLATE', 'UPDATE', 0),
@@ -2547,21 +2302,21 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(419, 'accounting', 'UPDATERUNNINGBALANCE_JOURNALENTRY', 'JOURNALENTRY', 'UPDATERUNNINGBALANCE', 0),
 	(420, 'organisation', 'READ_SMS', 'SMS', 'READ', 0),
 	(421, 'organisation', 'CREATE_SMS', 'SMS', 'CREATE', 0),
-	(422, 'organisation', 'CREATE_SMS_CHECKER', 'SMS', 'CREATE_CHECKER', 0),
+	(422, 'organisation', 'CREATE_SMS_CHECKER', 'SMS', 'CREATE', 0),
 	(423, 'organisation', 'UPDATE_SMS', 'SMS', 'UPDATE', 0),
-	(424, 'organisation', 'UPDATE_SMS_CHECKER', 'SMS', 'UPDATE_CHECKER', 0),
+	(424, 'organisation', 'UPDATE_SMS_CHECKER', 'SMS', 'UPDATE', 0),
 	(425, 'organisation', 'DELETE_SMS', 'SMS', 'DELETE', 0),
-	(426, 'organisation', 'DELETE_SMS_CHECKER', 'SMS', 'DELETE_CHECKER', 0),
-	(427, 'organisation', 'CREATE_HOLIDAY_CHECKER', 'HOLIDAY', 'CREATE_CHECKER', 0),
+	(426, 'organisation', 'DELETE_SMS_CHECKER', 'SMS', 'DELETE', 0),
+	(427, 'organisation', 'CREATE_HOLIDAY_CHECKER', 'HOLIDAY', 'CREATE', 0),
 	(428, 'organisation', 'ACTIVATE_HOLIDAY', 'HOLIDAY', 'ACTIVATE', 0),
-	(429, 'organisation', 'ACTIVATE_HOLIDAY_CHECKER', 'HOLIDAY', 'ACTIVATE_CHECKER', 0),
+	(429, 'organisation', 'ACTIVATE_HOLIDAY_CHECKER', 'HOLIDAY', 'ACTIVATE', 0),
 	(430, 'organisation', 'UPDATE_HOLIDAY', 'HOLIDAY', 'UPDATE', 0),
-	(431, 'organisation', 'UPDATE_HOLIDAY_CHECKER', 'HOLIDAY', 'UPDATE_CHECKER', 0),
+	(431, 'organisation', 'UPDATE_HOLIDAY_CHECKER', 'HOLIDAY', 'UPDATE', 0),
 	(432, 'organisation', 'DELETE_HOLIDAY', 'HOLIDAY', 'DELETE', 0),
-	(433, 'organisation', 'DELETE_HOLIDAY_CHECKER', 'HOLIDAY', 'DELETE_CHECKER', 0),
+	(433, 'organisation', 'DELETE_HOLIDAY_CHECKER', 'HOLIDAY', 'DELETE', 0),
 	(434, 'transaction_loan', 'UNDOWRITEOFF_LOAN', 'LOAN', 'UNDOWRITEOFF', 0),
 	(435, 'portfolio', 'READ_SAVINGSACCOUNTCHARGE', 'SAVINGSACCOUNTCHARGE', 'READ', 0),
-	(436, 'accounting', 'CREATE_JOURNALENTRY_CHECKER', 'JOURNALENTRY', 'CREATE_CHECKER', 0),
+	(436, 'accounting', 'CREATE_JOURNALENTRY_CHECKER', 'JOURNALENTRY', 'CREATE', 0),
 	(437, 'portfolio', 'UPDATE_DISBURSEMENTDETAIL', 'DISBURSEMENTDETAIL', 'UPDATE', 0),
 	(438, 'portfolio', 'UPDATESAVINGSACCOUNT_CLIENT', 'CLIENT', 'UPDATESAVINGSACCOUNT', 0),
 	(439, 'accounting', 'READ_ACCOUNTINGRULE', 'ACCOUNTINGRULE', 'READ', 0),
@@ -2578,108 +2333,98 @@ INSERT INTO `m_permission` (`id`, `grouping`, `code`, `entity_name`, `action_nam
 	(450, 'account_transfer', 'UPDATE_STANDINGINSTRUCTION ', 'STANDINGINSTRUCTION ', 'UPDATE', 0),
 	(451, 'account_transfer', 'DELETE_STANDINGINSTRUCTION ', 'STANDINGINSTRUCTION ', 'DELETE', 0),
 	(452, 'portfolio', 'CREATE_INTERESTRATECHART', 'INTERESTRATECHART', 'CREATE', 0),
-	(453, 'portfolio', 'CREATE_INTERESTRATECHART_CHECKER', 'INTERESTRATECHART', 'CREATE_CHECKER', 0),
+	(453, 'portfolio', 'CREATE_INTERESTRATECHART_CHECKER', 'INTERESTRATECHART', 'CREATE', 0),
 	(454, 'portfolio', 'UPDATE_INTERESTRATECHART', 'INTERESTRATECHART', 'UPDATE', 0),
 	(455, 'portfolio', 'DELETE_INTERESTRATECHART', 'INTERESTRATECHART', 'DELETE', 0),
-	(456, 'portfolio', 'UPDATE_INTERESTRATECHART_CHECKER', 'INTERESTRATECHART', 'UPDATE_CHECKER', 0),
-	(457, 'portfolio', 'DELETE_INTERESTRATECHART_CHECKER', 'INTERESTRATECHART', 'DELETE_CHECKER', 0),
+	(456, 'portfolio', 'UPDATE_INTERESTRATECHART_CHECKER', 'INTERESTRATECHART', 'UPDATE', 0),
+	(457, 'portfolio', 'DELETE_INTERESTRATECHART_CHECKER', 'INTERESTRATECHART', 'DELETE', 0),
 	(458, 'portfolio', 'CREATE_CHARTSLAB', 'CHARTSLAB', 'CREATE', 0),
-	(459, 'portfolio', 'CREATE_CHARTSLAB_CHECKER', 'CHARTSLAB', 'CREATE_CHECKER', 0),
+	(459, 'portfolio', 'CREATE_CHARTSLAB_CHECKER', 'CHARTSLAB', 'CREATE', 0),
 	(460, 'portfolio', 'UPDATE_CHARTSLAB', 'CHARTSLAB', 'UPDATE', 0),
 	(461, 'portfolio', 'DELETE_CHARTSLAB', 'CHARTSLAB', 'DELETE', 0),
-	(462, 'portfolio', 'UPDATE_CHARTSLAB_CHECKER', 'CHARTSLAB', 'UPDATE_CHECKER', 0),
-	(463, 'portfolio', 'DELETE_CHARTSLAB_CHECKER', 'CHARTSLAB', 'DELETE_CHECKER', 0),
+	(462, 'portfolio', 'UPDATE_CHARTSLAB_CHECKER', 'CHARTSLAB', 'UPDATE', 0),
+	(463, 'portfolio', 'DELETE_CHARTSLAB_CHECKER', 'CHARTSLAB', 'DELETE', 0),
 	(464, 'portfolio', 'CREATE_FIXEDDEPOSITPRODUCT', 'FIXEDDEPOSITPRODUCT', 'CREATE', 0),
-	(465, 'portfolio', 'CREATE_FIXEDDEPOSITPRODUCT_CHECKER', 'FIXEDDEPOSITPRODUCT', 'CREATE_CHECKER', 0),
+	(465, 'portfolio', 'CREATE_FIXEDDEPOSITPRODUCT_CHECKER', 'FIXEDDEPOSITPRODUCT', 'CREATE', 0),
 	(466, 'portfolio', 'UPDATE_FIXEDDEPOSITPRODUCT', 'FIXEDDEPOSITPRODUCT', 'UPDATE', 0),
 	(467, 'portfolio', 'DELETE_FIXEDDEPOSITPRODUCT', 'FIXEDDEPOSITPRODUCT', 'DELETE', 0),
-	(468, 'portfolio', 'UPDATE_FIXEDDEPOSITPRODUCT_CHECKER', 'FIXEDDEPOSITPRODUCT', 'UPDATE_CHECKER', 0),
-	(469, 'portfolio', 'DELETE_FIXEDDEPOSITPRODUCT_CHECKER', 'FIXEDDEPOSITPRODUCT', 'DELETE_CHECKER', 0),
+	(468, 'portfolio', 'UPDATE_FIXEDDEPOSITPRODUCT_CHECKER', 'FIXEDDEPOSITPRODUCT', 'UPDATE', 0),
+	(469, 'portfolio', 'DELETE_FIXEDDEPOSITPRODUCT_CHECKER', 'FIXEDDEPOSITPRODUCT', 'DELETE', 0),
 	(470, 'portfolio', 'CREATE_RECURRINGDEPOSITPRODUCT', 'RECURRINGDEPOSITPRODUCT', 'CREATE', 0),
-	(471, 'portfolio', 'CREATE_RECURRINGDEPOSITPRODUCT_CHECKER', 'RECURRINGDEPOSITPRODUCT', 'CREATE_CHECKER', 0),
+	(471, 'portfolio', 'CREATE_RECURRINGDEPOSITPRODUCT_CHECKER', 'RECURRINGDEPOSITPRODUCT', 'CREATE', 0),
 	(472, 'portfolio', 'UPDATE_RECURRINGDEPOSITPRODUCT', 'RECURRINGDEPOSITPRODUCT', 'UPDATE', 0),
 	(473, 'portfolio', 'DELETE_RECURRINGDEPOSITPRODUCT', 'RECURRINGDEPOSITPRODUCT', 'DELETE', 0),
-	(474, 'portfolio', 'UPDATE_RECURRINGDEPOSITPRODUCT_CHECKER', 'RECURRINGDEPOSITPRODUCT', 'UPDATE_CHECKER', 0),
-	(475, 'portfolio', 'DELETE_RECURRINGDEPOSITPRODUCT_CHECKER', 'RECURRINGDEPOSITPRODUCT', 'DELETE_CHECKER', 0),
+	(474, 'portfolio', 'UPDATE_RECURRINGDEPOSITPRODUCT_CHECKER', 'RECURRINGDEPOSITPRODUCT', 'UPDATE', 0),
+	(475, 'portfolio', 'DELETE_RECURRINGDEPOSITPRODUCT_CHECKER', 'RECURRINGDEPOSITPRODUCT', 'DELETE', 0),
 	(476, 'portfolio', 'READ_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'READ', 0),
 	(477, 'portfolio', 'CREATE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'CREATE', 0),
-	(478, 'portfolio', 'CREATE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'CREATE_CHECKER', 0),
+	(478, 'portfolio', 'CREATE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'CREATE', 0),
 	(479, 'portfolio', 'UPDATE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'UPDATE', 0),
-	(480, 'portfolio', 'UPDATE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'UPDATE_CHECKER', 0),
+	(480, 'portfolio', 'UPDATE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'UPDATE', 0),
 	(481, 'portfolio', 'DELETE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'DELETE', 0),
-	(482, 'portfolio', 'DELETE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'DELETE_CHECKER', 0),
+	(482, 'portfolio', 'DELETE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'DELETE', 0),
 	(483, 'transaction_savings', 'DEPOSIT_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'DEPOSIT', 0),
-	(484, 'transaction_savings', 'DEPOSIT_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'DEPOSIT_CHECKER', 0),
+	(484, 'transaction_savings', 'DEPOSIT_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'DEPOSIT', 0),
 	(485, 'transaction_savings', 'WITHDRAWAL_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'WITHDRAWAL', 0),
-	(486, 'transaction_savings', 'WITHDRAWAL_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'WITHDRAWAL_CHECKER', 0),
+	(486, 'transaction_savings', 'WITHDRAWAL_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'WITHDRAWAL', 0),
 	(487, 'transaction_savings', 'ACTIVATE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'ACTIVATE', 0),
-	(488, 'transaction_savings', 'ACTIVATE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'ACTIVATE_CHECKER', 0),
+	(488, 'transaction_savings', 'ACTIVATE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'ACTIVATE', 0),
 	(489, 'transaction_savings', 'CALCULATEINTEREST_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'CALCULATEINTEREST', 0),
-	(490, 'transaction_savings', 'CALCULATEINTEREST_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'CALCULATEINTEREST_CHECKER', 0),
+	(490, 'transaction_savings', 'CALCULATEINTEREST_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'CALCULATEINTEREST', 0),
 	(491, 'transaction_savings', 'POSTINTEREST_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'POSTINTEREST', 1),
-	(492, 'transaction_savings', 'POSTINTEREST_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'POSTINTEREST_CHECKER', 0),
+	(492, 'transaction_savings', 'POSTINTEREST_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'POSTINTEREST', 0),
 	(493, 'transaction_savings', 'APPROVE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'APPROVE', 1),
 	(494, 'transaction_savings', 'REJECT_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'REJECT', 1),
 	(495, 'transaction_savings', 'WITHDRAW_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'WITHDRAW', 1),
 	(496, 'transaction_savings', 'APPROVALUNDO_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'APPROVALUNDO', 1),
 	(497, 'transaction_savings', 'CLOSE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'CLOSE', 1),
-	(498, 'transaction_savings', 'APPROVE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'APPROVE_CHECKER', 0),
-	(499, 'transaction_savings', 'REJECT_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'REJECT_CHECKER', 0),
-	(500, 'transaction_savings', 'WITHDRAW_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'WITHDRAW_CHECKER', 0),
-	(501, 'transaction_savings', 'APPROVALUNDO_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'APPROVALUNDO_CHECKER', 0),
-	(502, 'transaction_savings', 'CLOSE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'CLOSE_CHECKER', 0),
+	(498, 'transaction_savings', 'APPROVE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'APPROVE', 0),
+	(499, 'transaction_savings', 'REJECT_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'REJECT', 0),
+	(500, 'transaction_savings', 'WITHDRAW_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'WITHDRAW', 0),
+	(501, 'transaction_savings', 'APPROVALUNDO_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'APPROVALUNDO', 0),
+	(502, 'transaction_savings', 'CLOSE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'CLOSE', 0),
 	(503, 'transaction_savings', 'UNDOTRANSACTION_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'UNDOTRANSACTION', 1),
-	(504, 'transaction_savings', 'UNDOTRANSACTION_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'UNDOTRANSACTION_CHECKER', 0),
+	(504, 'transaction_savings', 'UNDOTRANSACTION_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'UNDOTRANSACTION', 0),
 	(505, 'transaction_savings', 'ADJUSTTRANSACTION_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'ADJUSTTRANSACTION', 0),
 	(506, 'portfolio', 'READ_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'READ', 0),
 	(507, 'portfolio', 'CREATE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'CREATE', 0),
-	(508, 'portfolio', 'CREATE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'CREATE_CHECKER', 0),
+	(508, 'portfolio', 'CREATE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'CREATE', 0),
 	(509, 'portfolio', 'UPDATE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'UPDATE', 0),
-	(510, 'portfolio', 'UPDATE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'UPDATE_CHECKER', 0),
+	(510, 'portfolio', 'UPDATE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'UPDATE', 0),
 	(511, 'portfolio', 'DELETE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'DELETE', 0),
-	(512, 'portfolio', 'DELETE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'DELETE_CHECKER', 0),
+	(512, 'portfolio', 'DELETE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'DELETE', 0),
 	(513, 'transaction_savings', 'DEPOSIT_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'DEPOSIT', 0),
-	(514, 'transaction_savings', 'DEPOSIT_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'DEPOSIT_CHECKER', 0),
+	(514, 'transaction_savings', 'DEPOSIT_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'DEPOSIT', 0),
 	(515, 'transaction_savings', 'WITHDRAWAL_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'WITHDRAWAL', 0),
-	(516, 'transaction_savings', 'WITHDRAWAL_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'WITHDRAWAL_CHECKER', 0),
+	(516, 'transaction_savings', 'WITHDRAWAL_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'WITHDRAWAL', 0),
 	(517, 'transaction_savings', 'ACTIVATE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'ACTIVATE', 0),
-	(518, 'transaction_savings', 'ACTIVATE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'ACTIVATE_CHECKER', 0),
+	(518, 'transaction_savings', 'ACTIVATE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'ACTIVATE', 0),
 	(519, 'transaction_savings', 'CALCULATEINTEREST_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'CALCULATEINTEREST', 0),
-	(520, 'transaction_savings', 'CALCULATEINTEREST_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'CALCULATEINTEREST_CHECKER', 0),
+	(520, 'transaction_savings', 'CALCULATEINTEREST_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'CALCULATEINTEREST', 0),
 	(521, 'transaction_savings', 'POSTINTEREST_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'POSTINTEREST', 1),
-	(522, 'transaction_savings', 'POSTINTEREST_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'POSTINTEREST_CHECKER', 0),
+	(522, 'transaction_savings', 'POSTINTEREST_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'POSTINTEREST', 0),
 	(523, 'transaction_savings', 'APPROVE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'APPROVE', 1),
 	(524, 'transaction_savings', 'REJECT_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'REJECT', 1),
 	(525, 'transaction_savings', 'WITHDRAW_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'WITHDRAW', 1),
 	(526, 'transaction_savings', 'APPROVALUNDO_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'APPROVALUNDO', 1),
 	(527, 'transaction_savings', 'CLOSE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'CLOSE', 1),
-	(528, 'transaction_savings', 'APPROVE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'APPROVE_CHECKER', 0),
-	(529, 'transaction_savings', 'REJECT_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'REJECT_CHECKER', 0),
-	(530, 'transaction_savings', 'WITHDRAW_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'WITHDRAW_CHECKER', 0),
-	(531, 'transaction_savings', 'APPROVALUNDO_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'APPROVALUNDO_CHECKER', 0),
-	(532, 'transaction_savings', 'CLOSE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'CLOSE_CHECKER', 0),
+	(528, 'transaction_savings', 'APPROVE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'APPROVE', 0),
+	(529, 'transaction_savings', 'REJECT_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'REJECT', 0),
+	(530, 'transaction_savings', 'WITHDRAW_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'WITHDRAW', 0),
+	(531, 'transaction_savings', 'APPROVALUNDO_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'APPROVALUNDO', 0),
+	(532, 'transaction_savings', 'CLOSE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'CLOSE', 0),
 	(533, 'transaction_savings', 'UNDOTRANSACTION_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'UNDOTRANSACTION', 1),
-	(534, 'transaction_savings', 'UNDOTRANSACTION_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'UNDOTRANSACTION_CHECKER', 0),
+	(534, 'transaction_savings', 'UNDOTRANSACTION_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'UNDOTRANSACTION', 0),
 	(535, 'transaction_savings', 'ADJUSTTRANSACTION_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'ADJUSTTRANSACTION', 0),
-	(536, 'transaction_savings', 'PREMATURECLOSE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'PREMATURECLOSE_CHECKER', 0),
+	(536, 'transaction_savings', 'PREMATURECLOSE_FIXEDDEPOSITACCOUNT_CHECKER', 'FIXEDDEPOSITACCOUNT', 'PREMATURECLOSE', 0),
 	(537, 'transaction_savings', 'PREMATURECLOSE_FIXEDDEPOSITACCOUNT', 'FIXEDDEPOSITACCOUNT', 'PREMATURECLOSE', 1),
-	(538, 'transaction_savings', 'PREMATURECLOSE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'PREMATURECLOSE_CHECKER', 0),
+	(538, 'transaction_savings', 'PREMATURECLOSE_RECURRINGDEPOSITACCOUNT_CHECKER', 'RECURRINGDEPOSITACCOUNT', 'PREMATURECLOSE', 0),
 	(539, 'transaction_savings', 'PREMATURECLOSE_RECURRINGDEPOSITACCOUNT', 'RECURRINGDEPOSITACCOUNT', 'PREMATURECLOSE', 1),
-	(540, 'transaction_loan', 'DISBURSETOSAVINGS_LOAN', 'LOAN', 'DISBURSETOSAVINGS', 0),
-	(541, 'transaction_loan', 'RECOVERYPAYMENT_LOAN', 'LOAN', 'RECOVERYPAYMENT', 0),
-	(542, 'organisation', 'READ_RECURRINGDEPOSITPRODUCT', 'RECURRINGDEPOSITPRODUCT', 'READ', 0),
-	(543, 'organisation', 'READ_FIXEDDEPOSITPRODUCT', 'FIXEDDEPOSITPRODUCT', 'READ', 0),
-	(544, 'accounting', 'READ_FINANCIALACTIVITYACCOUNT', 'FINANCIALACTIVITYACCOUNT', 'READ', 0),
-	(545, 'accounting', 'CREATE_FINANCIALACTIVITYACCOUNT', 'FINANCIALACTIVITYACCOUNT', 'CREATE', 0),
-	(546, 'accounting', 'DELETE_FINANCIALACTIVITYACCOUNT', 'FINANCIALACTIVITYACCOUNT', 'DELETE', 0),
-	(547, 'accounting', 'UPDATE_FINANCIALACTIVITYACCOUNT', 'FINANCIALACTIVITYACCOUNT', 'UPDATE', 0),
-	(548, 'datatable', 'UPDATE_LIKELIHOOD', 'likelihood', 'UPDATE', 0),
-	(549, 'survey', 'REGISTER_SURVEY', 'survey', 'CREATE', 0);
+	(540, 'transaction_loan', 'DISBURSETOSAVINGS_LOAN', 'LOAN', 'DISBURSETOSAVINGS', 0);
 /*!40000 ALTER TABLE `m_permission` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_portfolio_account_associations
-DROP TABLE IF EXISTS `m_portfolio_account_associations`;
+-- m_portfolio_account_associations
 CREATE TABLE IF NOT EXISTS `m_portfolio_account_associations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_account_id` bigint(20) DEFAULT NULL,
@@ -2697,14 +2442,12 @@ CREATE TABLE IF NOT EXISTS `m_portfolio_account_associations` (
   CONSTRAINT `linked_savings_fk` FOREIGN KEY (`linked_savings_account_id`) REFERENCES `m_savings_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_portfolio_account_associations: ~0 rows (approximately)
-DELETE FROM `m_portfolio_account_associations`;
+-- m_portfolio_account_associations: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_portfolio_account_associations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_portfolio_account_associations` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_portfolio_command_source
-DROP TABLE IF EXISTS `m_portfolio_command_source`;
+-- m_portfolio_command_source
 CREATE TABLE IF NOT EXISTS `m_portfolio_command_source` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `action_name` varchar(50) NOT NULL,
@@ -2741,21 +2484,19 @@ CREATE TABLE IF NOT EXISTS `m_portfolio_command_source` (
   CONSTRAINT `FK_m_maker_m_appuser` FOREIGN KEY (`maker_id`) REFERENCES `m_appuser` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_portfolio_command_source: ~0 rows (approximately)
-DELETE FROM `m_portfolio_command_source`;
+-- m_portfolio_command_source: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_portfolio_command_source` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_portfolio_command_source` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_product_loan
-DROP TABLE IF EXISTS `m_product_loan`;
+-- m_product_loan
 CREATE TABLE IF NOT EXISTS `m_product_loan` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `short_name` varchar(4) NOT NULL,
   `currency_code` varchar(3) NOT NULL,
   `currency_digits` smallint(5) NOT NULL,
   `currency_multiplesof` smallint(5) DEFAULT NULL,
-  `principal_amount` decimal(19,6) DEFAULT NULL,
+  `principal_amount` decimal(19,6) NOT NULL,
   `min_principal_amount` decimal(19,6) DEFAULT NULL,
   `max_principal_amount` decimal(19,6) DEFAULT NULL,
   `arrearstolerance_amount` decimal(19,6) DEFAULT NULL,
@@ -2800,14 +2541,12 @@ CREATE TABLE IF NOT EXISTS `m_product_loan` (
   CONSTRAINT `FK_ltp_strategy` FOREIGN KEY (`loan_transaction_strategy_id`) REFERENCES `ref_loan_transaction_processing_strategy` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_product_loan: ~0 rows (approximately)
-DELETE FROM `m_product_loan`;
+-- m_product_loan: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_product_loan` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_product_loan` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_product_loan_charge
-DROP TABLE IF EXISTS `m_product_loan_charge`;
+-- m_product_loan_charge
 CREATE TABLE IF NOT EXISTS `m_product_loan_charge` (
   `product_loan_id` bigint(20) NOT NULL,
   `charge_id` bigint(20) NOT NULL,
@@ -2817,14 +2556,12 @@ CREATE TABLE IF NOT EXISTS `m_product_loan_charge` (
   CONSTRAINT `m_product_loan_charge_ibfk_2` FOREIGN KEY (`product_loan_id`) REFERENCES `m_product_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_product_loan_charge: ~0 rows (approximately)
-DELETE FROM `m_product_loan_charge`;
+-- m_product_loan_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_product_loan_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_product_loan_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_product_loan_variations_borrower_cycle
-DROP TABLE IF EXISTS `m_product_loan_variations_borrower_cycle`;
+-- m_product_loan_variations_borrower_cycle
 CREATE TABLE IF NOT EXISTS `m_product_loan_variations_borrower_cycle` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `loan_product_id` bigint(20) NOT NULL DEFAULT '0',
@@ -2839,14 +2576,12 @@ CREATE TABLE IF NOT EXISTS `m_product_loan_variations_borrower_cycle` (
   CONSTRAINT `borrower_cycle_loan_product_FK` FOREIGN KEY (`loan_product_id`) REFERENCES `m_product_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_product_loan_variations_borrower_cycle: ~0 rows (approximately)
-DELETE FROM `m_product_loan_variations_borrower_cycle`;
+-- m_product_loan_variations_borrower_cycle: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_product_loan_variations_borrower_cycle` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_product_loan_variations_borrower_cycle` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_product_mix
-DROP TABLE IF EXISTS `m_product_mix`;
+-- m_product_mix
 CREATE TABLE IF NOT EXISTS `m_product_mix` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) NOT NULL,
@@ -2858,14 +2593,12 @@ CREATE TABLE IF NOT EXISTS `m_product_mix` (
   CONSTRAINT `FK_m_product_mix_product_id_to_m_product_loan` FOREIGN KEY (`product_id`) REFERENCES `m_product_loan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_product_mix: ~0 rows (approximately)
-DELETE FROM `m_product_mix`;
+-- m_product_mix: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_product_mix` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_product_mix` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_role
-DROP TABLE IF EXISTS `m_role`;
+-- m_role
 CREATE TABLE IF NOT EXISTS `m_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -2874,16 +2607,14 @@ CREATE TABLE IF NOT EXISTS `m_role` (
   UNIQUE KEY `unq_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_role: ~1 rows (approximately)
-DELETE FROM `m_role`;
+-- m_role: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_role` DISABLE KEYS */;
 INSERT INTO `m_role` (`id`, `name`, `description`) VALUES
 	(1, 'Super user', 'This role provides all application permissions.');
 /*!40000 ALTER TABLE `m_role` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_role_permission
-DROP TABLE IF EXISTS `m_role_permission`;
+-- m_role_permission
 CREATE TABLE IF NOT EXISTS `m_role_permission` (
   `role_id` bigint(20) NOT NULL,
   `permission_id` bigint(20) NOT NULL,
@@ -2894,16 +2625,14 @@ CREATE TABLE IF NOT EXISTS `m_role_permission` (
   CONSTRAINT `FK8DEDB04815CEC7AB` FOREIGN KEY (`role_id`) REFERENCES `m_role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_role_permission: ~1 rows (approximately)
-DELETE FROM `m_role_permission`;
+-- m_role_permission: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_role_permission` DISABLE KEYS */;
 INSERT INTO `m_role_permission` (`role_id`, `permission_id`) VALUES
 	(1, 1);
 /*!40000 ALTER TABLE `m_role_permission` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_account
-DROP TABLE IF EXISTS `m_savings_account`;
+-- m_savings_account
 CREATE TABLE IF NOT EXISTS `m_savings_account` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_no` varchar(20) NOT NULL,
@@ -2951,9 +2680,6 @@ CREATE TABLE IF NOT EXISTS `m_savings_account` (
   `total_interest_earned_derived` decimal(19,6) DEFAULT NULL,
   `total_interest_posted_derived` decimal(19,6) DEFAULT NULL,
   `account_balance_derived` decimal(19,6) NOT NULL DEFAULT '0.000000',
-  `min_required_balance` decimal(19,6) DEFAULT NULL,
-  `enforce_min_required_balance` tinyint(1) NOT NULL DEFAULT '0',
-  `min_balance_for_interest_calculation` decimal(19,6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sa_account_no_UNIQUE` (`account_no`),
   UNIQUE KEY `sa_externalid_UNIQUE` (`external_id`),
@@ -2965,14 +2691,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_account` (
   CONSTRAINT `FKSA00000000000003` FOREIGN KEY (`product_id`) REFERENCES `m_savings_product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_account: ~0 rows (approximately)
-DELETE FROM `m_savings_account`;
+-- m_savings_account: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_account` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_account` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_account_charge
-DROP TABLE IF EXISTS `m_savings_account_charge`;
+-- m_savings_account_charge
 CREATE TABLE IF NOT EXISTS `m_savings_account_charge` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_id` bigint(20) NOT NULL,
@@ -3001,14 +2725,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_account_charge` (
   CONSTRAINT `m_savings_account_charge_ibfk_2` FOREIGN KEY (`savings_account_id`) REFERENCES `m_savings_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_account_charge: ~0 rows (approximately)
-DELETE FROM `m_savings_account_charge`;
+-- m_savings_account_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_account_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_account_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_account_charge_paid_by
-DROP TABLE IF EXISTS `m_savings_account_charge_paid_by`;
+-- m_savings_account_charge_paid_by
 CREATE TABLE IF NOT EXISTS `m_savings_account_charge_paid_by` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_transaction_id` bigint(20) NOT NULL,
@@ -3021,14 +2743,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_account_charge_paid_by` (
   CONSTRAINT `FK__m_savings_account_transaction` FOREIGN KEY (`savings_account_transaction_id`) REFERENCES `m_savings_account_transaction` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_account_charge_paid_by: ~0 rows (approximately)
-DELETE FROM `m_savings_account_charge_paid_by`;
+-- m_savings_account_charge_paid_by: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_account_charge_paid_by` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_account_charge_paid_by` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_account_interest_rate_chart
-DROP TABLE IF EXISTS `m_savings_account_interest_rate_chart`;
+-- m_savings_account_interest_rate_chart
 CREATE TABLE IF NOT EXISTS `m_savings_account_interest_rate_chart` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_id` bigint(20) NOT NULL,
@@ -3041,14 +2761,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_account_interest_rate_chart` (
   CONSTRAINT `FKSAIRC00000000000001` FOREIGN KEY (`savings_account_id`) REFERENCES `m_savings_account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_account_interest_rate_chart: ~0 rows (approximately)
-DELETE FROM `m_savings_account_interest_rate_chart`;
+-- m_savings_account_interest_rate_chart: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_account_interest_rate_chart` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_account_interest_rate_chart` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_account_interest_rate_slab
-DROP TABLE IF EXISTS `m_savings_account_interest_rate_slab`;
+-- m_savings_account_interest_rate_slab
 CREATE TABLE IF NOT EXISTS `m_savings_account_interest_rate_slab` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_interest_rate_chart_id` bigint(20) NOT NULL,
@@ -3065,14 +2783,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_account_interest_rate_slab` (
   CONSTRAINT `FKSAIRS00000000000001` FOREIGN KEY (`savings_account_interest_rate_chart_id`) REFERENCES `m_savings_account_interest_rate_chart` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_account_interest_rate_slab: ~0 rows (approximately)
-DELETE FROM `m_savings_account_interest_rate_slab`;
+-- m_savings_account_interest_rate_slab: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_account_interest_rate_slab` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_account_interest_rate_slab` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_account_transaction
-DROP TABLE IF EXISTS `m_savings_account_transaction`;
+-- m_savings_account_transaction
 CREATE TABLE IF NOT EXISTS `m_savings_account_transaction` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `savings_account_id` bigint(20) NOT NULL,
@@ -3097,36 +2813,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_account_transaction` (
   CONSTRAINT `FK_m_savings_account_transaction_m_payment_detail` FOREIGN KEY (`payment_detail_id`) REFERENCES `m_payment_detail` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_account_transaction: ~0 rows (approximately)
-DELETE FROM `m_savings_account_transaction`;
+-- m_savings_account_transaction: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_account_transaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_account_transaction` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_interest_incentives
-DROP TABLE IF EXISTS `m_savings_interest_incentives`;
-CREATE TABLE IF NOT EXISTS `m_savings_interest_incentives` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `deposit_account_interest_rate_slab_id` bigint(20) NOT NULL,
-  `entiry_type` smallint(2) NOT NULL,
-  `attribute_name` smallint(2) NOT NULL,
-  `condition_type` smallint(2) NOT NULL,
-  `attribute_value` varchar(50) NOT NULL,
-  `incentive_type` smallint(2) NOT NULL,
-  `amount` decimal(19,6) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_m_savings_interest_incentives_m_savings_interest_rate_slab` (`deposit_account_interest_rate_slab_id`),
-  CONSTRAINT `FK_m_savings_interest_incentives_m_savings_interest_rate_slab` FOREIGN KEY (`deposit_account_interest_rate_slab_id`) REFERENCES `m_savings_account_interest_rate_slab` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.m_savings_interest_incentives: ~0 rows (approximately)
-DELETE FROM `m_savings_interest_incentives`;
-/*!40000 ALTER TABLE `m_savings_interest_incentives` DISABLE KEYS */;
-/*!40000 ALTER TABLE `m_savings_interest_incentives` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.m_savings_product
-DROP TABLE IF EXISTS `m_savings_product`;
+-- m_savings_product
 CREATE TABLE IF NOT EXISTS `m_savings_product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -3150,22 +2842,17 @@ CREATE TABLE IF NOT EXISTS `m_savings_product` (
   `withdrawal_fee_for_transfer` tinyint(4) DEFAULT '1',
   `allow_overdraft` tinyint(1) NOT NULL DEFAULT '0',
   `overdraft_limit` decimal(19,6) DEFAULT NULL,
-  `min_required_balance` decimal(19,6) DEFAULT NULL,
-  `enforce_min_required_balance` tinyint(1) NOT NULL DEFAULT '0',
-  `min_balance_for_interest_calculation` decimal(19,6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sp_unq_name` (`name`),
   UNIQUE KEY `sp_unq_short_name` (`short_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_product: ~0 rows (approximately)
-DELETE FROM `m_savings_product`;
+-- m_savings_product: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_product` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_product` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_savings_product_charge
-DROP TABLE IF EXISTS `m_savings_product_charge`;
+-- m_savings_product_charge
 CREATE TABLE IF NOT EXISTS `m_savings_product_charge` (
   `savings_product_id` bigint(20) NOT NULL,
   `charge_id` bigint(20) NOT NULL,
@@ -3175,14 +2862,12 @@ CREATE TABLE IF NOT EXISTS `m_savings_product_charge` (
   CONSTRAINT `m_savings_product_charge_ibfk_2` FOREIGN KEY (`savings_product_id`) REFERENCES `m_savings_product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_savings_product_charge: ~0 rows (approximately)
-DELETE FROM `m_savings_product_charge`;
+-- m_savings_product_charge: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_savings_product_charge` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_savings_product_charge` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_staff
-DROP TABLE IF EXISTS `m_staff`;
+-- m_staff
 CREATE TABLE IF NOT EXISTS `m_staff` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `is_loan_officer` tinyint(1) NOT NULL DEFAULT '0',
@@ -3203,14 +2888,12 @@ CREATE TABLE IF NOT EXISTS `m_staff` (
   CONSTRAINT `FK_m_staff_m_office` FOREIGN KEY (`office_id`) REFERENCES `m_office` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_staff: ~0 rows (approximately)
-DELETE FROM `m_staff`;
+-- m_staff: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_staff` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_staff` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_template
-DROP TABLE IF EXISTS `m_template`;
+-- m_template
 CREATE TABLE IF NOT EXISTS `m_template` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -3221,14 +2904,12 @@ CREATE TABLE IF NOT EXISTS `m_template` (
   UNIQUE KEY `unq_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_template: ~0 rows (approximately)
-DELETE FROM `m_template`;
+-- m_template: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_template` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_template` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_templatemappers
-DROP TABLE IF EXISTS `m_templatemappers`;
+-- m_templatemappers
 CREATE TABLE IF NOT EXISTS `m_templatemappers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `mapperkey` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -3237,14 +2918,12 @@ CREATE TABLE IF NOT EXISTS `m_templatemappers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_templatemappers: ~0 rows (approximately)
-DELETE FROM `m_templatemappers`;
+-- m_templatemappers: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_templatemappers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_templatemappers` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_template_m_templatemappers
-DROP TABLE IF EXISTS `m_template_m_templatemappers`;
+-- m_template_m_templatemappers
 CREATE TABLE IF NOT EXISTS `m_template_m_templatemappers` (
   `m_template_id` bigint(20) NOT NULL,
   `mappers_id` bigint(20) NOT NULL,
@@ -3253,14 +2932,12 @@ CREATE TABLE IF NOT EXISTS `m_template_m_templatemappers` (
   KEY `m_template_id` (`m_template_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_template_m_templatemappers: ~0 rows (approximately)
-DELETE FROM `m_template_m_templatemappers`;
+-- m_template_m_templatemappers: ~0 rows (approximately)
 /*!40000 ALTER TABLE `m_template_m_templatemappers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `m_template_m_templatemappers` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.m_working_days
-DROP TABLE IF EXISTS `m_working_days`;
+-- m_working_days
 CREATE TABLE IF NOT EXISTS `m_working_days` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `recurrence` varchar(100) DEFAULT NULL,
@@ -3268,83 +2945,14 @@ CREATE TABLE IF NOT EXISTS `m_working_days` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.m_working_days: ~1 rows (approximately)
-DELETE FROM `m_working_days`;
+-- m_working_days: ~1 rows (approximately)
 /*!40000 ALTER TABLE `m_working_days` DISABLE KEYS */;
 INSERT INTO `m_working_days` (`id`, `recurrence`, `repayment_rescheduling_enum`) VALUES
 	(1, 'FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,TU,WE,TH,FR,SA,SU', 2);
 /*!40000 ALTER TABLE `m_working_days` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.ppi_likelihoods
-DROP TABLE IF EXISTS `ppi_likelihoods`;
-CREATE TABLE IF NOT EXISTS `ppi_likelihoods` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code` varchar(100) NOT NULL,
-  `name` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.ppi_likelihoods: ~0 rows (approximately)
-DELETE FROM `ppi_likelihoods`;
-/*!40000 ALTER TABLE `ppi_likelihoods` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ppi_likelihoods` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.ppi_likelihoods_ppi
-DROP TABLE IF EXISTS `ppi_likelihoods_ppi`;
-CREATE TABLE IF NOT EXISTS `ppi_likelihoods_ppi` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `likelihood_id` bigint(20) NOT NULL,
-  `ppi_name` varchar(250) NOT NULL,
-  `enabled` int(11) NOT NULL DEFAULT '100',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.ppi_likelihoods_ppi: ~0 rows (approximately)
-DELETE FROM `ppi_likelihoods_ppi`;
-/*!40000 ALTER TABLE `ppi_likelihoods_ppi` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ppi_likelihoods_ppi` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.ppi_scores
-DROP TABLE IF EXISTS `ppi_scores`;
-CREATE TABLE IF NOT EXISTS `ppi_scores` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `score_from` int(11) NOT NULL,
-  `score_to` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
--- Dumping data for table samuelx.ppi_scores: ~20 rows (approximately)
-DELETE FROM `ppi_scores`;
-/*!40000 ALTER TABLE `ppi_scores` DISABLE KEYS */;
-INSERT INTO `ppi_scores` (`id`, `score_from`, `score_to`) VALUES
-	(1, 0, 4),
-	(2, 5, 9),
-	(3, 10, 14),
-	(4, 15, 19),
-	(5, 20, 24),
-	(6, 25, 29),
-	(7, 30, 34),
-	(8, 35, 39),
-	(9, 40, 44),
-	(10, 45, 49),
-	(11, 50, 54),
-	(12, 55, 59),
-	(13, 60, 64),
-	(14, 65, 69),
-	(15, 70, 74),
-	(16, 75, 79),
-	(17, 80, 84),
-	(18, 85, 89),
-	(19, 90, 94),
-	(20, 95, 100);
-/*!40000 ALTER TABLE `ppi_scores` ENABLE KEYS */;
-
-
--- Dumping structure for table samuelx.ref_loan_transaction_processing_strategy
-DROP TABLE IF EXISTS `ref_loan_transaction_processing_strategy`;
+-- ref_loan_transaction_processing_strategy
 CREATE TABLE IF NOT EXISTS `ref_loan_transaction_processing_strategy` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(100) DEFAULT NULL,
@@ -3353,8 +2961,7 @@ CREATE TABLE IF NOT EXISTS `ref_loan_transaction_processing_strategy` (
   UNIQUE KEY `ltp_strategy_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.ref_loan_transaction_processing_strategy: ~7 rows (approximately)
-DELETE FROM `ref_loan_transaction_processing_strategy`;
+-- ref_loan_transaction_processing_strategy: ~7 rows (approximately)
 /*!40000 ALTER TABLE `ref_loan_transaction_processing_strategy` DISABLE KEYS */;
 INSERT INTO `ref_loan_transaction_processing_strategy` (`id`, `code`, `name`) VALUES
 	(1, 'mifos-standard-strategy', 'Mifos style'),
@@ -3367,21 +2974,18 @@ INSERT INTO `ref_loan_transaction_processing_strategy` (`id`, `code`, `name`) VA
 /*!40000 ALTER TABLE `ref_loan_transaction_processing_strategy` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.rpt_sequence
-DROP TABLE IF EXISTS `rpt_sequence`;
+-- rpt_sequence
 CREATE TABLE IF NOT EXISTS `rpt_sequence` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.rpt_sequence: ~0 rows (approximately)
-DELETE FROM `rpt_sequence`;
+-- rpt_sequence: ~0 rows (approximately)
 /*!40000 ALTER TABLE `rpt_sequence` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rpt_sequence` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.r_enum_value
-DROP TABLE IF EXISTS `r_enum_value`;
+-- r_enum_value
 CREATE TABLE IF NOT EXISTS `r_enum_value` (
   `enum_name` varchar(100) NOT NULL,
   `enum_id` int(11) NOT NULL,
@@ -3393,8 +2997,7 @@ CREATE TABLE IF NOT EXISTS `r_enum_value` (
   UNIQUE KEY `enum_value` (`enum_name`,`enum_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.r_enum_value: ~61 rows (approximately)
-DELETE FROM `r_enum_value`;
+-- r_enum_value: ~61 rows (approximately)
 /*!40000 ALTER TABLE `r_enum_value` DISABLE KEYS */;
 INSERT INTO `r_enum_value` (`enum_name`, `enum_id`, `enum_message_property`, `enum_value`, `enum_type`) VALUES
 	('amortization_method_enum', 0, 'Equal principle payments', 'Equal principle payments', 0),
@@ -3461,8 +3064,7 @@ INSERT INTO `r_enum_value` (`enum_name`, `enum_id`, `enum_message_property`, `en
 /*!40000 ALTER TABLE `r_enum_value` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.scheduler_detail
-DROP TABLE IF EXISTS `scheduler_detail`;
+-- scheduler_detail
 CREATE TABLE IF NOT EXISTS `scheduler_detail` (
   `id` smallint(2) NOT NULL AUTO_INCREMENT,
   `is_suspended` tinyint(1) NOT NULL DEFAULT '0',
@@ -3471,16 +3073,14 @@ CREATE TABLE IF NOT EXISTS `scheduler_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.scheduler_detail: ~1 rows (approximately)
-DELETE FROM `scheduler_detail`;
+-- scheduler_detail: ~1 rows (approximately)
 /*!40000 ALTER TABLE `scheduler_detail` DISABLE KEYS */;
 INSERT INTO `scheduler_detail` (`id`, `is_suspended`, `execute_misfired_jobs`, `reset_scheduler_on_bootup`) VALUES
 	(1, 0, 1, 1);
 /*!40000 ALTER TABLE `scheduler_detail` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.schema_version
-DROP TABLE IF EXISTS `schema_version`;
+-- schema_version
 CREATE TABLE IF NOT EXISTS `schema_version` (
   `version_rank` int(11) NOT NULL,
   `installed_rank` int(11) NOT NULL,
@@ -3497,214 +3097,193 @@ CREATE TABLE IF NOT EXISTS `schema_version` (
   KEY `schema_version_vr_idx` (`version_rank`),
   KEY `schema_version_ir_idx` (`installed_rank`),
   KEY `schema_version_s_idx` (`success`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table samuelx.schema_version: ~217 rows (approximately)
-DELETE FROM `schema_version`;
+-- schema_version: ~217 rows (approximately)
 /*!40000 ALTER TABLE `schema_version` DISABLE KEYS */;
 INSERT INTO `schema_version` (`version_rank`, `installed_rank`, `version`, `description`, `type`, `script`, `checksum`, `installed_by`, `installed_on`, `execution_time`, `success`) VALUES
-	(1, 1, '1', 'mifosplatform-core-ddl-latest', 'SQL', 'V1__mifosplatform-core-ddl-latest.sql', -1957145051, 'root', '2014-12-05 12:19:58', 3168, 1),
-	(10, 10, '10', 'interest-posting-fields-for-savings', 'SQL', 'V10__interest-posting-fields-for-savings.sql', -1133853485, 'root', '2014-12-05 12:20:01', 155, 1),
-	(100, 100, '100', 'Group saving summary report', 'SQL', 'V100__Group_saving_summary_report.sql', -1635399448, 'root', '2014-12-05 12:20:14', 3, 1),
-	(101, 101, '101', 'add mulitplesof to account transfers table', 'SQL', 'V101__add_mulitplesof_to_account_transfers_table.sql', -1162976022, 'root', '2014-12-05 12:20:15', 196, 1),
-	(102, 102, '102', 'client attendance tables', 'SQL', 'V102__client_attendance_tables.sql', -45448019, 'root', '2014-12-05 12:20:15', 168, 1),
-	(103, 103, '103', 'cluster support for batch jobs', 'SQL', 'V103__cluster_support_for_batch_jobs.sql', -781879007, 'root', '2014-12-05 12:20:15', 168, 1),
-	(104, 104, '104', 'permissions for transfers', 'SQL', 'V104__permissions_for_transfers.sql', 653895919, 'root', '2014-12-05 12:20:15', 9, 1),
-	(105, 105, '105', 'track loan transaction against office', 'SQL', 'V105__track_loan_transaction_against_office.sql', 785650440, 'root', '2014-12-05 12:20:15', 311, 1),
-	(106, 106, '106', 'more permissions for transfers', 'SQL', 'V106__more_permissions_for_transfers.sql', -1132691133, 'root', '2014-12-05 12:20:16', 16, 1),
-	(107, 107, '107', 'datatable code mappings', 'SQL', 'V107__datatable_code_mappings.sql', 630737271, 'root', '2014-12-05 12:20:16', 37, 1),
-	(108, 108, '108', 'client has transfer office', 'SQL', 'V108__client_has_transfer_office.sql', -1748734810, 'root', '2014-12-05 12:20:16', 64, 1),
-	(109, 109, '109', 'account transfer withdrawal fee configuration', 'SQL', 'V109__account_transfer_withdrawal_fee_configuration.sql', -754569033, 'root', '2014-12-05 12:20:16', 118, 1),
-	(11, 11, '11', 'add-payment-details', 'SQL', 'V11__add-payment-details.sql', 391380768, 'root', '2014-12-05 12:20:01', 51, 1),
-	(110, 110, '110', 'group center close', 'SQL', 'V110__group_center_close.sql', -1261775365, 'root', '2014-12-05 12:20:16', 33, 1),
-	(111, 111, '111', 'disable constraint approach for datatables by default', 'SQL', 'V111__disable_constraint_approach_for_datatables_by_default.sql', 2058257907, 'root', '2014-12-05 12:20:16', 3, 1),
-	(112, 112, '111.1', 'set default transfers in suspense account for existing loan products', 'SQL', 'V111_1__set default_transfers_in_suspense_account_for_existing_loan_products.sql', 1907173791, 'root', '2014-12-05 12:20:16', 2, 1),
-	(113, 113, '112', 'mixreport sql support', 'SQL', 'V112__mixreport_sql_support.sql', 1254859560, 'root', '2014-12-05 12:20:16', 96, 1),
-	(114, 114, '113', 'track savings transaction against office', 'SQL', 'V113__track_savings_transaction_against_office.sql', -1390529632, 'root', '2014-12-05 12:20:17', 332, 1),
-	(115, 115, '114', 'set default transfers in suspense account for existing savings products - Copy', 'SQL', 'V114__set_default_transfers_in_suspense_account_for_existing_savings_products - Copy.sql', 1518369372, 'root', '2014-12-05 12:20:17', 3, 1),
-	(116, 116, '115', 'permissions for cache api', 'SQL', 'V115__permissions_for_cache_api.sql', 156437687, 'root', '2014-12-05 12:20:17', 14, 1),
-	(117, 117, '116', 'track currency for journal entries', 'SQL', 'V116__track_currency_for_journal_entries.sql', 1109139399, 'root', '2014-12-05 12:20:17', 167, 1),
-	(118, 118, '117', 'loan charge from savings', 'SQL', 'V117__loan_charge_from_savings.sql', 13633826, 'root', '2014-12-05 12:20:17', 180, 1),
-	(119, 119, '118', 'savings charge', 'SQL', 'V118__savings_charge.sql', 899101813, 'root', '2014-12-05 12:20:17', 172, 1),
-	(120, 120, '118.1', 'savings charge patch update', 'SQL', 'V118_1__savings_charge_patch_update.sql', 426133125, 'root', '2014-12-05 12:20:17', 109, 1),
-	(121, 121, '118.2', 'product mapping delete duplicate fund source to account mappings', 'SQL', 'V118_2__product_mapping_delete_duplicate_fund_source_to_account_mappings.sql', 139468093, 'root', '2014-12-05 12:20:17', 28, 1),
-	(122, 122, '118.3', 'permissions form propose and accept client transfers', 'SQL', 'V118_3__permissions_form_propose_and_accept_client_transfers.sql', 602708322, 'root', '2014-12-05 12:20:18', 3, 1),
-	(123, 123, '118.4', 'reset default transfers in suspense account for existing savings products', 'SQL', 'V118_4__reset_default_transfers_in_suspense_account_for_existing_savings_products.sql', 1246865828, 'root', '2014-12-05 12:20:18', 3, 1),
-	(124, 124, '118.5', 'batch job entry for pay savings charge', 'SQL', 'V118_5__batch_job_entry_for_pay_savings_charge.sql', -1477017272, 'root', '2014-12-05 12:20:18', 2, 1),
-	(125, 125, '118.6', 'defaults for income from penalties for savings product', 'SQL', 'V118_6__defaults_for_income_from_penalties_for savings_product.sql', 255024118, 'root', '2014-12-05 12:20:18', 2, 1),
-	(126, 126, '118.7', 'move withdrawal annual fee to charges', 'SQL', 'V118_7__move_withdrawal_annual_fee_to_charges.sql', 480656720, 'root', '2014-12-05 12:20:18', 286, 1),
-	(127, 127, '118.8', 'track overpayments seperately in loan transactions', 'SQL', 'V118_8__track_overpayments_seperately_in_loan_transactions.sql', 1684107411, 'root', '2014-12-05 12:20:18', 45, 1),
-	(128, 128, '119', 'add template table', 'SQL', 'V119__add_template_table.sql', 1524629249, 'root', '2014-12-05 12:20:18', 74, 1),
-	(12, 12, '12', 'add external id to couple of tables', 'SQL', 'V12__add_external_id_to_couple_of_tables.sql', 371833586, 'root', '2014-12-05 12:20:01', 260, 1),
-	(129, 129, '120', 'accounting running balance', 'SQL', 'V120__accounting_running_balance.sql', 746738547, 'root', '2014-12-05 12:20:18', 46, 1),
-	(130, 130, '121', 'accounting running balance for organization', 'SQL', 'V121__accounting_running_balance_for_organization.sql', 1907762382, 'root', '2014-12-05 12:20:18', 61, 1),
-	(131, 131, '122', 'recurring fee support for savings', 'SQL', 'V122__recurring_fee_support_for_savings.sql', -1538770236, 'root', '2014-12-05 12:20:19', 129, 1),
-	(132, 132, '123', 'remove payment mode for savings', 'SQL', 'V123__remove_payment_mode_for_savings.sql', 1909778922, 'root', '2014-12-05 12:20:19', 62, 1),
-	(133, 133, '124', 'added min max cap for charges', 'SQL', 'V124__added_min_max_cap_for_charges.sql', -1996899270, 'root', '2014-12-05 12:20:19', 106, 1),
-	(134, 134, '125', 'added column for actual fee amount or percentage', 'SQL', 'V125__added_column_for_actual_fee_amount_or_percentage.sql', -87760502, 'root', '2014-12-05 12:20:19', 34, 1),
-	(135, 135, '126', 'initial database structure for sms outbound', 'SQL', 'V126__initial_database_structure_for_sms_outbound.sql', -586195149, 'root', '2014-12-05 12:20:19', 43, 1),
-	(136, 136, '127', 'mobile no fields', 'SQL', 'V127__mobile_no_fields.sql', -659228285, 'root', '2014-12-05 12:20:19', 150, 1),
-	(137, 137, '128', 'added loan installment charge', 'SQL', 'V128__added_loan_installment_charge.sql', -1983585024, 'root', '2014-12-05 12:20:19', 86, 1),
-	(138, 138, '129', 'client and group timeline', 'SQL', 'V129__client_and_group_timeline.sql', -1671377251, 'root', '2014-12-05 12:20:20', 319, 1),
-	(13, 13, '13', 'add group and client pending configuration', 'SQL', 'V13__add_group_and_client_pending_configuration.sql', 145878397, 'root', '2014-12-05 12:20:01', 14, 1),
-	(139, 139, '130', 'calendar-history-table', 'SQL', 'V130__calendar-history-table.sql', -475045678, 'root', '2014-12-05 12:20:20', 50, 1),
-	(140, 140, '131', 'holiday-status-column-and-permissions', 'SQL', 'V131__holiday-status-column-and-permissions.sql', -1387001593, 'root', '2014-12-05 12:20:20', 182, 1),
-	(141, 141, '132', 'borrower cycle changes', 'SQL', 'V132__borrower_cycle_changes.sql', -355052428, 'root', '2014-12-05 12:20:20', 172, 1),
-	(142, 142, '133', 'adding payment detail with journal entry', 'SQL', 'V133__adding_payment_detail_with_journal_entry.sql', 1975659943, 'root', '2014-12-05 12:20:20', 225, 1),
-	(143, 143, '134', 'added column value on c configuration', 'SQL', 'V134__added_column_value_on_c_configuration.sql', -30626232, 'root', '2014-12-05 12:20:21', 53, 1),
-	(144, 144, '134.1', 'submitted date updation for clients', 'SQL', 'V134_1__submitted_date_updation_for_clients.sql', 184599342, 'root', '2014-12-05 12:20:21', 3, 1),
-	(145, 145, '134.2', 'permissions spelling correction', 'SQL', 'V134_2__permissions_spelling_correction.sql', 996960341, 'root', '2014-12-05 12:20:21', 3, 1),
-	(146, 146, '135', 'added permission for undo written off', 'SQL', 'V135__added_permission_for_undo_written_off.sql', 1414936537, 'root', '2014-12-05 12:20:21', 6, 1),
-	(147, 147, '136.1', 'update script strechy parameter', 'SQL', 'V136_1__update_script_strechy_parameter.sql', 633461657, 'root', '2014-12-05 12:20:21', 13, 1),
-	(148, 148, '137', 'added is active column in m staff', 'SQL', 'V137__added_is_active_column_in_m_staff.sql', 1962782431, 'root', '2014-12-05 12:20:21', 154, 1),
-	(149, 149, '138', 'add short name for m product loan and m savings product', 'SQL', 'V138__add_short_name_for_m_product_loan_and_m_savings_product.sql', -1526828084, 'root', '2014-12-05 12:20:21', 489, 1),
-	(150, 150, '139', 'default value for is active updated to true in m staff', 'SQL', 'V139__default_value_for_is_active_updated_to_true_in_m_staff.sql', 844329308, 'root', '2014-12-05 12:20:22', 79, 1),
-	(14, 14, '14', 'rename status id to enum', 'SQL', 'V14__rename_status_id_to_enum.sql', 1958382098, 'root', '2014-12-05 12:20:01', 182, 1),
-	(151, 151, '140', 'added loan charge status', 'SQL', 'V140__added_loan_charge_status.sql', 1209971905, 'root', '2014-12-05 12:20:22', 94, 1),
-	(152, 152, '140.1', 'added payment detail id in ac gl journal entry', 'SQL', 'V140_1__added_payment_detail_id_in_ac_gl_journal_entry.sql', -214253481, 'root', '2014-12-05 12:20:22', 159, 1),
-	(153, 153, '141', 'add early repayment strategy', 'SQL', 'V141__add_early_repayment_strategy.sql', 401969634, 'root', '2014-12-05 12:20:22', 3, 1),
-	(154, 154, '142', 'read savingsaccount charge permission', 'SQL', 'V142__read_savingsaccount_charge_permission.sql', -1798083956, 'root', '2014-12-05 12:20:22', 4, 1),
-	(155, 155, '143', 'create journalentry checker permission', 'SQL', 'V143__create_journalentry_checker_permission.sql', 227507002, 'root', '2014-12-05 12:20:22', 3, 1),
-	(156, 156, '144', 'spelling mistake corrections', 'SQL', 'V144__spelling_mistake_corrections.sql', -778391100, 'root', '2014-12-05 12:20:22', 169, 1),
-	(157, 157, '145', 'add force password reset in c configuration', 'SQL', 'V145__add_force_password_reset_in_c_configuration.sql', -662441756, 'root', '2014-12-05 12:20:22', 219, 1),
-	(158, 158, '146', 'tranche loans', 'SQL', 'V146__tranche_loans.sql', 989126672, 'root', '2014-12-05 12:20:23', 198, 1),
-	(159, 159, '147', 'tranche loans column name changes', 'SQL', 'V147__tranche_loans_column_name_changes.sql', -533159256, 'root', '2014-12-05 12:20:23', 117, 1),
-	(160, 160, '148', 'overdraft changes', 'SQL', 'V148__overdraft_changes.sql', -1470217992, 'root', '2014-12-05 12:20:23', 177, 1),
-	(161, 161, '149', 'add created date savings transaction', 'SQL', 'V149__add_created_date_savings_transaction.sql', 137884095, 'root', '2014-12-05 12:20:23', 65, 1),
-	(15, 15, '15', 'center permissions', 'SQL', 'V15__center_permissions.sql', 1124247014, 'root', '2014-12-05 12:20:01', 10, 1),
-	(162, 162, '150', 'basic savings report', 'SQL', 'V150__basic_savings_report.sql', 2133891313, 'root', '2014-12-05 12:20:23', 54, 1),
-	(163, 163, '151', 'add default savings account to client', 'SQL', 'V151__add_default_savings_account_to_client.sql', -2012873976, 'root', '2014-12-05 12:20:23', 56, 1),
-	(164, 164, '152', 'added grace for over due', 'SQL', 'V152__added_grace_for_over_due.sql', 1917777205, 'root', '2014-12-05 12:20:24', 151, 1),
-	(165, 165, '153', 'Insert missed permissions', 'SQL', 'V153__Insert_missed_permissions.sql', -1693091937, 'root', '2014-12-05 12:20:24', 5, 1),
-	(166, 166, '154', 'aging details', 'SQL', 'V154__aging_details.sql', 1117759702, 'root', '2014-12-05 12:20:24', 13, 1),
-	(167, 167, '155', 'stretchy into pentaho', 'SQL', 'V155__stretchy_into_pentaho.sql', -1836158085, 'root', '2014-12-05 12:20:24', 86, 1),
-	(168, 168, '156', 'added loan saving txns pentaho', 'SQL', 'V156__added_loan_saving_txns_pentaho.sql', 1942570756, 'root', '2014-12-05 12:20:24', 15, 1),
-	(169, 169, '157', 'overdue charge improvements', 'SQL', 'V157__overdue_charge_improvements.sql', -1267720651, 'root', '2014-12-05 12:20:24', 199, 1),
-	(170, 170, '158', 'dashboard and navigation queries', 'SQL', 'V158__dashboard_and_navigation_queries.sql', -265915721, 'root', '2014-12-05 12:20:24', 14, 1),
-	(171, 171, '159', 'add transaction id column m portfolio command source', 'SQL', 'V159__add_transaction_id_column_m_portfolio_command_source.sql', -1834626647, 'root', '2014-12-05 12:20:24', 48, 1),
-	(16, 16, '16', 'drop min max column on loan table', 'SQL', 'V16__drop_min_max_column_on_loan_table.sql', -1497882087, 'root', '2014-12-05 12:20:01', 145, 1),
-	(172, 172, '160', 'standing instruction changes', 'SQL', 'V160__standing_instruction_changes.sql', -2130923257, 'root', '2014-12-05 12:20:25', 319, 1),
-	(173, 173, '160.2', 'Allow nullValue For principal on lonProduct', 'SQL', 'V160_2__Allow_nullValue_For_principal_on_lonProduct.sql', 844844635, 'root', '2014-12-05 12:20:25', 43, 1),
-	(174, 174, '161', 'added accrual batch job', 'SQL', 'V161__added_accrual_batch_job.sql', -1558441026, 'root', '2014-12-05 12:20:25', 61, 1),
-	(175, 175, '162', 'overdue charge batch job', 'SQL', 'V162__overdue_charge_batch_job.sql', -1213828784, 'root', '2014-12-05 12:20:25', 3, 1),
-	(176, 176, '163', 'added npa for loans', 'SQL', 'V163__added_npa_for_loans.sql', -381581272, 'root', '2014-12-05 12:20:25', 137, 1),
-	(177, 177, '164', 'fd and rd deposit tables', 'SQL', 'V164__fd_and_rd_deposit_tables.sql', -489803231, 'root', '2014-12-05 12:20:26', 585, 1),
-	(178, 178, '165', 'added permission for disburse to saving account', 'SQL', 'V165__added_permission_for_disburse_to_saving_account.sql', -2109143723, 'root', '2014-12-05 12:20:26', 2, 1),
-	(179, 179, '166', 'added deposit amount to product term and preclosure', 'SQL', 'V166__added_deposit_amount_to_product_term_and_preclosure.sql', -2068527520, 'root', '2014-12-05 12:20:26', 192, 1),
-	(180, 180, '167', 'added columns for writtenOff loans recovered', 'SQL', 'V167__added_columns_for_writtenOff_loans_recovered.sql', -901133645, 'root', '2014-12-05 12:20:26', 232, 1),
-	(181, 181, '168', 'added transfer fixed deposit interest to linked account', 'SQL', 'V168__added_transfer_fixed_deposit_interest_to_linked_account.sql', 1513454871, 'root', '2014-12-05 12:20:26', 104, 1),
-	(182, 182, '169', 'update dashboard reports to core reports use report to false', 'SQL', 'V169__update_dashboard_reports_to_core_reports_use_report_to_false.sql', 1910199831, 'root', '2014-12-05 12:20:26', 28, 1),
-	(17, 17, '17', 'update stretchy reporting ddl', 'SQL', 'V17__update_stretchy_reporting_ddl.sql', 2040068410, 'root', '2014-12-05 12:20:02', 317, 1),
-	(183, 183, '170', 'update deposit accounts maturity details job', 'SQL', 'V170__update_deposit_accounts_maturity_details_job.sql', 348328732, 'root', '2014-12-05 12:20:26', 7, 1),
-	(184, 184, '171', 'added mandatory savings and rd changes', 'SQL', 'V171__added_mandatory_savings_and_rd_changes.sql', -219494664, 'root', '2014-12-05 12:20:27', 495, 1),
-	(185, 185, '172', 'accounting changes for transfers', 'SQL', 'V172__accounting_changes_for_transfers.sql', 1989818135, 'root', '2014-12-05 12:20:27', 38, 1),
-	(186, 186, '173', 'ppi', 'SQL', 'V173__ppi.sql', -2061337506, 'root', '2014-12-05 12:20:27', 366, 1),
-	(187, 187, '174', 'remove interest accrual', 'SQL', 'V174__remove_interest_accrual.sql', 1343795196, 'root', '2014-12-05 12:20:28', 4, 1),
-	(188, 188, '175', 'added incentive interest rates', 'SQL', 'V175__added_incentive_interest_rates.sql', 1609110836, 'root', '2014-12-05 12:20:28', 467, 1),
-	(189, 189, '176', 'updates to financial activity accounts', 'SQL', 'V176__updates_to_financial_activity_accounts.sql', 242225588, 'root', '2014-12-05 12:20:28', 295, 1),
-	(190, 190, '177', 'cleanup for client incentives', 'SQL', 'V177__cleanup_for_client_incentives.sql', -2131344758, 'root', '2014-12-05 12:20:28', 4, 1),
-	(191, 191, '178', 'updates to financial activity accounts pt2', 'SQL', 'V178__updates_to_financial_activity_accounts_pt2.sql', -417659005, 'root', '2014-12-05 12:20:28', 6, 1),
-	(192, 192, '179', 'updates to action names for maker checker permissions', 'SQL', 'V179__updates_to_action_names_for_maker_checker_permissions.sql', -239637884, 'root', '2014-12-05 12:20:28', 20, 1),
-	(18, 18, '18', 'update stretchy reporting reportSql', 'SQL', 'V18__update_stretchy_reporting_reportSql.sql', -170206095, 'root', '2014-12-05 12:20:02', 44, 1),
-	(193, 193, '180', 'update report schemas for disbursed vs awaitingdisbursal and groupnamesbystaff', 'SQL', 'V180__update_report_schemas_for_disbursed_vs_awaitingdisbursal_and_groupnamesbystaff.sql', -478172694, 'root', '2014-12-05 12:20:29', 4, 1),
-	(194, 194, '181', 'standing instruction logging', 'SQL', 'V181__standing_instruction_logging.sql', -259580241, 'root', '2014-12-05 12:20:29', 41, 1),
-	(195, 195, '182', 'added min required balance to savings product', 'SQL', 'V182__added_min_required_balance_to_savings_product.sql', -2083442779, 'root', '2014-12-05 12:20:29', 90, 1),
-	(196, 196, '183', 'added min balance for interest calculation', 'SQL', 'V183__added_min_balance_for_interest_calculation.sql', -1892956044, 'root', '2014-12-05 12:20:29', 135, 1),
-	(197, 197, '184', 'update min required balance for savings product', 'SQL', 'V184__update_min_required_balance_for_savings_product.sql', -978631870, 'root', '2014-12-05 12:20:29', 130, 1),
-	(19, 19, '19', 'report maintenance permissions', 'SQL', 'V19__report_maintenance_permissions.sql', -1528956905, 'root', '2014-12-05 12:20:02', 8, 1),
-	(2, 2, '2', 'mifosx-base-reference-data-utf8', 'SQL', 'V2__mifosx-base-reference-data-utf8.sql', 1316484475, 'root', '2014-12-05 12:19:58', 168, 1),
-	(20, 20, '20', 'report maint perms really configuration', 'SQL', 'V20__report_maint_perms_really_configuration.sql', -402845015, 'root', '2014-12-05 12:20:02', 2, 1),
-	(21, 21, '21', 'activation-permissions-for-clients', 'SQL', 'V21__activation-permissions-for-clients.sql', -569932376, 'root', '2014-12-05 12:20:02', 56, 1),
-	(22, 22, '22', 'alter-group-for-consistency-add-permissions', 'SQL', 'V22__alter-group-for-consistency-add-permissions.sql', 578271556, 'root', '2014-12-05 12:20:02', 171, 1),
-	(23, 23, '23', 'remove-enable-disable-configuration-for-client-group-status', 'SQL', 'V23__remove-enable-disable-configuration-for-client-group-status.sql', -832390233, 'root', '2014-12-05 12:20:02', 39, 1),
-	(24, 24, '24', 'add-group-client-foreign-key-constraint-in-loan-table', 'SQL', 'V24__add-group-client-foreign-key-constraint-in-loan-table.sql', -621897624, 'root', '2014-12-05 12:20:02', 208, 1),
-	(25, 25, '25', 'update client reports for status and activation change', 'SQL', 'V25__update_client_reports_for_status_and_activation_change.sql', -1426943124, 'root', '2014-12-05 12:20:03', 33, 1),
-	(26, 26, '26', 'add-support-for-withdrawal-fees-on-savings', 'SQL', 'V26__add-support-for-withdrawal-fees-on-savings.sql', -1955461568, 'root', '2014-12-05 12:20:03', 388, 1),
-	(27, 27, '27', 'add-loan-type-column-to-loan-table', 'SQL', 'V27__add-loan-type-column-to-loan-table.sql', -746287938, 'root', '2014-12-05 12:20:03', 159, 1),
-	(28, 28, '28', 'accounting-abstractions-and-autoposting', 'SQL', 'V28__accounting-abstractions-and-autoposting.sql', -966431980, 'root', '2014-12-05 12:20:03', 165, 1),
-	(29, 29, '29', 'add-support-for-annual-fees-on-savings', 'SQL', 'V29__add-support-for-annual-fees-on-savings.sql', 992227725, 'root', '2014-12-05 12:20:04', 325, 1),
-	(3, 3, '3', 'mifosx-permissions-and-authorisation-utf8', 'SQL', 'V3__mifosx-permissions-and-authorisation-utf8.sql', 1922951887, 'root', '2014-12-05 12:19:58', 129, 1),
-	(30, 30, '30', 'add-referenceNumber-to-acc gl journal entry', 'SQL', 'V30__add-referenceNumber-to-acc_gl_journal_entry.sql', 2079970797, 'root', '2014-12-05 12:20:04', 101, 1),
-	(31, 31, '31', 'drop-autopostings', 'SQL', 'V31__drop-autopostings.sql', 630501407, 'root', '2014-12-05 12:20:04', 22, 1),
-	(32, 32, '32', 'associate-disassociate-clients-from-group-permissions', 'SQL', 'V32__associate-disassociate-clients-from-group-permissions.sql', 765311507, 'root', '2014-12-05 12:20:04', 3, 1),
-	(33, 33, '33', 'drop unique check on stretchy report parameter', 'SQL', 'V33__drop_unique_check_on_stretchy_report_parameter.sql', -716768190, 'root', '2014-12-05 12:20:06', 1749, 1),
-	(34, 34, '34', 'add unique check on stretchy report parameter', 'SQL', 'V34__add_unique_check_on_stretchy_report_parameter.sql', -1989718961, 'root', '2014-12-05 12:20:06', 94, 1),
-	(35, 35, '35', 'add hierarchy column for acc gl account', 'SQL', 'V35__add_hierarchy_column_for_acc_gl_account.sql', -1387013309, 'root', '2014-12-05 12:20:06', 81, 1),
-	(36, 36, '36', 'add tag id column for acc gl account', 'SQL', 'V36__add_tag_id_column_for_acc_gl_account.sql', -620418591, 'root', '2014-12-05 12:20:06', 95, 1),
-	(37, 37, '37', 'add-center-group-collection-sheet-permissions', 'SQL', 'V37__add-center-group-collection-sheet-permissions.sql', -1157429270, 'root', '2014-12-05 12:20:06', 3, 1),
-	(38, 38, '38', 'add-group-summary-details-report', 'SQL', 'V38__add-group-summary-details-report.sql', -1018394665, 'root', '2014-12-05 12:20:06', 5, 1),
-	(39, 39, '39', 'payment-channels-updates', 'SQL', 'V39__payment-channels-updates.sql', -1005512239, 'root', '2014-12-05 12:20:07', 355, 1),
-	(4, 4, '4', 'mifosx-core-reports-utf8', 'SQL', 'V4__mifosx-core-reports-utf8.sql', -934709187, 'root', '2014-12-05 12:19:59', 294, 1),
-	(40, 40, '40', 'add permissions for accounting rule', 'SQL', 'V40__add_permissions_for_accounting_rule.sql', 1514233058, 'root', '2014-12-05 12:20:07', 5, 1),
-	(41, 41, '41', 'group-summary-reports', 'SQL', 'V41__group-summary-reports.sql', 263779795, 'root', '2014-12-05 12:20:07', 10, 1),
-	(42, 42, '42', 'Add default value for id for acc accounting rule', 'SQL', 'V42__Add_default_value_for_id_for_acc_accounting_rule.sql', 1068680120, 'root', '2014-12-05 12:20:07', 177, 1),
-	(43, 43, '43', 'accounting-for-savings', 'SQL', 'V43__accounting-for-savings.sql', 1965510021, 'root', '2014-12-05 12:20:07', 101, 1),
-	(44, 44, '44', 'document-increase-size-of-column-type', 'SQL', 'V44__document-increase-size-of-column-type.sql', 1264142829, 'root', '2014-12-05 12:20:07', 64, 1),
-	(45, 45, '45', 'create acc rule tags table', 'SQL', 'V45__create_acc_rule_tags_table.sql', -307868244, 'root', '2014-12-05 12:20:07', 64, 1),
-	(46, 46, '46', 'extend datatables api', 'SQL', 'V46__extend_datatables_api.sql', 297544230, 'root', '2014-12-05 12:20:07', 4, 1),
-	(47, 47, '47', 'staff-hierarchy-link-to-users', 'SQL', 'V47__staff-hierarchy-link-to-users.sql', 480254198, 'root', '2014-12-05 12:20:08', 375, 1),
-	(48, 48, '48', 'adding-S3-Support', 'SQL', 'V48__adding-S3-Support.sql', -280798781, 'root', '2014-12-05 12:20:08', 359, 1),
-	(49, 49, '49', 'track-loan-charge-payment-transactions', 'SQL', 'V49__track-loan-charge-payment-transactions.sql', 170618680, 'root', '2014-12-05 12:20:08', 70, 1),
-	(5, 5, '5', 'update-savings-product-and-account-tables', 'SQL', 'V5__update-savings-product-and-account-tables.sql', 1171300485, 'root', '2014-12-05 12:19:59', 366, 1),
-	(50, 50, '50', 'add-grace-settings-to-loan-product', 'SQL', 'V50__add-grace-settings-to-loan-product.sql', 188244658, 'root', '2014-12-05 12:20:09', 203, 1),
-	(51, 51, '51', 'track-additional-details-related-to-installment-performance', 'SQL', 'V51__track-additional-details-related-to-installment-performance.sql', 2012793946, 'root', '2014-12-05 12:20:09', 150, 1),
-	(52, 52, '52', 'add boolean support cols to acc accounting rule', 'SQL', 'V52__add_boolean_support_cols_to_acc_accounting_rule.sql', 961668575, 'root', '2014-12-05 12:20:09', 138, 1),
-	(53, 53, '53', 'track-advance-and-late-payments-on-installment', 'SQL', 'V53__track-advance-and-late-payments-on-installment.sql', -230737076, 'root', '2014-12-05 12:20:09', 44, 1),
-	(54, 54, '54', 'charge-to-income-account-mappings', 'SQL', 'V54__charge-to-income-account-mappings.sql', 2064168495, 'root', '2014-12-05 12:20:09', 47, 1),
-	(55, 55, '55', 'add-additional-transaction-processing-strategies', 'SQL', 'V55__add-additional-transaction-processing-strategies.sql', 1186305896, 'root', '2014-12-05 12:20:09', 43, 1),
-	(56, 56, '56', 'track-overpaid-amount-on-loans', 'SQL', 'V56__track-overpaid-amount-on-loans.sql', 1455634018, 'root', '2014-12-05 12:20:09', 57, 1),
-	(57, 57, '57', 'add default values to debit and credit accounts acc accounting rule', 'SQL', 'V57__add_default_values_to_debit_and_credit_accounts_acc_accounting_rule.sql', 1936034654, 'root', '2014-12-05 12:20:09', 50, 1),
-	(58, 58, '58', 'create-holiday-tables changed', 'SQL', 'V58__create-holiday-tables_changed.sql', 878594707, 'root', '2014-12-05 12:20:09', 61, 1),
-	(59, 59, '59', 'add group roles schema and permissions', 'SQL', 'V59__add_group_roles_schema_and_permissions.sql', 2139634800, 'root', '2014-12-05 12:20:10', 180, 1),
-	(6, 6, '6', 'add min max principal column to loan', 'SQL', 'V6__add_min_max_principal_column_to_loan.sql', 21414779, 'root', '2014-12-05 12:20:00', 508, 1),
-	(60, 60, '60', 'quipo dashboard reports', 'SQL', 'V60__quipo_dashboard_reports.sql', -1414014218, 'root', '2014-12-05 12:20:10', 22, 1),
-	(61, 61, '61', 'txn running balance example', 'SQL', 'V61__txn_running_balance_example.sql', -1186179870, 'root', '2014-12-05 12:20:10', 25, 1),
-	(62, 62, '62', 'add staff id to m client changed', 'SQL', 'V62__add_staff_id_to_m_client_changed.sql', -903717279, 'root', '2014-12-05 12:20:10', 63, 1),
-	(63, 63, '63', 'add sync disbursement with meeting column to loan', 'SQL', 'V63__add_sync_disbursement_with_meeting_column_to_loan.sql', 1706011840, 'root', '2014-12-05 12:20:10', 65, 1),
-	(64, 64, '64', 'add permission for assign staff', 'SQL', 'V64__add_permission_for_assign_staff.sql', -1938102414, 'root', '2014-12-05 12:20:10', 2, 1),
-	(65, 65, '65', 'fix rupee symbol issues', 'SQL', 'V65__fix_rupee_symbol_issues.sql', 581612224, 'root', '2014-12-05 12:20:10', 21, 1),
-	(66, 66, '66', 'client close functionality', 'SQL', 'V66__client_close_functionality.sql', 225242657, 'root', '2014-12-05 12:20:10', 187, 1),
-	(67, 67, '67', 'loans in advance table', 'SQL', 'V67__loans_in_advance_table.sql', -2001051496, 'root', '2014-12-05 12:20:10', 25, 1),
-	(68, 68, '68', 'quipo dashboard reports updated', 'SQL', 'V68__quipo_dashboard_reports_updated.sql', -1241469930, 'root', '2014-12-05 12:20:10', 44, 1),
-	(69, 69, '69', 'loans in advance initialise', 'SQL', 'V69__loans_in_advance_initialise.sql', -1961764720, 'root', '2014-12-05 12:20:11', 55, 1),
-	(7, 7, '7', 'remove read makerchecker permission', 'SQL', 'V7__remove_read_makerchecker_permission.sql', -335430825, 'root', '2014-12-05 12:20:00', 112, 1),
-	(70, 70, '70', 'quipo program detail query fix', 'SQL', 'V70__quipo_program_detail_query_fix.sql', 961289260, 'root', '2014-12-05 12:20:11', 8, 1),
-	(71, 71, '71', 'insert reschedule repayment to configuration', 'SQL', 'V71__insert_reschedule_repayment_to_configuration.sql', -1148306529, 'root', '2014-12-05 12:20:11', 19, 1),
-	(72, 72, '72', 'add m loan counter changes', 'SQL', 'V72__add_m_loan_counter_changes.sql', 201544058, 'root', '2014-12-05 12:20:11', 175, 1),
-	(73, 73, '73', 'add repayments rescheduled to and processed column to holiday', 'SQL', 'V73__add_repayments_rescheduled_to_and_processed_column_to_holiday.sql', -1946338033, 'root', '2014-12-05 12:20:11', 52, 1),
-	(74, 74, '74', 'alter m loan counter table add group', 'SQL', 'V74__alter_m_loan_counter_table_add_group.sql', -889985683, 'root', '2014-12-05 12:20:11', 160, 1),
-	(75, 75, '75', 'add reschedule-repayments-on-holidays to configuration', 'SQL', 'V75__add_reschedule-repayments-on-holidays_to_configuration.sql', 1328301697, 'root', '2014-12-05 12:20:11', 22, 1),
-	(76, 76, '76', 'rename permission grouping', 'SQL', 'V76__rename_permission_grouping.sql', 1717580945, 'root', '2014-12-05 12:20:11', 10, 1),
-	(77, 77, '77', 'alter m product loan changes', 'SQL', 'V77__alter_m_product_loan_changes.sql', 677013677, 'root', '2014-12-05 12:20:11', 47, 1),
-	(78, 78, '78', 'breakdown portfolio grouping', 'SQL', 'V78__breakdown_portfolio_grouping.sql', -1385954232, 'root', '2014-12-05 12:20:11', 26, 1),
-	(79, 79, '79', 'schedule jobs tables', 'SQL', 'V79__schedule_jobs_tables.sql', 339707179, 'root', '2014-12-05 12:20:12', 59, 1),
-	(8, 8, '8', 'deposit-transaction-permissions-if-they-exist', 'SQL', 'V8__deposit-transaction-permissions-if-they-exist.sql', -1507997551, 'root', '2014-12-05 12:20:00', 2, 1),
-	(80, 80, '80', 'schedule jobs tables updates', 'SQL', 'V80__schedule_jobs_tables_updates.sql', -152869205, 'root', '2014-12-05 12:20:12', 216, 1),
-	(81, 81, '81', 'savings related changes', 'SQL', 'V81__savings_related_changes.sql', 285284658, 'root', '2014-12-05 12:20:12', 344, 1),
-	(82, 82, '82', 'schedule jobs tables updates for running status', 'SQL', 'V82__schedule_jobs_tables_updates_for_running_status.sql', -1029370098, 'root', '2014-12-05 12:20:12', 82, 1),
-	(83, 83, '83', 'non-working-days-table', 'SQL', 'V83__non-working-days-table.sql', -1092480574, 'root', '2014-12-05 12:20:12', 12, 1),
-	(84, 84, '84', 'undo savings transaction permission', 'SQL', 'V84__undo_savings_transaction_permission.sql', 1857641857, 'root', '2014-12-05 12:20:12', 2, 1),
-	(85, 85, '85', 'product mix related changes', 'SQL', 'V85__product_mix_related_changes.sql', -740767169, 'root', '2014-12-05 12:20:13', 87, 1),
-	(86, 86, '86', 'update-working-days', 'SQL', 'V86__update-working-days.sql', 1266232028, 'root', '2014-12-05 12:20:13', 5, 1),
-	(87, 87, '87', 'add permission for scheduler', 'SQL', 'V87__add_permission_for_scheduler.sql', -575950289, 'root', '2014-12-05 12:20:13', 16, 1),
-	(88, 88, '88', 'added update constrain for scheduler jobs', 'SQL', 'V88__added_update_constrain_for_scheduler_jobs.sql', 1579070736, 'root', '2014-12-05 12:20:13', 71, 1),
-	(89, 89, '89', 'added scheduler group', 'SQL', 'V89__added_scheduler_group.sql', -1538207332, 'root', '2014-12-05 12:20:13', 123, 1),
-	(9, 9, '9', 'add min max constraint column to loan loanproduct', 'SQL', 'V9__add_min_max_constraint_column_to_loan_loanproduct.sql', -2103326932, 'root', '2014-12-05 12:20:00', 289, 1),
-	(90, 90, '90', 'client performance history reports', 'SQL', 'V90__client_performance_history_reports.sql', 35589718, 'root', '2014-12-05 12:20:13', 21, 1),
-	(91, 91, '91', 'apply annual fees permission', 'SQL', 'V91__apply_annual_fees_permission.sql', 440351308, 'root', '2014-12-05 12:20:13', 14, 1),
-	(92, 92, '91.1', 'configuration settings for holiday and non workingday', 'SQL', 'V91_1__configuration_settings_for_holiday_and_non_workingday.sql', -429561096, 'root', '2014-12-05 12:20:13', 22, 1),
-	(93, 93, '92', 'group center assign staff permission', 'SQL', 'V92__group_center_assign_staff_permission.sql', -1557846330, 'root', '2014-12-05 12:20:13', 23, 1),
-	(94, 94, '93', 'loan transaction external id', 'SQL', 'V93__loan_transaction_external_id.sql', 987684239, 'root', '2014-12-05 12:20:13', 43, 1),
-	(95, 95, '94', 'added savings accont type', 'SQL', 'V94__added_savings_accont type.sql', 623078091, 'root', '2014-12-05 12:20:13', 35, 1),
-	(96, 96, '95', 'batch job postInterest', 'SQL', 'V95__batch_job_postInterest.sql', -1484077135, 'root', '2014-12-05 12:20:13', 4, 1),
-	(97, 97, '96', 'savings accounts transfers table', 'SQL', 'V96__savings_accounts_transfers_table.sql', -1447275289, 'root', '2014-12-05 12:20:13', 108, 1),
-	(98, 98, '97', 'add permission for adjust savings transaction', 'SQL', 'V97__add_permission_for_adjust_savings_transaction.sql', -2045732265, 'root', '2014-12-05 12:20:13', 8, 1),
-	(99, 99, '98', 'added currency roundof for multipleof', 'SQL', 'V98__added_currency_roundof_for_multipleof.sql', -131804848, 'root', '2014-12-05 12:20:14', 752, 1);
+	(1, 1, '1', 'mifosplatform-core-ddl-latest', 'SQL', 'V1__mifosplatform-core-ddl-latest.sql', -1957145051, 'root', '2014-05-06 16:10:35', 7029, 1),
+	(10, 10, '10', 'interest-posting-fields-for-savings', 'SQL', 'V10__interest-posting-fields-for-savings.sql', -1133853485, 'root', '2014-05-06 16:10:41', 742, 1),
+	(100, 100, '100', 'Group saving summary report', 'SQL', 'V100__Group_saving_summary_report.sql', -1635399448, 'root', '2014-05-06 16:11:34', 92, 1),
+	(101, 101, '101', 'add mulitplesof to account transfers table', 'SQL', 'V101__add_mulitplesof_to_account_transfers_table.sql', -1162976022, 'root', '2014-05-06 16:11:34', 280, 1),
+	(102, 102, '102', 'client attendance tables', 'SQL', 'V102__client_attendance_tables.sql', -45448019, 'root', '2014-05-06 16:11:35', 307, 1),
+	(103, 103, '103', 'cluster support for batch jobs', 'SQL', 'V103__cluster_support_for_batch_jobs.sql', -781879007, 'root', '2014-05-06 16:11:36', 677, 1),
+	(104, 104, '104', 'permissions for transfers', 'SQL', 'V104__permissions_for_transfers.sql', 653895919, 'root', '2014-05-06 16:11:36', 111, 1),
+	(105, 105, '105', 'track loan transaction against office', 'SQL', 'V105__track_loan_transaction_against_office.sql', 785650440, 'root', '2014-05-06 16:11:37', 1028, 1),
+	(106, 106, '106', 'more permissions for transfers', 'SQL', 'V106__more_permissions_for_transfers.sql', -1132691133, 'root', '2014-05-06 16:11:37', 45, 1),
+	(107, 107, '107', 'datatable code mappings', 'SQL', 'V107__datatable_code_mappings.sql', 630737271, 'root', '2014-05-06 16:11:38', 300, 1),
+	(108, 108, '108', 'client has transfer office', 'SQL', 'V108__client_has_transfer_office.sql', -1748734810, 'root', '2014-05-06 16:11:38', 511, 1),
+	(109, 109, '109', 'account transfer withdrawal fee configuration', 'SQL', 'V109__account_transfer_withdrawal_fee_configuration.sql', -754569033, 'root', '2014-05-06 16:11:39', 411, 1),
+	(11, 11, '11', 'add-payment-details', 'SQL', 'V11__add-payment-details.sql', 391380768, 'root', '2014-05-06 16:10:41', 548, 1),
+	(110, 110, '110', 'group center close', 'SQL', 'V110__group_center_close.sql', -1261775365, 'root', '2014-05-06 16:11:39', 276, 1),
+	(111, 111, '111', 'disable constraint approach for datatables by default', 'SQL', 'V111__disable_constraint_approach_for_datatables_by_default.sql', 2058257907, 'root', '2014-05-06 16:11:39', 38, 1),
+	(112, 112, '111.1', 'set default transfers in suspense account for existing loan products', 'SQL', 'V111_1__set default_transfers_in_suspense_account_for_existing_loan_products.sql', 1907173791, 'root', '2014-05-06 16:11:40', 4, 1),
+	(113, 113, '112', 'mixreport sql support', 'SQL', 'V112__mixreport_sql_support.sql', 1254859560, 'root', '2014-05-06 16:11:40', 428, 1),
+	(114, 114, '113', 'track savings transaction against office', 'SQL', 'V113__track_savings_transaction_against_office.sql', -1390529632, 'root', '2014-05-06 16:11:41', 718, 1),
+	(115, 115, '114', 'set default transfers in suspense account for existing savings products - Copy', 'SQL', 'V114__set_default_transfers_in_suspense_account_for_existing_savings_products - Copy.sql', 1518369372, 'root', '2014-05-06 16:11:41', 3, 1),
+	(116, 116, '115', 'permissions for cache api', 'SQL', 'V115__permissions_for_cache_api.sql', 156437687, 'root', '2014-05-06 16:11:41', 127, 1),
+	(117, 117, '116', 'track currency for journal entries', 'SQL', 'V116__track_currency_for_journal_entries.sql', 1109139399, 'root', '2014-05-06 16:11:42', 613, 1),
+	(118, 118, '117', 'loan charge from savings', 'SQL', 'V117__loan_charge_from_savings.sql', 13633826, 'root', '2014-05-06 16:11:43', 737, 1),
+	(119, 119, '118', 'savings charge', 'SQL', 'V118__savings_charge.sql', 899101813, 'root', '2014-05-06 16:11:43', 398, 1),
+	(120, 120, '118.1', 'savings charge patch update', 'SQL', 'V118_1__savings_charge_patch_update.sql', 426133125, 'root', '2014-05-06 16:11:44', 591, 1),
+	(121, 121, '118.2', 'product mapping delete duplicate fund source to account mappings', 'SQL', 'V118_2__product_mapping_delete_duplicate_fund_source_to_account_mappings.sql', 139468093, 'root', '2014-05-06 16:11:44', 3, 1),
+	(122, 122, '118.3', 'permissions form propose and accept client transfers', 'SQL', 'V118_3__permissions_form_propose_and_accept_client_transfers.sql', 602708322, 'root', '2014-05-06 16:11:44', 38, 1),
+	(123, 123, '118.4', 'reset default transfers in suspense account for existing savings products', 'SQL', 'V118_4__reset_default_transfers_in_suspense_account_for_existing_savings_products.sql', 1246865828, 'root', '2014-05-06 16:11:45', 5, 1),
+	(124, 124, '118.5', 'batch job entry for pay savings charge', 'SQL', 'V118_5__batch_job_entry_for_pay_savings_charge.sql', -1477017272, 'root', '2014-05-06 16:11:45', 112, 1),
+	(125, 125, '118.6', 'defaults for income from penalties for savings product', 'SQL', 'V118_6__defaults_for_income_from_penalties_for savings_product.sql', 255024118, 'root', '2014-05-06 16:11:45', 3, 1),
+	(126, 126, '118.7', 'move withdrawal annual fee to charges', 'SQL', 'V118_7__move_withdrawal_annual_fee_to_charges.sql', 480656720, 'root', '2014-05-06 16:11:46', 1253, 1),
+	(127, 127, '118.8', 'track overpayments seperately in loan transactions', 'SQL', 'V118_8__track_overpayments_seperately_in_loan_transactions.sql', 1684107411, 'root', '2014-05-06 16:11:47', 866, 1),
+	(128, 128, '119', 'add template table', 'SQL', 'V119__add_template_table.sql', 1524629249, 'root', '2014-05-06 16:11:48', 595, 1),
+	(12, 12, '12', 'add external id to couple of tables', 'SQL', 'V12__add_external_id_to_couple_of_tables.sql', 371833586, 'root', '2014-05-06 16:10:43', 1587, 1),
+	(129, 129, '120', 'accounting running balance', 'SQL', 'V120__accounting_running_balance.sql', 746738547, 'root', '2014-05-06 16:11:49', 625, 1),
+	(130, 130, '121', 'accounting running balance for organization', 'SQL', 'V121__accounting_running_balance_for_organization.sql', 1907762382, 'root', '2014-05-06 16:11:49', 395, 1),
+	(131, 131, '122', 'recurring fee support for savings', 'SQL', 'V122__recurring_fee_support_for_savings.sql', -1538770236, 'root', '2014-05-06 16:11:50', 804, 1),
+	(132, 132, '123', 'remove payment mode for savings', 'SQL', 'V123__remove_payment_mode_for_savings.sql', 1909778922, 'root', '2014-05-06 16:11:51', 414, 1),
+	(133, 133, '124', 'added min max cap for charges', 'SQL', 'V124__added_min_max_cap_for_charges.sql', -1996899270, 'root', '2014-05-06 16:11:52', 848, 1),
+	(134, 134, '125', 'added column for actual fee amount or percentage', 'SQL', 'V125__added_column_for_actual_fee_amount_or_percentage.sql', -87760502, 'root', '2014-05-06 16:11:52', 408, 1),
+	(135, 135, '126', 'initial database structure for sms outbound', 'SQL', 'V126__initial_database_structure_for_sms_outbound.sql', -586195149, 'root', '2014-05-06 16:11:53', 563, 1),
+	(136, 136, '127', 'mobile no fields', 'SQL', 'V127__mobile_no_fields.sql', -659228285, 'root', '2014-05-06 16:11:54', 969, 1),
+	(137, 137, '128', 'added loan installment charge', 'SQL', 'V128__added_loan_installment_charge.sql', -1983585024, 'root', '2014-05-06 16:11:54', 461, 1),
+	(138, 138, '129', 'client and group timeline', 'SQL', 'V129__client_and_group_timeline.sql', -1671377251, 'root', '2014-05-06 16:11:56', 1278, 1),
+	(13, 13, '13', 'add group and client pending configuration', 'SQL', 'V13__add_group_and_client_pending_configuration.sql', 145878397, 'root', '2014-05-06 16:10:43', 78, 1),
+	(139, 139, '130', 'calendar-history-table', 'SQL', 'V130__calendar-history-table.sql', -475045678, 'root', '2014-05-06 16:11:57', 227, 1),
+	(140, 140, '131', 'holiday-status-column-and-permissions', 'SQL', 'V131__holiday-status-column-and-permissions.sql', -1387001593, 'root', '2014-05-06 16:11:58', 961, 1),
+	(141, 141, '132', 'borrower cycle changes', 'SQL', 'V132__borrower_cycle_changes.sql', -355052428, 'root', '2014-05-06 16:11:58', 333, 1),
+	(142, 142, '133', 'adding payment detail with journal entry', 'SQL', 'V133__adding_payment_detail_with_journal_entry.sql', 1975659943, 'root', '2014-05-06 16:11:59', 416, 1),
+	(143, 143, '134', 'added column value on c configuration', 'SQL', 'V134__added_column_value_on_c_configuration.sql', -30626232, 'root', '2014-05-06 16:11:59', 321, 1),
+	(144, 144, '134.1', 'submitted date updation for clients', 'SQL', 'V134_1__submitted_date_updation_for_clients.sql', 184599342, 'root', '2014-05-06 16:11:59', 6, 1),
+	(145, 145, '134.2', 'permissions spelling correction', 'SQL', 'V134_2__permissions_spelling_correction.sql', 996960341, 'root', '2014-05-06 16:12:00', 45, 1),
+	(146, 146, '135', 'added permission for undo written off', 'SQL', 'V135__added_permission_for_undo_written_off.sql', 1414936537, 'root', '2014-05-06 16:12:00', 63, 1),
+	(147, 147, '136.1', 'update script strechy parameter', 'SQL', 'V136_1__update_script_strechy_parameter.sql', 633461657, 'root', '2014-05-06 16:12:00', 42, 1),
+	(148, 148, '137', 'added is active column in m staff', 'SQL', 'V137__added_is_active_column_in_m_staff.sql', 1962782431, 'root', '2014-05-06 16:12:00', 231, 1),
+	(149, 149, '138', 'add short name for m product loan and m savings product', 'SQL', 'V138__add_short_name_for_m_product_loan_and_m_savings_product.sql', -1526828084, 'root', '2014-05-06 16:12:02', 1347, 1),
+	(150, 150, '139', 'default value for is active updated to true in m staff', 'SQL', 'V139__default_value_for_is_active_updated_to_true_in_m_staff.sql', 844329308, 'root', '2014-05-06 16:12:02', 303, 1),
+	(14, 14, '14', 'rename status id to enum', 'SQL', 'V14__rename_status_id_to_enum.sql', 1958382098, 'root', '2014-05-06 16:10:44', 481, 1),
+	(151, 151, '140', 'added loan charge status', 'SQL', 'V140__added_loan_charge_status.sql', 1209971905, 'root', '2014-05-06 16:12:03', 229, 1),
+	(152, 152, '140.1', 'added payment detail id in ac gl journal entry', 'SQL', 'V140_1__added_payment_detail_id_in_ac_gl_journal_entry.sql', -214253481, 'root', '2014-05-06 16:12:03', 268, 1),
+	(153, 153, '141', 'add early repayment strategy', 'SQL', 'V141__add_early_repayment_strategy.sql', 401969634, 'root', '2014-05-06 16:12:03', 197, 1),
+	(154, 154, '142', 'read savingsaccount charge permission', 'SQL', 'V142__read_savingsaccount_charge_permission.sql', -1798083956, 'root', '2014-05-06 16:12:03', 42, 1),
+	(155, 155, '143', 'create journalentry checker permission', 'SQL', 'V143__create_journalentry_checker_permission.sql', 227507002, 'root', '2014-05-06 16:12:04', 41, 1),
+	(156, 156, '144', 'spelling mistake corrections', 'SQL', 'V144__spelling_mistake_corrections.sql', -778391100, 'root', '2014-05-06 16:12:04', 425, 1),
+	(157, 157, '145', 'add force password reset in c configuration', 'SQL', 'V145__add_force_password_reset_in_c_configuration.sql', -662441756, 'root', '2014-05-06 16:12:05', 1070, 1),
+	(158, 158, '146', 'tranche loans', 'SQL', 'V146__tranche_loans.sql', 989126672, 'root', '2014-05-06 16:12:07', 1762, 1),
+	(159, 159, '147', 'tranche loans column name changes', 'SQL', 'V147__tranche_loans_column_name_changes.sql', -533159256, 'root', '2014-05-06 16:12:08', 358, 1),
+	(160, 160, '148', 'overdraft changes', 'SQL', 'V148__overdraft_changes.sql', -1470217992, 'root', '2014-05-06 16:12:09', 1361, 1),
+	(161, 161, '149', 'add created date savings transaction', 'SQL', 'V149__add_created_date_savings_transaction.sql', 137884095, 'root', '2014-05-06 16:12:10', 349, 1),
+	(15, 15, '15', 'center permissions', 'SQL', 'V15__center_permissions.sql', 1124247014, 'root', '2014-05-06 16:10:44', 54, 1),
+	(162, 162, '150', 'basic savings report', 'SQL', 'V150__basic_savings_report.sql', 2133891313, 'root', '2014-05-06 16:12:10', 397, 1),
+	(163, 163, '151', 'add default savings account to client', 'SQL', 'V151__add_default_savings_account_to_client.sql', -2012873976, 'root', '2014-05-06 16:12:11', 232, 1),
+	(164, 164, '152', 'added grace for over due', 'SQL', 'V152__added_grace_for_over_due.sql', 1917777205, 'root', '2014-05-06 16:12:11', 403, 1),
+	(165, 165, '153', 'Insert missed permissions', 'SQL', 'V153__Insert_missed_permissions.sql', -1693091937, 'root', '2014-05-06 16:12:11', 79, 1),
+	(166, 166, '154', 'aging details', 'SQL', 'V154__aging_details.sql', 1117759702, 'root', '2014-05-06 16:12:11', 41, 1),
+	(167, 167, '155', 'stretchy into pentaho', 'SQL', 'V155__stretchy_into_pentaho.sql', -1836158085, 'root', '2014-05-06 16:12:12', 138, 1),
+	(168, 168, '156', 'added loan saving txns pentaho', 'SQL', 'V156__added_loan_saving_txns_pentaho.sql', 1942570756, 'root', '2014-05-06 16:12:12', 50, 1),
+	(169, 169, '157', 'overdue charge improvements', 'SQL', 'V157__overdue_charge_improvements.sql', -1267720651, 'root', '2014-05-06 16:12:12', 491, 1),
+	(170, 170, '158', 'dashboard and navigation queries', 'SQL', 'V158__dashboard_and_navigation_queries.sql', -265915721, 'root', '2014-05-06 16:12:13', 55, 1),
+	(171, 171, '159', 'add transaction id column m portfolio command source', 'SQL', 'V159__add_transaction_id_column_m_portfolio_command_source.sql', -1834626647, 'root', '2014-05-06 16:12:13', 195, 1),
+	(16, 16, '16', 'drop min max column on loan table', 'SQL', 'V16__drop_min_max_column_on_loan_table.sql', -1497882087, 'root', '2014-05-06 16:10:44', 270, 1),
+	(172, 172, '160', 'standing instruction changes', 'SQL', 'V160__standing_instruction_changes.sql', -2130923257, 'root', '2014-05-06 16:12:15', 1609, 1),
+	(173, 173, '161', 'added accrual batch job', 'SQL', 'V161__added_accrual_batch_job.sql', -1558441026, 'root', '2014-05-06 16:12:15', 417, 1),
+	(174, 174, '162', 'overdue charge batch job', 'SQL', 'V162__overdue_charge_batch_job.sql', -1213828784, 'root', '2014-05-06 16:12:15', 66, 1),
+	(175, 175, '163', 'added npa for loans', 'SQL', 'V163__added_npa_for_loans.sql', -381581272, 'root', '2014-05-06 16:12:16', 646, 1),
+	(176, 176, '164', 'fd and rd deposit tables', 'SQL', 'V164__fd_and_rd_deposit_tables.sql', -489803231, 'root', '2014-05-06 16:12:20', 3811, 1),
+	(177, 177, '165', 'added permission for disburse to saving account', 'SQL', 'V165__added_permission_for_disburse_to_saving_account.sql', -2109143723, 'root', '2014-05-06 16:12:20', 129, 1),
+	(178, 178, '166', 'added deposit amount to product term and preclosure', 'SQL', 'V166__added_deposit_amount_to_product_term_and_preclosure.sql', -2068527520, 'root', '2014-05-06 16:12:22', 1115, 1),
+	(17, 17, '17', 'update stretchy reporting ddl', 'SQL', 'V17__update_stretchy_reporting_ddl.sql', 2040068410, 'root', '2014-05-06 16:10:46', 1365, 1),
+	(18, 18, '18', 'update stretchy reporting reportSql', 'SQL', 'V18__update_stretchy_reporting_reportSql.sql', -170206095, 'root', '2014-05-06 16:10:46', 116, 1),
+	(19, 19, '19', 'report maintenance permissions', 'SQL', 'V19__report_maintenance_permissions.sql', -1528956905, 'root', '2014-05-06 16:10:46', 59, 1),
+	(2, 2, '2', 'mifosx-base-reference-data-utf8', 'SQL', 'V2__mifosx-base-reference-data-utf8.sql', 1316484475, 'root', '2014-05-06 16:10:35', 97, 1),
+	(20, 20, '20', 'report maint perms really configuration', 'SQL', 'V20__report_maint_perms_really_configuration.sql', -402845015, 'root', '2014-05-06 16:10:46', 41, 1),
+	(21, 21, '21', 'activation-permissions-for-clients', 'SQL', 'V21__activation-permissions-for-clients.sql', -569932376, 'root', '2014-05-06 16:10:47', 242, 1),
+	(22, 22, '22', 'alter-group-for-consistency-add-permissions', 'SQL', 'V22__alter-group-for-consistency-add-permissions.sql', 578271556, 'root', '2014-05-06 16:10:48', 1087, 1),
+	(23, 23, '23', 'remove-enable-disable-configuration-for-client-group-status', 'SQL', 'V23__remove-enable-disable-configuration-for-client-group-status.sql', -832390233, 'root', '2014-05-06 16:10:48', 521, 1),
+	(24, 24, '24', 'add-group-client-foreign-key-constraint-in-loan-table', 'SQL', 'V24__add-group-client-foreign-key-constraint-in-loan-table.sql', -621897624, 'root', '2014-05-06 16:10:49', 286, 1),
+	(25, 25, '25', 'update client reports for status and activation change', 'SQL', 'V25__update_client_reports_for_status_and_activation_change.sql', -1426943124, 'root', '2014-05-06 16:10:49', 44, 1),
+	(26, 26, '26', 'add-support-for-withdrawal-fees-on-savings', 'SQL', 'V26__add-support-for-withdrawal-fees-on-savings.sql', -1955461568, 'root', '2014-05-06 16:10:50', 1010, 1),
+	(27, 27, '27', 'add-loan-type-column-to-loan-table', 'SQL', 'V27__add-loan-type-column-to-loan-table.sql', -746287938, 'root', '2014-05-06 16:10:51', 420, 1),
+	(28, 28, '28', 'accounting-abstractions-and-autoposting', 'SQL', 'V28__accounting-abstractions-and-autoposting.sql', -966431980, 'root', '2014-05-06 16:10:51', 664, 1),
+	(29, 29, '29', 'add-support-for-annual-fees-on-savings', 'SQL', 'V29__add-support-for-annual-fees-on-savings.sql', 992227725, 'root', '2014-05-06 16:10:53', 1032, 1),
+	(3, 3, '3', 'mifosx-permissions-and-authorisation-utf8', 'SQL', 'V3__mifosx-permissions-and-authorisation-utf8.sql', 1922951887, 'root', '2014-05-06 16:10:35', 93, 1),
+	(30, 30, '30', 'add-referenceNumber-to-acc gl journal entry', 'SQL', 'V30__add-referenceNumber-to-acc_gl_journal_entry.sql', 2079970797, 'root', '2014-05-06 16:10:53', 413, 1),
+	(31, 31, '31', 'drop-autopostings', 'SQL', 'V31__drop-autopostings.sql', 630501407, 'root', '2014-05-06 16:10:53', 70, 1),
+	(32, 32, '32', 'associate-disassociate-clients-from-group-permissions', 'SQL', 'V32__associate-disassociate-clients-from-group-permissions.sql', 765311507, 'root', '2014-05-06 16:10:54', 46, 1),
+	(33, 33, '33', 'drop unique check on stretchy report parameter', 'SQL', 'V33__drop_unique_check_on_stretchy_report_parameter.sql', -716768190, 'root', '2014-05-06 16:10:54', 689, 1),
+	(34, 34, '34', 'add unique check on stretchy report parameter', 'SQL', 'V34__add_unique_check_on_stretchy_report_parameter.sql', -1989718961, 'root', '2014-05-06 16:10:55', 204, 1),
+	(35, 35, '35', 'add hierarchy column for acc gl account', 'SQL', 'V35__add_hierarchy_column_for_acc_gl_account.sql', -1387013309, 'root', '2014-05-06 16:10:55', 427, 1),
+	(36, 36, '36', 'add tag id column for acc gl account', 'SQL', 'V36__add_tag_id_column_for_acc_gl_account.sql', -620418591, 'root', '2014-05-06 16:10:56', 406, 1),
+	(37, 37, '37', 'add-center-group-collection-sheet-permissions', 'SQL', 'V37__add-center-group-collection-sheet-permissions.sql', -1157429270, 'root', '2014-05-06 16:10:56', 57, 1),
+	(38, 38, '38', 'add-group-summary-details-report', 'SQL', 'V38__add-group-summary-details-report.sql', -1018394665, 'root', '2014-05-06 16:10:56', 130, 1),
+	(39, 39, '39', 'payment-channels-updates', 'SQL', 'V39__payment-channels-updates.sql', -1005512239, 'root', '2014-05-06 16:10:59', 2026, 1),
+	(4, 4, '4', 'mifosx-core-reports-utf8', 'SQL', 'V4__mifosx-core-reports-utf8.sql', -934709187, 'root', '2014-05-06 16:10:36', 539, 1),
+	(40, 40, '40', 'add permissions for accounting rule', 'SQL', 'V40__add_permissions_for_accounting_rule.sql', 1514233058, 'root', '2014-05-06 16:10:59', 318, 1),
+	(41, 41, '41', 'group-summary-reports', 'SQL', 'V41__group-summary-reports.sql', 263779795, 'root', '2014-05-06 16:10:59', 168, 1),
+	(42, 42, '42', 'Add default value for id for acc accounting rule', 'SQL', 'V42__Add_default_value_for_id_for_acc_accounting_rule.sql', 1068680120, 'root', '2014-05-06 16:11:00', 359, 1),
+	(43, 43, '43', 'accounting-for-savings', 'SQL', 'V43__accounting-for-savings.sql', 1965510021, 'root', '2014-05-06 16:11:01', 1107, 1),
+	(44, 44, '44', 'document-increase-size-of-column-type', 'SQL', 'V44__document-increase-size-of-column-type.sql', 1264142829, 'root', '2014-05-06 16:11:02', 665, 1),
+	(45, 45, '45', 'create acc rule tags table', 'SQL', 'V45__create_acc_rule_tags_table.sql', -307868244, 'root', '2014-05-06 16:11:03', 385, 1),
+	(46, 46, '46', 'extend datatables api', 'SQL', 'V46__extend_datatables_api.sql', 297544230, 'root', '2014-05-06 16:11:03', 37, 1),
+	(47, 47, '47', 'staff-hierarchy-link-to-users', 'SQL', 'V47__staff-hierarchy-link-to-users.sql', 480254198, 'root', '2014-05-06 16:11:04', 991, 1),
+	(48, 48, '48', 'adding-S3-Support', 'SQL', 'V48__adding-S3-Support.sql', -280798781, 'root', '2014-05-06 16:11:06', 1990, 1),
+	(49, 49, '49', 'track-loan-charge-payment-transactions', 'SQL', 'V49__track-loan-charge-payment-transactions.sql', 170618680, 'root', '2014-05-06 16:11:06', 189, 1),
+	(5, 5, '5', 'update-savings-product-and-account-tables', 'SQL', 'V5__update-savings-product-and-account-tables.sql', 1171300485, 'root', '2014-05-06 16:10:37', 747, 1),
+	(50, 50, '50', 'add-grace-settings-to-loan-product', 'SQL', 'V50__add-grace-settings-to-loan-product.sql', 188244658, 'root', '2014-05-06 16:11:07', 757, 1),
+	(51, 51, '51', 'track-additional-details-related-to-installment-performance', 'SQL', 'V51__track-additional-details-related-to-installment-performance.sql', 2012793946, 'root', '2014-05-06 16:11:08', 762, 1),
+	(52, 52, '52', 'add boolean support cols to acc accounting rule', 'SQL', 'V52__add_boolean_support_cols_to_acc_accounting_rule.sql', 961668575, 'root', '2014-05-06 16:11:09', 403, 1),
+	(53, 53, '53', 'track-advance-and-late-payments-on-installment', 'SQL', 'V53__track-advance-and-late-payments-on-installment.sql', -230737076, 'root', '2014-05-06 16:11:09', 194, 1),
+	(54, 54, '54', 'charge-to-income-account-mappings', 'SQL', 'V54__charge-to-income-account-mappings.sql', 2064168495, 'root', '2014-05-06 16:11:09', 194, 1),
+	(55, 55, '55', 'add-additional-transaction-processing-strategies', 'SQL', 'V55__add-additional-transaction-processing-strategies.sql', 1186305896, 'root', '2014-05-06 16:11:10', 518, 1),
+	(56, 56, '56', 'track-overpaid-amount-on-loans', 'SQL', 'V56__track-overpaid-amount-on-loans.sql', 1455634018, 'root', '2014-05-06 16:11:11', 549, 1),
+	(57, 57, '57', 'add default values to debit and credit accounts acc accounting rule', 'SQL', 'V57__add_default_values_to_debit_and_credit_accounts_acc_accounting_rule.sql', 1936034654, 'root', '2014-05-06 16:11:11', 210, 1),
+	(58, 58, '58', 'create-holiday-tables changed', 'SQL', 'V58__create-holiday-tables_changed.sql', 878594707, 'root', '2014-05-06 16:11:11', 361, 1),
+	(59, 59, '59', 'add group roles schema and permissions', 'SQL', 'V59__add_group_roles_schema_and_permissions.sql', 2139634800, 'root', '2014-05-06 16:11:12', 251, 1),
+	(6, 6, '6', 'add min max principal column to loan', 'SQL', 'V6__add_min_max_principal_column_to_loan.sql', 21414779, 'root', '2014-05-06 16:10:38', 861, 1),
+	(60, 60, '60', 'quipo dashboard reports', 'SQL', 'V60__quipo_dashboard_reports.sql', -1414014218, 'root', '2014-05-06 16:11:12', 67, 1),
+	(61, 61, '61', 'txn running balance example', 'SQL', 'V61__txn_running_balance_example.sql', -1186179870, 'root', '2014-05-06 16:11:12', 51, 1),
+	(62, 62, '62', 'add staff id to m client changed', 'SQL', 'V62__add_staff_id_to_m_client_changed.sql', -903717279, 'root', '2014-05-06 16:11:13', 412, 1),
+	(63, 63, '63', 'add sync disbursement with meeting column to loan', 'SQL', 'V63__add_sync_disbursement_with_meeting_column_to_loan.sql', 1706011840, 'root', '2014-05-06 16:11:13', 238, 1),
+	(64, 64, '64', 'add permission for assign staff', 'SQL', 'V64__add_permission_for_assign_staff.sql', -1938102414, 'root', '2014-05-06 16:11:13', 329, 1),
+	(65, 65, '65', 'fix rupee symbol issues', 'SQL', 'V65__fix_rupee_symbol_issues.sql', 581612224, 'root', '2014-05-06 16:11:14', 59, 1),
+	(66, 66, '66', 'client close functionality', 'SQL', 'V66__client_close_functionality.sql', 225242657, 'root', '2014-05-06 16:11:15', 965, 1),
+	(67, 67, '67', 'loans in advance table', 'SQL', 'V67__loans_in_advance_table.sql', -2001051496, 'root', '2014-05-06 16:11:15', 155, 1),
+	(68, 68, '68', 'quipo dashboard reports updated', 'SQL', 'V68__quipo_dashboard_reports_updated.sql', -1241469930, 'root', '2014-05-06 16:11:16', 224, 1),
+	(69, 69, '69', 'loans in advance initialise', 'SQL', 'V69__loans_in_advance_initialise.sql', -1961764720, 'root', '2014-05-06 16:11:16', 58, 1),
+	(7, 7, '7', 'remove read makerchecker permission', 'SQL', 'V7__remove_read_makerchecker_permission.sql', -335430825, 'root', '2014-05-06 16:10:38', 43, 1),
+	(70, 70, '70', 'quipo program detail query fix', 'SQL', 'V70__quipo_program_detail_query_fix.sql', 961289260, 'root', '2014-05-06 16:11:16', 55, 1),
+	(71, 71, '71', 'insert reschedule repayment to configuration', 'SQL', 'V71__insert_reschedule_repayment_to_configuration.sql', -1148306529, 'root', '2014-05-06 16:11:16', 42, 1),
+	(72, 72, '72', 'add m loan counter changes', 'SQL', 'V72__add_m_loan_counter_changes.sql', 201544058, 'root', '2014-05-06 16:11:17', 583, 1),
+	(73, 73, '73', 'add repayments rescheduled to and processed column to holiday', 'SQL', 'V73__add_repayments_rescheduled_to_and_processed_column_to_holiday.sql', -1946338033, 'root', '2014-05-06 16:11:17', 240, 1),
+	(74, 74, '74', 'alter m loan counter table add group', 'SQL', 'V74__alter_m_loan_counter_table_add_group.sql', -889985683, 'root', '2014-05-06 16:11:18', 330, 1),
+	(75, 75, '75', 'add reschedule-repayments-on-holidays to configuration', 'SQL', 'V75__add_reschedule-repayments-on-holidays_to_configuration.sql', 1328301697, 'root', '2014-05-06 16:11:18', 49, 1),
+	(76, 76, '76', 'rename permission grouping', 'SQL', 'V76__rename_permission_grouping.sql', 1717580945, 'root', '2014-05-06 16:11:18', 46, 1),
+	(77, 77, '77', 'alter m product loan changes', 'SQL', 'V77__alter_m_product_loan_changes.sql', 677013677, 'root', '2014-05-06 16:11:18', 209, 1),
+	(78, 78, '78', 'breakdown portfolio grouping', 'SQL', 'V78__breakdown_portfolio_grouping.sql', -1385954232, 'root', '2014-05-06 16:11:19', 46, 1),
+	(79, 79, '79', 'schedule jobs tables', 'SQL', 'V79__schedule_jobs_tables.sql', 339707179, 'root', '2014-05-06 16:11:19', 311, 1),
+	(8, 8, '8', 'deposit-transaction-permissions-if-they-exist', 'SQL', 'V8__deposit-transaction-permissions-if-they-exist.sql', -1507997551, 'root', '2014-05-06 16:10:38', 6, 1),
+	(80, 80, '80', 'schedule jobs tables updates', 'SQL', 'V80__schedule_jobs_tables_updates.sql', -152869205, 'root', '2014-05-06 16:11:21', 2005, 1),
+	(81, 81, '81', 'savings related changes', 'SQL', 'V81__savings_related_changes.sql', 285284658, 'root', '2014-05-06 16:11:24', 2366, 1),
+	(82, 82, '82', 'schedule jobs tables updates for running status', 'SQL', 'V82__schedule_jobs_tables_updates_for_running_status.sql', -1029370098, 'root', '2014-05-06 16:11:25', 841, 1),
+	(83, 83, '83', 'non-working-days-table', 'SQL', 'V83__non-working-days-table.sql', -1092480574, 'root', '2014-05-06 16:11:25', 295, 1),
+	(84, 84, '84', 'undo savings transaction permission', 'SQL', 'V84__undo_savings_transaction_permission.sql', 1857641857, 'root', '2014-05-06 16:11:25', 117, 1),
+	(85, 85, '85', 'product mix related changes', 'SQL', 'V85__product_mix_related_changes.sql', -740767169, 'root', '2014-05-06 16:11:26', 632, 1),
+	(86, 86, '86', 'update-working-days', 'SQL', 'V86__update-working-days.sql', 1266232028, 'root', '2014-05-06 16:11:26', 155, 1),
+	(87, 87, '87', 'add permission for scheduler', 'SQL', 'V87__add_permission_for_scheduler.sql', -575950289, 'root', '2014-05-06 16:11:27', 122, 1),
+	(88, 88, '88', 'added update constrain for scheduler jobs', 'SQL', 'V88__added_update_constrain_for_scheduler_jobs.sql', 1579070736, 'root', '2014-05-06 16:11:27', 460, 1),
+	(89, 89, '89', 'added scheduler group', 'SQL', 'V89__added_scheduler_group.sql', -1538207332, 'root', '2014-05-06 16:11:28', 382, 1),
+	(9, 9, '9', 'add min max constraint column to loan loanproduct', 'SQL', 'V9__add_min_max_constraint_column_to_loan_loanproduct.sql', -2103326932, 'root', '2014-05-06 16:10:40', 1520, 1),
+	(90, 90, '90', 'client performance history reports', 'SQL', 'V90__client_performance_history_reports.sql', 35589718, 'root', '2014-05-06 16:11:28', 109, 1),
+	(91, 91, '91', 'apply annual fees permission', 'SQL', 'V91__apply_annual_fees_permission.sql', 440351308, 'root', '2014-05-06 16:11:28', 108, 1),
+	(92, 92, '91.1', 'configuration settings for holiday and non workingday', 'SQL', 'V91_1__configuration_settings_for_holiday_and_non_workingday.sql', -429561096, 'root', '2014-05-06 16:11:28', 102, 1),
+	(93, 93, '92', 'group center assign staff permission', 'SQL', 'V92__group_center_assign_staff_permission.sql', -1557846330, 'root', '2014-05-06 16:11:29', 103, 1),
+	(94, 94, '93', 'loan transaction external id', 'SQL', 'V93__loan_transaction_external_id.sql', 987684239, 'root', '2014-05-06 16:11:29', 365, 1),
+	(95, 95, '94', 'added savings accont type', 'SQL', 'V94__added_savings_accont type.sql', 623078091, 'root', '2014-05-06 16:11:30', 438, 1),
+	(96, 96, '95', 'batch job postInterest', 'SQL', 'V95__batch_job_postInterest.sql', -1484077135, 'root', '2014-05-06 16:11:30', 106, 1),
+	(97, 97, '96', 'savings accounts transfers table', 'SQL', 'V96__savings_accounts_transfers_table.sql', -1447275289, 'root', '2014-05-06 16:11:31', 1144, 1),
+	(98, 98, '97', 'add permission for adjust savings transaction', 'SQL', 'V97__add_permission_for_adjust_savings_transaction.sql', -2045732265, 'root', '2014-05-06 16:11:31', 54, 1),
+	(99, 99, '98', 'added currency roundof for multipleof', 'SQL', 'V98__added_currency_roundof_for_multipleof.sql', -131804848, 'root', '2014-05-06 16:11:34', 2266, 1);
 /*!40000 ALTER TABLE `schema_version` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.sms_messages_outbound
-DROP TABLE IF EXISTS `sms_messages_outbound`;
+-- sms_messages_outbound
 CREATE TABLE IF NOT EXISTS `sms_messages_outbound` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `group_id` bigint(20) DEFAULT NULL,
@@ -3722,14 +3301,12 @@ CREATE TABLE IF NOT EXISTS `sms_messages_outbound` (
   CONSTRAINT `FKSTAFF000000001` FOREIGN KEY (`staff_id`) REFERENCES `m_staff` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.sms_messages_outbound: ~0 rows (approximately)
-DELETE FROM `sms_messages_outbound`;
+-- sms_messages_outbound: ~0 rows (approximately)
 /*!40000 ALTER TABLE `sms_messages_outbound` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sms_messages_outbound` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.stretchy_parameter
-DROP TABLE IF EXISTS `stretchy_parameter`;
+-- stretchy_parameter
 CREATE TABLE IF NOT EXISTS `stretchy_parameter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parameter_name` varchar(45) NOT NULL,
@@ -3749,8 +3326,7 @@ CREATE TABLE IF NOT EXISTS `stretchy_parameter` (
   CONSTRAINT `fk_stretchy_parameter_001` FOREIGN KEY (`parent_id`) REFERENCES `stretchy_parameter` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.stretchy_parameter: ~15 rows (approximately)
-DELETE FROM `stretchy_parameter`;
+-- stretchy_parameter: ~15 rows (approximately)
 /*!40000 ALTER TABLE `stretchy_parameter` DISABLE KEYS */;
 INSERT INTO `stretchy_parameter` (`id`, `parameter_name`, `parameter_variable`, `parameter_label`, `parameter_displayType`, `parameter_FormatType`, `parameter_default`, `special`, `selectOne`, `selectAll`, `parameter_sql`, `parent_id`) VALUES
 	(1, 'startDateSelect', 'startDate', 'startDate', 'date', 'date', 'today', NULL, NULL, NULL, NULL, NULL),
@@ -3771,8 +3347,7 @@ INSERT INTO `stretchy_parameter` (`id`, `parameter_name`, `parameter_variable`, 
 /*!40000 ALTER TABLE `stretchy_parameter` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.stretchy_report
-DROP TABLE IF EXISTS `stretchy_report`;
+-- stretchy_report
 CREATE TABLE IF NOT EXISTS `stretchy_report` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `report_name` varchar(100) NOT NULL,
@@ -3787,8 +3362,7 @@ CREATE TABLE IF NOT EXISTS `stretchy_report` (
   UNIQUE KEY `report_name_UNIQUE` (`report_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.stretchy_report: ~51 rows (approximately)
-DELETE FROM `stretchy_report`;
+-- stretchy_report: ~53 rows (approximately)
 /*!40000 ALTER TABLE `stretchy_report` DISABLE KEYS */;
 INSERT INTO `stretchy_report` (`id`, `report_name`, `report_type`, `report_subtype`, `report_category`, `report_sql`, `description`, `core_report`, `use_report`) VALUES
 	(1, 'Client Listing', 'Table', NULL, 'Client', 'select \nconcat(repeat("..",   \n   ((LENGTH(ounder.`hierarchy`) - LENGTH(REPLACE(ounder.`hierarchy`, \'.\', \'\')) - 1))), ounder.`name`) as "Office/Branch",\n c.account_no as "Client Account No.",  \nc.display_name as "Name",  \nr.enum_message_property as "Status",\nc.activation_date as "Activation", c.external_id as "External Id"\nfrom m_office o \njoin m_office ounder on ounder.hierarchy like concat(o.hierarchy, \'%\')\nand ounder.hierarchy like concat(\'${currentUserHierarchy}\', \'%\')\njoin m_client c on c.office_id = ounder.id\nleft join r_enum_value r on r.enum_name = \'status_enum\' and r.enum_id = c.status_enum\nwhere o.id = ${officeId}\norder by ounder.hierarchy, c.account_no', 'Individual Client Report\r\n\r\nLists the small number of defined fields on the client table.  Would expect to copy this \n\nreport and add any \'one to one\' additional data for specific tenant needs.\r\n\r\nCan be run for any size MFI but you\'d expect it only to be run within a branch for \n\nlarger ones.  Depending on how many columns are displayed, there is probably is a limit of about 20/50k clients returned for html display (export to excel doesn\'t \n\nhave that client browser/memory impact).', 1, 1),
@@ -3866,20 +3440,19 @@ INSERT INTO `stretchy_report` (`id`, `report_name`, `report_type`, `report_subty
 	(145, 'Written-Off Loans(Pentaho)', 'Pentaho', NULL, 'Loan', '(NULL)', '(NULL)', 1, 1),
 	(146, 'Client Saving Transactions', 'Pentaho', NULL, 'Savings', NULL, NULL, 0, 0),
 	(147, 'Client Loan Account Schedule', 'Pentaho', NULL, 'Loans', NULL, NULL, 0, 0),
-	(148, 'GroupNamesByStaff', 'Table', '', '', 'Select gr.id as id, gr.display_name as name from m_group gr where gr.level_id=1 and gr.staff_id = ${staffId}', '', 1, 0),
-	(149, 'ClientTrendsByDay', 'Table', '', 'Client', 'SELECT 	COUNT(cl.id) AS count, \n		cl.activation_date AS days\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (cl.activation_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND DATE(NOW()- INTERVAL 1 DAY))\nGROUP BY days', 'Retrieves the number of clients joined in last 12 days', 1, 0),
-	(150, 'ClientTrendsByWeek', 'Table', '', 'Client', 'SELECT 	COUNT(cl.id) AS count, \n		WEEK(cl.activation_date) AS Weeks\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (cl.activation_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 WEEK) AND DATE(NOW()))\nGROUP BY Weeks', '', 1, 0),
-	(151, 'ClientTrendsByMonth', 'Table', '', 'Client', 'SELECT 	COUNT(cl.id) AS count, \n		MONTHNAME(cl.activation_date) AS Months\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (cl.activation_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 MONTH) AND DATE(NOW()))\nGROUP BY Months', '', 1, 0),
-	(152, 'LoanTrendsByDay', 'Table', '', 'Loan', 'SELECT 	COUNT(ln.id) AS lcount, \n		ln.disbursedon_date AS days\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\n	LEFT JOIN m_loan ln on cl.id = ln.client_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (ln.disbursedon_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND DATE(NOW()- INTERVAL 1 DAY))\nGROUP BY days', 'Retrieves Number of loans disbursed for last 12 days', 1, 0),
-	(153, 'LoanTrendsByWeek', 'Table', '', 'Loan', 'SELECT 	COUNT(ln.id) AS lcount, \n		WEEK(ln.disbursedon_date) AS Weeks\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\n	LEFT JOIN m_loan ln on cl.id = ln.client_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (ln.disbursedon_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 WEEK) AND DATE(NOW()))\nGROUP BY Weeks', '', 1, 0),
-	(154, 'LoanTrendsByMonth', 'Table', '', 'Loan', 'SELECT 	COUNT(ln.id) AS lcount, \n		MONTHNAME(ln.disbursedon_date) AS Months\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\n	LEFT JOIN m_loan ln on cl.id = ln.client_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (ln.disbursedon_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 MONTH) AND DATE(NOW()))\nGROUP BY Months', '', 1, 0),
-	(155, 'Demand_Vs_Collection', 'Table', '', 'Loan', 'select amount.AmountDue-amount.AmountPaid as AmountDue, amount.AmountPaid as AmountPaid from\n(SELECT \n(IFNULL(SUM(ls.principal_amount),0) - IFNULL(SUM(ls.principal_writtenoff_derived),0)\n + IFNULL(SUM(ls.interest_amount),0) - IFNULL(SUM(ls.interest_writtenoff_derived),0) \n - IFNULL(SUM(ls.interest_waived_derived),0)\n + IFNULL(SUM(ls.fee_charges_amount),0) - IFNULL(SUM(ls.fee_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.fee_charges_waived_derived),0)\n + IFNULL(SUM(ls.penalty_charges_amount),0) - IFNULL(SUM(ls.penalty_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.penalty_charges_waived_derived),0)\n) AS AmountDue, \n\n(IFNULL(SUM(ls.principal_completed_derived),0) - IFNULL(SUM(ls.principal_writtenoff_derived),0) + IFNULL(SUM(ls.interest_completed_derived),0) - IFNULL(SUM(ls.interest_writtenoff_derived),0) \n - IFNULL(SUM(ls.interest_waived_derived),0)\n + IFNULL(SUM(ls.fee_charges_completed_derived),0) - IFNULL(SUM(ls.fee_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.fee_charges_waived_derived),0)\n + IFNULL(SUM(ls.penalty_charges_completed_derived),0) - IFNULL(SUM(ls.penalty_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.penalty_charges_waived_derived),0)\n) AS AmountPaid\nFROM m_office of\nLEFT JOIN m_client cl ON of.id = cl.office_id\nLEFT JOIN m_loan ln ON cl.id = ln.client_id\nLEFT JOIN m_loan_repayment_schedule ls ON ln.id = ls.loan_id\nWHERE ls.duedate = DATE(NOW()) AND \n (of.hierarchy LIKE CONCAT((\nSELECT ino.hierarchy\nFROM m_office ino\nWHERE ino.id = ${officeId}),"%"))) as amount', 'Demand Vs Collection', 1, 0),
-	(156, 'Disbursal_Vs_Awaitingdisbursal', 'Table', '', 'Loan', 'select awaitinddisbursal.amount-disbursedAmount.amount as amountToBeDisburse, disbursedAmount.amount as disbursedAmount from \n(\nSELECT 	COUNT(ln.id) AS noOfLoans, \n			IFNULL(SUM(ln.principal_amount),0) AS amount\nFROM \nm_office of\nLEFT JOIN m_client cl ON cl.office_id = of.id\nLEFT JOIN m_loan ln ON cl.id = ln.client_id\nWHERE \nln.expected_disbursedon_date = DATE(NOW()) AND \n(ln.loan_status_id=200 OR ln.loan_status_id=300) AND\n of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" )\n) awaitinddisbursal,\n(\nSELECT 	COUNT(ltrxn.id) as count, \n			IFNULL(SUM(ltrxn.amount),0) as amount \nFROM \nm_office of\nLEFT JOIN m_client cl ON cl.office_id = of.id\nLEFT JOIN m_loan ln ON cl.id = ln.client_id\nLEFT JOIN m_loan_transaction ltrxn ON ln.id = ltrxn.loan_id\nWHERE \nltrxn.transaction_date = DATE(NOW()) AND \nltrxn.is_reversed = 0 AND\nltrxn.transaction_type_enum=1 AND\n of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n) disbursedAmount', 'Disbursal_Vs_Awaitingdisbursal', 1, 0);
+	(148, 'GroupNamesByStaff', 'Table', '', '', 'Select gr.id as id, gr.display_name as name from m_group gr where gr.level_id=1 and gr.staff_id = ${staffId}', '', 0, 1),
+	(149, 'ClientTrendsByDay', 'Table', '', 'Client', 'SELECT 	COUNT(cl.id) AS count, \n		cl.activation_date AS days\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (cl.activation_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND DATE(NOW()- INTERVAL 1 DAY))\nGROUP BY days', 'Retrieves the number of clients joined in last 12 days', 0, 1),
+	(150, 'ClientTrendsByWeek', 'Table', '', 'Client', 'SELECT 	COUNT(cl.id) AS count, \n		WEEK(cl.activation_date) AS Weeks\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (cl.activation_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 WEEK) AND DATE(NOW()))\nGROUP BY Weeks', '', 0, 1),
+	(151, 'ClientTrendsByMonth', 'Table', '', 'Client', 'SELECT 	COUNT(cl.id) AS count, \n		MONTHNAME(cl.activation_date) AS Months\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (cl.activation_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 MONTH) AND DATE(NOW()))\nGROUP BY Months', '', 0, 1),
+	(152, 'LoanTrendsByDay', 'Table', '', 'Loan', 'SELECT 	COUNT(ln.id) AS lcount, \n		ln.disbursedon_date AS days\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\n	LEFT JOIN m_loan ln on cl.id = ln.client_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (ln.disbursedon_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 DAY) AND DATE(NOW()- INTERVAL 1 DAY))\nGROUP BY days', 'Retrieves Number of loans disbursed for last 12 days', 0, 1),
+	(153, 'LoanTrendsByWeek', 'Table', '', 'Loan', 'SELECT 	COUNT(ln.id) AS lcount, \n		WEEK(ln.disbursedon_date) AS Weeks\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\n	LEFT JOIN m_loan ln on cl.id = ln.client_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (ln.disbursedon_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 WEEK) AND DATE(NOW()))\nGROUP BY Weeks', '', 0, 1),
+	(154, 'LoanTrendsByMonth', 'Table', '', 'Loan', 'SELECT 	COUNT(ln.id) AS lcount, \n		MONTHNAME(ln.disbursedon_date) AS Months\nFROM m_office of \n	LEFT JOIN m_client cl on of.id = cl.office_id\n	LEFT JOIN m_loan ln on cl.id = ln.client_id\nWHERE of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n	AND (ln.disbursedon_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 12 MONTH) AND DATE(NOW()))\nGROUP BY Months', '', 0, 1),
+	(155, 'Demand_Vs_Collection', 'Table', '', 'Loan', 'select amount.AmountDue-amount.AmountPaid as AmountDue, amount.AmountPaid as AmountPaid from\n(SELECT \n(IFNULL(SUM(ls.principal_amount),0) - IFNULL(SUM(ls.principal_writtenoff_derived),0)\n + IFNULL(SUM(ls.interest_amount),0) - IFNULL(SUM(ls.interest_writtenoff_derived),0) \n - IFNULL(SUM(ls.interest_waived_derived),0)\n + IFNULL(SUM(ls.fee_charges_amount),0) - IFNULL(SUM(ls.fee_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.fee_charges_waived_derived),0)\n + IFNULL(SUM(ls.penalty_charges_amount),0) - IFNULL(SUM(ls.penalty_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.penalty_charges_waived_derived),0)\n) AS AmountDue, \n\n(IFNULL(SUM(ls.principal_completed_derived),0) - IFNULL(SUM(ls.principal_writtenoff_derived),0) + IFNULL(SUM(ls.interest_completed_derived),0) - IFNULL(SUM(ls.interest_writtenoff_derived),0) \n - IFNULL(SUM(ls.interest_waived_derived),0)\n + IFNULL(SUM(ls.fee_charges_completed_derived),0) - IFNULL(SUM(ls.fee_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.fee_charges_waived_derived),0)\n + IFNULL(SUM(ls.penalty_charges_completed_derived),0) - IFNULL(SUM(ls.penalty_charges_writtenoff_derived),0) \n - IFNULL(SUM(ls.penalty_charges_waived_derived),0)\n) AS AmountPaid\nFROM m_office of\nLEFT JOIN m_client cl ON of.id = cl.office_id\nLEFT JOIN m_loan ln ON cl.id = ln.client_id\nLEFT JOIN m_loan_repayment_schedule ls ON ln.id = ls.loan_id\nWHERE ls.duedate = DATE(NOW()) AND \n (of.hierarchy LIKE CONCAT((\nSELECT ino.hierarchy\nFROM m_office ino\nWHERE ino.id = ${officeId}),"%"))) as amount', 'Demand Vs Collection', 0, 1),
+	(156, 'Disbursal_Vs_Awaitingdisbursal', 'Table', '', 'Loan', 'select awaitinddisbursal.amount-disbursedAmount.amount as amountToBeDisburse, disbursedAmount.amount as disbursedAmount from \n(\nSELECT 	COUNT(ln.id) AS noOfLoans, \n			IFNULL(SUM(ln.principal_amount),0) AS amount\nFROM \nm_office of\nLEFT JOIN m_client cl ON cl.office_id = of.id\nLEFT JOIN m_loan ln ON cl.id = ln.client_id\nWHERE \nln.expected_disbursedon_date = DATE(NOW()) AND \n(ln.loan_status_id=200 OR ln.loan_status_id=300) AND\n of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" )\n) awaitinddisbursal,\n(\nSELECT 	COUNT(ltrxn.id) as count, \n			IFNULL(SUM(ltrxn.amount),0) as amount \nFROM \nm_office of\nLEFT JOIN m_client cl ON cl.office_id = of.id\nLEFT JOIN m_loan ln ON cl.id = ln.client_id\nLEFT JOIN m_loan_transaction ltrxn ON ln.id = ltrxn.loan_id\nWHERE \nltrxn.transaction_date = DATE(NOW()) AND \nltrxn.transaction_type_enum=1 AND\n of.hierarchy like concat((select ino.hierarchy from m_office ino where ino.id = ${officeId}),"%" ) \n) disbursedAmount', 'Disbursal_Vs_Awaitingdisbursal', 0, 1);
 /*!40000 ALTER TABLE `stretchy_report` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.stretchy_report_parameter
-DROP TABLE IF EXISTS `stretchy_report_parameter`;
+-- stretchy_report_parameter
 CREATE TABLE IF NOT EXISTS `stretchy_report_parameter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `report_id` int(11) NOT NULL,
@@ -3893,8 +3466,7 @@ CREATE TABLE IF NOT EXISTS `stretchy_report_parameter` (
   CONSTRAINT `fk_report_parameter_002` FOREIGN KEY (`parameter_id`) REFERENCES `stretchy_parameter` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=426 DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.stretchy_report_parameter: ~319 rows (approximately)
-DELETE FROM `stretchy_report_parameter`;
+-- stretchy_report_parameter: ~319 rows (approximately)
 /*!40000 ALTER TABLE `stretchy_report_parameter` DISABLE KEYS */;
 INSERT INTO `stretchy_report_parameter` (`id`, `report_id`, `parameter_id`, `report_parameter_name`) VALUES
 	(1, 1, 5, NULL),
@@ -4219,23 +3791,19 @@ INSERT INTO `stretchy_report_parameter` (`id`, `report_id`, `parameter_id`, `rep
 /*!40000 ALTER TABLE `stretchy_report_parameter` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.x_registered_table
-DROP TABLE IF EXISTS `x_registered_table`;
+-- x_registered_table
 CREATE TABLE IF NOT EXISTS `x_registered_table` (
   `registered_table_name` varchar(50) NOT NULL,
   `application_table_name` varchar(50) NOT NULL,
-  `category` int(11) NOT NULL DEFAULT '100',
   PRIMARY KEY (`registered_table_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.x_registered_table: ~0 rows (approximately)
-DELETE FROM `x_registered_table`;
+-- x_registered_table: ~0 rows (approximately)
 /*!40000 ALTER TABLE `x_registered_table` DISABLE KEYS */;
 /*!40000 ALTER TABLE `x_registered_table` ENABLE KEYS */;
 
 
--- Dumping structure for table samuelx.x_table_column_code_mappings
-DROP TABLE IF EXISTS `x_table_column_code_mappings`;
+-- x_table_column_code_mappings
 CREATE TABLE IF NOT EXISTS `x_table_column_code_mappings` (
   `column_alias_name` varchar(50) NOT NULL,
   `code_id` int(10) NOT NULL,
@@ -4244,8 +3812,7 @@ CREATE TABLE IF NOT EXISTS `x_table_column_code_mappings` (
   CONSTRAINT `FK_x_code_id` FOREIGN KEY (`code_id`) REFERENCES `m_code` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table samuelx.x_table_column_code_mappings: ~0 rows (approximately)
-DELETE FROM `x_table_column_code_mappings`;
+-- x_table_column_code_mappings: ~0 rows (approximately)
 /*!40000 ALTER TABLE `x_table_column_code_mappings` DISABLE KEYS */;
 /*!40000 ALTER TABLE `x_table_column_code_mappings` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

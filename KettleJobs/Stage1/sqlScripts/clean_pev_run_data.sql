@@ -1,5 +1,8 @@
 SET foreign_key_checks = 0;
 TRUNCATE m_appuser_role;
+TRUNCATE `address`;
+TRUNCATE `customer details`;
+TRUNCATE relatives;
 TRUNCATE  m_role;
 TRUNCATE m_appuser;
 TRUNCATE m_staff;
